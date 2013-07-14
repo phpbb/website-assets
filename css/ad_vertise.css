@@ -1,0 +1,64 @@
+#main h3, #main h4 {
+	margin-top: 10px !important;
+}
+
+#main #enhancements h3 {
+	color: #333333;
+	font-size: 1.05em;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #CCCCCC;
+    text-transform: uppercase;
+}
+
+#main #enhancements.mini-panel {
+	background-color: #f1f1f1;
+}
+
+#main ul.text-links {
+	font-size: 10px;
+	line-height: 1.2em;
+	margin-left: 0;
+}
+
+#main ul.text-links a, #main ul.text-links strong {
+	color: #105289;
+	text-decoration: none;
+}
+
+#contact {
+	width: 240px;
+}
+
+#contact.mini-panel h3 {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: none;
+	border-bottom-style: none;
+	
+}
+
+#contact.mini-panel p, #contact.mini-panel ul{
+	font-size: 1.2em;
+	line-height: 1.3em;
+}
+
+#contact.panel-text p {
+	margin-bottom: 1em;
+}
+
+#terms {
+	font-style: italic;
+}
+
+#main #terms ul{
+	font-size: 1.1em;
+}
+
+#main #terms ul ul, #main #terms ol ol {
+	font-size: 1.0em;
+}
+
+#main #terms h4 {
+	font-size: 1.1em;
+}

@@ -1,0 +1,286 @@
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+/* Search box
+--------------------------------------------- */
+#navbar #searchbox {
+	display: block;
+	float: right;
+	width: 165px;
+	height: 30px;
+	margin: 0px;
+	background: url("/assets/images/images/bg_search.gif") 0 0 no-repeat;
+	position: static;
+}
+
+#navbar #searchbox fieldset {
+	border: none;
+	padding-top: 6px;
+}
+
+#navbar #searchbox input {
+	width: 125px;
+	height: 19px !important;
+	margin-left: 28px;
+	border: none !important;
+	background-image: url("/assets/images/images/search_back.gif");
+	background-repeat: no-repeat;
+	background-color: transparent !important;
+	font-size: 1.1em !important;
+	padding-top: 2px;
+}
+
+/* Navbar */
+#navbar {
+	height: 30px;
+	clear: both;
+	margin: 1px 30px 0 30px;
+	background: url("/assets/images/images/bg_navbar.gif") repeat-x 0 0;
+}
+
+#navbar ul {
+	list-style: none;
+	display: block;
+}
+
+#navbar li {
+	float: left;
+}
+
+/* Rollover state */
+#navbar li {
+	height: 30px;
+	margin: 0;
+	background-position: 0 -33px;
+	display: block;
+	position: relative;
+	overflow: visible;
+}
+
+/* Rolloff state */
+#navbar li a, #navbar li a:link {
+	display: block;
+	width: 100%;
+	height: 31px;
+	background-position: 0 -1px;
+	position: relative;
+	overflow: hidden;
+}
+
+/* Hide <a> text and hide off-state image when rolling over (prevents flicker in IE) */
+/*#navbar li span a strong		{ display: none; }*/
+/*#navbar li span a:hover	{ background-image: none; }*/
+#navbar li span 			{ position: absolute; width: 100%; height: 100%; cursor: pointer; margin-top: -1px;}
+#navbar li a:hover span 	{ background-position: 0 -32px; }
+#navbar li a .hovering 		{ background-position: 0 -32px; }
+
+/* Button images  */
+.but-about span	{ background: transparent none 0 0 no-repeat; }
+.but-development span { background: transparent none 0 0 no-repeat; }
+.but-downloads span { background: transparent none 0 0 no-repeat; }
+.but-community span { background: transparent none 0 0 no-repeat; }
+.but-support span { background: transparent none 0 0 no-repeat; }
+.but-customise span { background: transparent none 0 0 no-repeat; }
+.but-shop span { background: transparent none 0 0 no-repeat; }
+.but-hosting span { background: transparent none 0 0 no-repeat; }
+.but-blog span { background: transparent none 0 0 no-repeat;}
+
+/* Big button dimensions */
+#navbar li.but-about  { width: 66px; }
+#navbar li.but-development  { width: 107px; }
+#navbar li.but-downloads  { width: 91px; }
+#navbar li.but-community  { width: 94px; }
+#navbar li.but-support  { width: 73px; }
+#navbar li.but-customise  { width: 87px; }
+#navbar li.but-shop  { width: 55px; }
+#navbar li.but-hosting  { width: 71px; }
+#navbar li.but-blog  { width: 55px; }
+
+/* Big button images */
+.but-about span	{ background-image: url("/assets/images/images/but_about.gif"); }
+.but-development span { background: url("/assets/images/images/but_dev.gif"); }
+.but-downloads span { background: url("/assets/images/images/but_downloads.gif"); }
+.but-community span { background: url("/assets/images/images/but_community.gif"); }
+.but-support span { background: url("/assets/images/images/but_support.gif"); }
+.but-customise span { background: url("/assets/images/images/but_customise.gif"); }
+.but-shop span { background: url("/assets/images/images/but_shop.gif"); }
+.but-hosting span { background: url("/assets/images/images/but_hosting.gif"); }
+.but-blog span { background: url("/assets/images/images/but_blog.gif"); }
+
+/* Always active states */
+body.about li.but-about span,
+body.development li.but-development span,
+body.downloads li.but-downloads span,
+body.languages li.but-downloads span,
+body.customise li.but-customise span,
+body.mods li.but-customise span,
+body.styles li.but-customise span,
+body.support li.but-support span,
+body.community  li.but-community span,
+body.shop li.but-shop span,
+body.blog li.but-blog span,
+body.hosting li.but-hosting span{
+	background-position: 0 -64px;
+}
+
+/* Always hover for active states */
+body.about #navbar li.but-about span:hover,
+body.development #navbar li.but-development span:hover,
+body.downloads #navbar li.but-downloads span:hover,
+body.languages #navbar li.but-downloads span:hover,
+body.customise #navbar li.but-customise span:hover,
+body.mods #navbar li.but-customise span:hover,
+body.styles #navbar li.but-customise span:hover,
+body.support #navbar li.but-support span:hover,
+body.community #navbar li.but-community span:hover,
+body.shop #navbar li.but-shop span:hover,
+body.blog #navbar li.but-blog span:hover,
+body.hosting #navbar li.but-hosting span:hover {
+	background-position: 0 -32px;
+}
+
+/* @group Submenu */
+
+.sub-menu {
+	background: transparent url("/assets/images/images/bg_submenu_full.png") no-repeat 0 0;
+	position: absolute;
+	z-index: 9999;
+	padding: 10px 18px 0 14px;
+	top: 25px;
+	width: 400px;
+	left: -20px;
+	overflow: visible;
+	display: none;
+
+}
+
+.sub-menu-bottom {
+	background: transparent url("/assets/images/images/bg_submenu_full.png") no-repeat 0 bottom;
+	bottom:-20px;
+	clear:both;
+	height:20px;
+	left:0;
+	position:absolute;
+	width:400px;
+}
+
+.sub-menu-extra {
+	padding-bottom: 10px;
+}
+
+.sub-menu-extra .sub-menu-bottom {
+	background: transparent url("/assets/images/images/bg_submenu_full.png") no-repeat 0 bottom;
+	height: 45px;
+	clear: both;
+	width: 350px;
+	position: absolute;
+	bottom: -45px;
+	left: 0;
+	margin-top: 0;
+	padding: 0 25px;
+	padding-bottom: 0px;
+	text-align: right;
+}
+
+#navbar .sub-menu-bottom a {
+	border-top: 1px dashed #b2b8bd;
+	display: block;
+	padding-top: 10px;
+	font-weight: bold;
+
+}
+
+#navbar .sub-menu-bottom a:hover {
+	color: #105289;
+
+}
+
+#navbar li .sub-menu a {
+	background: none;
+	display:block;
+	height:auto;
+	overflow:hidden;
+	position: static;
+	width: auto;
+	color: #FFF;
+
+}
+
+#navbar .sub-menu a:hover {
+	color: #FFF;
+	text-decoration: none;
+
+}
+
+.sub-menu ul {
+	width: 180px;
+	float: left;
+	margin-left: 4px;
+}
+
+ul.wide-menu {
+	width: 364px;
+}
+
+#navbar .sub-menu li {
+	display: block;
+	float:  none;
+	height: auto;
+	padding: 6px;
+	padding-bottom: 8px;
+	margin-bottom: 4px;
+}
+
+#navbar li .sub-menu p {
+	margin: 0;
+	font-size: 10px;
+}
+
+/* External link image by jQuery UI */
+#navbar li .sub-menu li:hover h4 a, #navbar .hover_ie h4 a, #navbar .hover_ie h4 a:hover {
+	font-size: 13px;
+	color: #105289;
+
+}
+
+#navbar li .sub-menu .last {
+	margin: 0;
+
+}
+
+#navbar .sub-menu li:hover, .hover_ie {
+	background: #ccd1d4 no-repeat;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: 0 0px 2px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0 0px 2px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0 0px 4px rgba(0,0,0,0.3);
+	border:  1px solid #DDD;
+	padding: 5px 5px 7px 5px;
+}
+
+#navbar .sub-menu li:hover a, #navbar .hover_ie p a, #navbar .hover_ie p a:hover {
+	color: #333;
+	text-shadow: none;
+}
+
+.on-top
+{
+	z-index: 10000;
+}
+
+
+#navbar .sub-menu li.external:hover {
+	background-image: url(images/bg_submenu_external.gif);
+	background-position: 165px 5px;
+}
+
+#navbar .sub-menu li.wide-menu-item:hover {
+	background-position: 349px 5px;
+}
+
+/* @end */

@@ -1,0 +1,25 @@
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+body {
+	font-size: 10px;
+}
+
+.forabg  {
+	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+}
+
+.forumbg  {
+	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+}
+
+.navbar {
+	background: transparent url("/assets/images/images/silver/innerbox_bg.gif") repeat-x;
+}
+
+li.row {
+	background: #e8ecee url("/assets/images/images/silver/row_bg.gif");
+}

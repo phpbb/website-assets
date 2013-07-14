@@ -1,0 +1,157 @@
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+.document .titlepage .releaseinfo, .document .titlepage .copyright {
+	display: none;
+}
+.document .copyright {	
+	text-align:left;
+	padding:2em 0;
+}
+.document .authorgroup {
+	display: none;
+}
+
+.document .titlepage h1.title {
+	color: #536482;
+}
+
+/* Tables of contents */
+
+.document .toc {
+	margin-bottom: 1.2em;
+}
+.document .toc p, .document .abstract p.title {
+	margin: 20px 0 3px;
+}
+.document .toc p b, .document .abstract p.title b {
+	font-weight: bold;
+	color: #D21A4E;
+}
+.document .toc dl {	
+	font-size: 1.2em;
+}
+.document .toc dl a {	
+	text-decoration: underline;
+}
+.document .toc dl dl {
+	font-size: 1em;
+	margin-left: 1em;
+}
+.document .list-of-figures {
+	display: none;
+}
+
+/* Section */
+.document .section h2.title {
+	margin-bottom: 20px;
+}
+.document .section ul, .document .section ol {
+	font-size: 1em !important;
+	line-height: 1em !important;
+	margin-bottom: 20px;
+}
+.document .section ul ul, .document .section ol ol {
+	margin-bottom: 0;
+}
+.document .section ul p, .document .section ol p {
+	margin: 0;
+	padding: 0;
+}
+
+/* Special items */
+.document .section .guilabel {
+	text-transform: uppercase;
+	font-size: 0.9em;
+	font-weight: bold;
+}
+.document .section .note, .document .section .important, .document .section .tip {
+	border: 1px solid #CCCCCC;
+	padding: 0.8em;
+	margin: 3em !important;
+}
+.document .section .note h3.title, .document .section .important h3.title, .document .section .tip h3.title  {
+	color: #536482 !important;
+	margin-top: 0 !important;
+	padding-top: 0;
+}
+
+.document .section .warning {
+	padding: 0.8em;
+	margin: 3em !important;	
+	color: #FFF;
+	background-color: #D21A4E;
+}
+.document .section .warning h3 {
+	color: #FFF;
+	margin-top: 0 !important;
+	padding-top: 0;	
+}
+
+.document .section .tip  {
+	background-color: #BFDEFF;
+	border-color: #0066CC;
+}
+.document .section .important,  .document .section .note {
+	background-color: #FFFFCC;
+	border-color: #FF9900;
+}
+
+.document .section .figure {
+	margin: 2em 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.document .section .figure .title {
+	display: none;
+}
+.document .section .figure .mediaobject {
+	text-align: center;
+}
+.document .section .figure .mediaobject img {
+	border: 1px solid #000;
+}
+.document .section .figure .caption p {
+	font-size: 0.85em !important;
+	color: #000;
+}
+.document .section .variablelist dt {
+	text-transform: uppercase;
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.document pre {
+	font: 1.2em Monaco, "Andale Mono","Courier New", Courier, mono;
+	color: #2E8B57;
+	background-color: #efefef; 
+	border: 1px solid rgb(221, 221, 221); 
+	padding: 5px; 
+	overflow: auto; 
+	width: 560px;	
+}
+
+.document code {
+	font-family: Monaco, "Andale Mono","Courier New", Courier, mono;
+}
+
+.docbook .document blockquote {
+	background-image: none;
+}
+
+.docbook .document .title b {
+	font-weight: bold;
+}
+
+.document ol.list-titles li {
+	font-weight: bold;
+	padding-top: 5px;
+}
+
+.document ol.list-titles ul li {
+	font-weight: normal;
+	font-size: 0.85em;
+	padding-top: 0;
+}
