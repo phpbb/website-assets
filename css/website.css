@@ -276,7 +276,7 @@ body.home #main div.column1 li, body.home #main div.column2 li {
 
 #main .mini-panel.feed-stats p a, .mini-panel.feed-stats p a {
 	padding: 1px 0pt 1px 17px;
-	background: transparent url(/assets/images/images/feed-icon-14x14.png) no-repeat scroll 0 50%;
+	background: transparent url(./images/feed-icon-14x14.png) no-repeat scroll 0 50%;
 }
 
 #main .mini-panel.feed-stats p img {
@@ -737,7 +737,7 @@ div.panel-emphasis {
 .home-sponsors ul.ads li a {
 	padding: 2px 0 2px 18px;
 	background-position: 0 50%;
-	background-image: url(/assets/images/images/favicons/blank.png);
+	background-image: url(./images/favicons/blank.png);
 	background-repeat: no-repeat;
 }
 
@@ -790,6 +790,7 @@ div.panel-emphasis {
 #page-footer #footer_banner_leaderboard {
 	padding-top: 15px;
 }
+
 #page-footer #ads_buttons_wrap {
 	height: 30px;
 	border-top: 1px solid #CCCCCC;
@@ -816,16 +817,13 @@ div.panel-emphasis {
 }
 
 /* Advertisement */
-div.banner-ad {
-	border: solid 1px #DDDDDD;
-	border-width: 1px 0;
-	padding: 1em 0;
-	text-align: center;
-	background: url("/assets/images/images/bg_ads.gif") no-repeat  100% 100%;
-}
-
-h3.ad_vertisement {
-	padding-top: 8px;
+#n-jobs {
+	width:728px;
+	height:90px;
+	border:1px solid #ccc;
+	background: #F5F7DF;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 /* License agreement */
@@ -1701,7 +1699,7 @@ body.shop div#bertie-hugger {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url(/assets/images/images/loading_wait.gif) 50% 30% no-repeat;
+	background: transparent url(./images/loading_wait.gif) 50% 30% no-repeat;
 }
 
 body.shop ul#bertie {
@@ -1712,7 +1710,7 @@ body.shop ul#bertie {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url(/assets/images/images/olympus-prosilver-bertie.jpg?20080629) 0 0 no-repeat;
+	background: transparent url(./images/olympus-prosilver-bertie.jpg?20080629) 0 0 no-repeat;
 }
 
 body.shop ul#bertie li {
@@ -1730,7 +1728,7 @@ body.shop ul#bertie li a {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-	background: transparent url(/assets/images/images/olympus-prosilver-bertie.jpg?20080629) 480px 0 no-repeat;
+	background: transparent url(./images/olympus-prosilver-bertie.jpg?20080629) 480px 0 no-repeat;
 	position: absolute;
 }
 
@@ -1935,10 +1933,10 @@ a.feature-extra:hover span.hover {
 	padding-right: 70px;
 }
 .feature-box .features-item-head.unselected {
-	background: url('/assets/images/images/features/feat-arrow-right.png') 335px center no-repeat;
+	background: url('./images/features/feat-arrow-right.png') 335px center no-repeat;
 }
 .feature-box .features-item-head.selected {
-	background: url('/assets/images/images/features/feat-arrow-down.png') 335px center no-repeat;
+	background: url('./images/features/feat-arrow-down.png') 335px center no-repeat;
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
@@ -1974,7 +1972,7 @@ a.feature-extra:hover span.hover {
 ul.feature-list li {
 	margin-left: -10px;
 	list-style-type: none;
-	background-image: url('/assets/images/images/features/accept.png');
+	background-image: url('./images/features/accept.png');
 	background-repeat: no-repeat;
 	background-position: 0 3px;
 	padding-left: 25px;
@@ -1987,7 +1985,7 @@ div.feature-item p {
 	font-size: 0.9em;
 }
 div.feature-item {
-	background: url('/assets/images/images/features/arrow-right-24.png') left center no-repeat;
+	background: url('./images/features/arrow-right-24.png') left center no-repeat;
 	padding-left: 40px;
 	margin-left: 10px;
 }
@@ -2034,7 +2032,7 @@ body.features span.feature-collapse:hover {
 	color: #D31141;
 }
 /*body.features span.feature-collapse:before {
-	content: url('/assets/images/images/features/sm-arrow-up.gif');
+	content: url('./images/features/sm-arrow-up.gif');
 }*/
 /* END NEW FEATURES */
 
@@ -2069,12 +2067,14 @@ span.inlinecode
 a.wikilink {
 	background: url("/assets/images/images/wiki_badge.gif") center right no-repeat;
 	padding-right: 34px;
+	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
 
 /* kb link */
 a.kblink {
 	background: url("/assets/images/images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
+	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
 /* Inline code tag */
 code.inline {
@@ -2207,7 +2207,7 @@ input.gsc-search-button {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: #000;
 	background: #FAFAFA none repeat-x top;
-	background-image: url("/community/styles/prosilver/theme/images/bg_button.gif");
+	background-image: url("https://phpbb.com/community/styles/prosilver/theme/images/bg_button.gif");
 	border: 1px solid #666666;
 	margin-left: 6px;
 }
@@ -2345,6 +2345,41 @@ body.modx-creator textarea.right-tools {
 
 #docs_nav li {
 	float: left;
+}
+
+/* MCP Titania Module */
+.attention {
+	border-bottom: 1px dashed;
+	padding: 5px 0;
+}
+
+p.attention-closed {
+	background-color: #ECD5D8;
+	margin-right: 0;
+	padding: 3px;
+}
+
+.attention.last {
+	border-bottom: 0;
+}
+
+.attention .content {
+	font-size: 1.2em;
+}
+
+.attention .content pre {
+	font-family: inherit;
+	white-space: normal;
+}
+
+.ins {
+	background-color: #dfd;
+	text-decoration: underline;
+}
+
+.del {
+	background-color: #fdd;
+	text-decoration: line-through;
 }
 
 /* Rollover state */
