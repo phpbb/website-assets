@@ -1,36 +1,40 @@
-window.onscroll = function () {
-	if(document.getElementById("contact") != null &&
-		document.getElementById("enhancements")!=null &&
-		document.getElementById("page-footer")!=null)
-	{
-		var adTop=document.getElementById("contact").offsetTop;
-		var adHeight=document.getElementById("contact").offsetHeight;
-		var answerTop=document.getElementById("enhancements").offsetTop;
-		var footerTop=document.getElementById("page-footer").offsetTop;
+$(document).ready(function() {
+	var contact = $('#contact'),
+		footer = $('#page-footer');
 
-		var ie7Fix=0;
+	if (!contact.length || !footer.length) return;
 
-		var ScrollTop = document.body.scrollTop;
-		if (ScrollTop == 0)
+	var extra = 5,
+		footerSpacing = 20,
+		top = contact.offset().top - extra,
+		height = contact.height(),
+		maxTop = footer.offset().top - height - footerSpacing,
+		$window = $(window),
+		fixed = false;
+
+	function scroll() {
+		var windowTop = $window.scrollTop();
+		if (windowTop <= top || windowTop >= maxTop)
 		{
-			if (window.pageYOffset)
-				ScrollTop = window.pageYOffset;
-			else
-				ScrollTop = (document.body.parentElement) ? document.body.parentElement.scrollTop : 0;
+			if (fixed)
+			{
+				contact.css({
+					position: 'static',
+					top: 'auto'
+				});
+			}
+			fixed = false;
+			return;
 		}
-		if(ScrollTop>(answerTop+ie7Fix))
+		if (!fixed)
 		{
-			document.getElementById("contact").style.position="fixed";
-			document.getElementById("contact").style.top="5px";
-		}
-		else
-		{
-			document.getElementById("contact").style.position="relative";
-			document.getElementById("contact").style.top=ie7Fix+"px";
-		}
-		if(answerTop+ie7Fix+adHeight>footerTop)
-		{
-			document.getElementById("contact").style.top=(footerTop-adHeight)+"px";
+			fixed = true;
+			contact.css({
+				position: 'fixed',
+				top: extra + 'px'
+			});
 		}
 	}
-}
+	scroll();
+	$(window).scroll(scroll);
+});

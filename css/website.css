@@ -879,9 +879,13 @@ div.column2wide {
 	font-size: 1.8em;
 	font-weight: bold;
 	padding: 5px 0;
-	margin: 1.2em 0 0;
+	margin: 0.5em 0 0;
 	border: none;
 	text-transform: none;
+}
+
+#main h3.teamtitle + h4 {
+	margin-top: 10px;
 }
 
 #main-extra p.teamdesc {
