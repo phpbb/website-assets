@@ -1703,7 +1703,7 @@ body.shop div#bertie-hugger {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url(./images/loading_wait.gif) 50% 30% no-repeat;
+	background: transparent url(/assets/images/images/loading_wait.gif) 50% 30% no-repeat;
 }
 
 body.shop ul#bertie {
@@ -1714,7 +1714,7 @@ body.shop ul#bertie {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url(./images/olympus-prosilver-bertie.jpg?20080629) 0 0 no-repeat;
+	background: transparent url(/assets/images/images/olympus-prosilver-bertie.jpg?20080629) 0 0 no-repeat;
 }
 
 body.shop ul#bertie li {
@@ -1732,7 +1732,7 @@ body.shop ul#bertie li a {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-	background: transparent url(./images/olympus-prosilver-bertie.jpg?20080629) 480px 0 no-repeat;
+	background: transparent url(/assets/images/images/olympus-prosilver-bertie.jpg?20080629) 480px 0 no-repeat;
 	position: absolute;
 }
 
@@ -1937,10 +1937,10 @@ a.feature-extra:hover span.hover {
 	padding-right: 70px;
 }
 .feature-box .features-item-head.unselected {
-	background: url('./images/features/feat-arrow-right.png') 335px center no-repeat;
+	background: url('/assets/images/images/features/feat-arrow-right.png') 335px center no-repeat;
 }
 .feature-box .features-item-head.selected {
-	background: url('./images/features/feat-arrow-down.png') 335px center no-repeat;
+	background: url('/assets/images/images/features/feat-arrow-down.png') 335px center no-repeat;
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
@@ -1976,7 +1976,7 @@ a.feature-extra:hover span.hover {
 ul.feature-list li {
 	margin-left: -10px;
 	list-style-type: none;
-	background-image: url('./images/features/accept.png');
+	background-image: url('/assets/images/images/features/accept.png');
 	background-repeat: no-repeat;
 	background-position: 0 3px;
 	padding-left: 25px;
@@ -1989,7 +1989,7 @@ div.feature-item p {
 	font-size: 0.9em;
 }
 div.feature-item {
-	background: url('./images/features/arrow-right-24.png') left center no-repeat;
+	background: url('/assets/images/images/features/arrow-right-24.png') left center no-repeat;
 	padding-left: 40px;
 	margin-left: 10px;
 }
@@ -2036,7 +2036,7 @@ body.features span.feature-collapse:hover {
 	color: #D31141;
 }
 /*body.features span.feature-collapse:before {
-	content: url('./images/features/sm-arrow-up.gif');
+	content: url('/assets/images/images/features/sm-arrow-up.gif');
 }*/
 /* END NEW FEATURES */
 
@@ -3110,7 +3110,7 @@ ul.showcasebuttons li {
 li.showall a {
 	width: 96px;
 	height: 36px;
-	background: url("/theme/images/showcase/buttons.gif") no-repeat -162px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -162px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -3128,7 +3128,7 @@ li.showall a:active {
 li.suggestsite a {
 	width: 131px;
 	height: 36px;
-	background: url("/theme/images/showcase/buttons.gif") no-repeat -354px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -354px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -3146,7 +3146,7 @@ li.suggestsite a:active {
 li.sort a.sortbutton {
 	width: 162px;
 	height: 36px;
-	background: url("/theme/images/showcase/buttons.gif") no-repeat left top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat left top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -3164,7 +3164,7 @@ li.sort a:active {
 li.manage a {
 	width: 96px;
 	height: 36px;
-	background: url("/theme/images/showcase/buttons.gif") no-repeat -258px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -258px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -3195,7 +3195,7 @@ ul.sortoptions li {
 	font-size: 12px;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-weight: bold;
-	background: url("/theme/images/showcase/divider.png") no-repeat 50% bottom;
+	background: url("/assets/images/images/showcase/divider.png") no-repeat 50% bottom;
 }
 
 ul.sortoptions li.lastoption {
@@ -3226,7 +3226,7 @@ li.sort:hover > ul.sortoptions {
 .showcase-site {
 	width: 246px;
 	height: 270px;
-	background: url("/theme/images/showcase/panelbg.png") no-repeat 50% top;
+	background: url("/assets/images/images/showcase/panelbg.png") no-repeat 50% top;
 	float: left;
 	margin: 10px 6px 10px;
 	padding: 11px;
@@ -3245,7 +3245,7 @@ li.sort:hover > ul.sortoptions {
 .topcorners {
 	width: 245px;
 	height: 5px;
-	background: url("/theme/images/showcase/cornermask.png") no-repeat left top;
+	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left top;
 	position: absolute;
 	z-index: 9997;
 }
@@ -3253,7 +3253,7 @@ li.sort:hover > ul.sortoptions {
 .bottomcorners {
 	width: 245px;
 	height: 5px;
-	background: url("/theme/images/showcase/cornermask.png") no-repeat left bottom;
+	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left bottom;
 	position: absolute;
 	z-index: 9996px;
 	margin-top: 120px;
@@ -3284,7 +3284,7 @@ span.editlink {
 .sitetags {
 	position: absolute;
 	z-index: 9998;
-	background: url("/theme/images/showcase/tag_blue.png") no-repeat left 50%;
+	background: url("/assets/images/images/showcase/tag_blue.png") no-repeat left 50%;
 	height: 16px;
 	margin-top: 240px;
 	padding-left: 22px;
