@@ -1,41 +1,84 @@
 $(function () {
 	var anchor, qtipStyle, qtipPosition,
 		hashValue = location.hash.slice(1);
+		expand = $('.expandall').show().find('span').text('Expand all'),
+		doExpand = true;
 
+	/**
+	 * Swap "Expand all" / "Collapse all" text
+	 */
+	function checkExpanded() {
+		var collapsed = $('.features-item-head.unselected');
+
+		if (!collapsed.length) {
+			if (doExpand) {
+				expand.text('Collapse all');
+				doExpand = false;
+			}
+			return;
+		}
+		
+		if (!doExpand) {
+			expand.text('Expand all');
+			doExpand = true;
+		}
+	}
+
+	/**
+	 * Toggles items
+	 *
+	 * @param {jQuery} [items] Items to toggle. "this" will be used if items list is not set.
+	 * @param {bool} [toggle] Status. By default swaps current status
+	 * @param {bool} [instant] True if animation should be skipped. Default = false
+	 */
+	function toggleItems(items, toggle, instant) {
+		var args = arguments;
+
+		items = (arguments.length < 1) ? $(this) : $(items);
+		if (items.hasClass('features-item-content')) {
+			items = items.siblings('.features-item-head');
+		}
+
+		items.each(function () {
+			var item = $(this),
+				toggle = (args.length < 2) ? item.hasClass('unselected') : args[1],
+				instant = (args.length < 3) ? false : args[2];
+
+			if (item.hasClass('selected') == toggle) return;
+
+			var content = item.siblings('.features-item-content');
+			if (instant) {
+				content.stop(true, true).toggle(toggle);
+			}
+			else {
+				content.toggleFadeSlide(300);
+			}
+
+			item.toggleClass('selected unselected');
+		});
+		checkExpanded();
+	}
+
+	// Hide current content
 	$('.features-item-content').hide();
 
+	// Toggle hash
 	if (hashValue) {
 		anchor = $("a[name='" + hashValue + "']");
 
 		if (anchor.length) {
-			anchor.parents('div.features-item-content')
-				.toggle()
-				.siblings('.features-item-head')
-					.removeClass('unselected')
-					.addClass('selected');
+			toggleItems(anchor.parents('div.features-item-content'), true, true);
 		}
 	}
 
-	$('.features-item-head').click(function () {
-		$(this).toggleClass('selected unselected')
-			.siblings('.features-item-content')
-				.toggleFadeSlide(300)
+	// Set events
+	$('.features-item-head').click(function() { toggleItems(this); });
+	expand.click(function() {
+		toggleItems($('.features-item-head'), doExpand);
+		checkExpanded();
+		return false;
 	});
 
-	$('.expandall').show()
-		.find('span')
-			.text('Expand all')
-			.click(function () {
-				var closed = $(this).text() === 'Expand all';
-				$(this).text(closed ? 'Collapse all' : 'Expand all');
-
-				$('.features-item-head').click();
-			});
-
-
-	$('span.feature-collapse').click(function() {
-		$(this).parent().siblings('.features-item-head').click();
-	}).show();
 
 	qtipStyle = {
 		fontSize: 11,
