@@ -78,6 +78,7 @@ $(function () {
 		checkExpanded();
 		return false;
 	});
+	$('.feature-collapse').show().click(function() { toggleItems($(this).parents('div.features-item-content'), false); });
 
 
 	qtipStyle = {
