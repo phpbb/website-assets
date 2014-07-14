@@ -1623,10 +1623,15 @@ body.support h1 {
 }
 
 .fragment {
-  background-color: #ECD5D8;
-  padding:5px;
-  color: #BC2A4D;
-  font-weight:bold;
+	background-color: #ECD5D8;
+	padding:5px;
+	color: #BC2A4D;
+	font-weight:bold;
+	margin-top: 20px;
+}
+
+.fragment h3 {
+	margin-top: 0;
 }
 
 #rules code {
