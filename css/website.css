@@ -817,13 +817,22 @@ div.panel-emphasis {
 }
 
 /* Advertisement */
-#n-jobs {
-	width:728px;
-	height:90px;
-	border:1px solid #ccc;
-	background: #F5F7DF;
-	margin-left:auto;
-	margin-right:auto;
+.ads-button-hosting {
+	display: block;
+	max-width: 728px;
+	height: 90px;
+	line-height: 90px;
+	margin: 0 auto;
+	border-radius: 6px;
+	border: 1px solid #828d96;
+	background: url('./images/need-hosting.png') 50% 0;
+	overflow: hidden;
+	text-indent: -5000px;
+}
+
+.ads-button-hosting:hover {
+	box-shadow: 0 0 25px rgba(255, 255, 255, 0.2) inset;
+	border-color: #b2bdc6;
 }
 
 /* License agreement */
@@ -2337,6 +2346,11 @@ body.modx-creator div.right-tools img {
 body.modx-creator textarea.right-tools {
 	float: left;
 	margin-bottom: 3px;
+}
+
+body.modx-creator .action-tools {
+	display: block;
+	margin-top: 5px;
 }
 
 /* Documentation */
