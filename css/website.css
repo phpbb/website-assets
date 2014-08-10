@@ -825,7 +825,7 @@ div.panel-emphasis {
 	margin: 0 auto;
 	border-radius: 6px;
 	border: 1px solid #828d96;
-	background: url('./images/need-hosting.png') 50% 0;
+	background: url('/theme/images/need-hosting.png') 50% 0;
 	overflow: hidden;
 	text-indent: -5000px;
 }
