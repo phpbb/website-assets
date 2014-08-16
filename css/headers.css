@@ -5,195 +5,197 @@ Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
 */
 
 /* Header block with images */
-body div.header {
+body .phpbb-header {
 	background-repeat: no-repeat;
-	width: 850px;
+	background-position: 50% 0;
+	width: 100%;
 	height: 129px;
-	float: left;
-	margin-top: 21px;
+	border-radius: 8px 8px 0 0;
+	position: relative;
 }
-body div.header h1 {
+body .phpbb-header h1 {
 	margin: 0;
 }
-body div.header h1 a {
+body .phpbb-header h1 a {
 	display: block;
-	width: 850px;
+	width: 100%;
 	height: 129px;
 	text-indent: -5000px;
 	text-decoration: none;
 	margin: 0;
 }
-html>body div.header h1 a {
+html>body .phpbb-header h1 a {
 	background: url("/assets/images/images/logo_phpbb.png") 25px 30px no-repeat;
 }
-* html div.header h1 a {
+* html .phpbb-header h1 a {
 	background: url("/assets/images/images/logo_phpbb.gif") 25px 30px no-repeat; /* .gif */
 }
 
 /* Section header images */
-body div.header {
+body .phpbb-header {
 	background-image: url("/assets/images/headers/header_misc.jpg");
 }
-body.home div.header {
+body.home .phpbb-header {
 	background-image: url("/assets/images/headers/header_olympus.jpg");
 }
-body.downloads div.header {
+body.downloads .phpbb-header {
 	background-image: url("/assets/images/headers/header_downloads.jpg");
 }
-body.changelog div.header {
+body.changelog .phpbb-header {
 	background-image: url("/assets/images/headers/header_changelog.jpg");
 }
-body.about div.header {
+body.about .phpbb-header {
 	background-image: url("/assets/images/headers/header_about.jpg");
 }
-body.contact div.header {
+body.contact .phpbb-header {
 	background-image: url("/assets/images/headers/header_about.jpg");
 }
-body.features div.header {
+body.features .phpbb-header {
 	background-image: url("/assets/images/headers/header_features.jpg");
 }
-body.history div.header {
+body.history .phpbb-header {
 	background-image: url("/assets/images/headers/header_history.jpg");
 }
-body.support div.header {
+body.support .phpbb-header {
 	background-image: url("/assets/images/headers/header_support.jpg");
 }
-body.documentation div.header {
+body.documentation .phpbb-header {
 	background-image: url("/assets/images/headers/header_documentation.jpg");
 }
-body.irc div.header {
+body.irc .phpbb-header {
 	background-image: url("/assets/images/headers/header_irc.jpg");
 }
-body.intl div.header {
+body.intl .phpbb-header {
 	background-image: url("/assets/images/headers/header_intl.jpg");
 }
-body.development div.header {
+body.development .phpbb-header {
 	background-image: url("/assets/images/headers/header_eiffel.jpg");
 }
-body.incidents div.header {
+body.incidents .phpbb-header {
 	background-image: url("/assets/images/headers/header_incidents.jpg");
 }
-body.pastebin div.header {
+body.pastebin .phpbb-header {
 	background-image: url("/assets/images/headers/header_pastebin.jpg");
 }
-body.security div.header {
+body.security .phpbb-header {
 	background-image: url("/assets/images/headers/header_security.jpg");
 }
-body.customise div.header {
+body.customise .phpbb-header {
 	background-image: url("/assets/images/headers/header_customise.jpg");
 }
-body.customisation-database div.header {
+body.customisation-database .phpbb-header {
 	background-image: url("/assets/images/headers/header_customisation_database.jpg");
 }
 
-body.community div.header {
+body.showcase .phpbb-header {
+	background-image: url("/assets/images/headers/header_showcase.jpg");
+}
+body.demo .phpbb-header {
+	background-image: url("/assets/images/headers/header_lighttower.jpg");
+}
+
+/* Normal Community */
+body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_community.jpg");
 }
 
-body.showcase div.header {
-	background-image: url("/assets/images/headers/header_showcase.jpg");
-}
-body.demo div.header {
-	background-image: url("/assets/images/headers/header_lighttower.jpg");
-}
-
 /* Countdown
-body.community div.header, body.customise div.header {
+body.community .phpbb-header, body.customise .phpbb-header {
 	background-image: url("/assets/images/headers/header_countdown.jpg");
 } */
 
-/* XMAS 
-body.community div.header {
-	background-image: url("/assets/css/header.php");
+/* XMAS
+body.community .phpbb-header {
+	background-image: url("./header.php");
 }
 */
- 
-/* Halloween 
-body.community div.header {
+
+/* Halloween
+body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_halloween03.gif");
 } */
 
-/* Valentine's Day 
-body.community div.header {
+/* Valentine's Day
+body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_valentines02.jpg");
 } */
 
-body.mods div.header {
+body.mods .phpbb-header {
 	background-image: url("/assets/images/headers/header_mods.jpg");
 }
-body.modx div.header {
+body.modx .phpbb-header {
 	background-image: url("/assets/images/headers/header_modx.jpg");
 }
-body.styles div.header {
+body.styles .phpbb-header {
 	background-image: url("/assets/images/headers/header_styles.jpg");
 }
-body.languages div.header {
+body.languages .phpbb-header {
 	background-image: url("/assets/images/headers/header_languages.jpg");
 }
-body.bugs div.header {
+body.bugs .phpbb-header {
 	background-image: url("/assets/images/headers/header_bugs.jpg");
 }
-body.search div.header {
+body.search .phpbb-header {
 	background-image: url("/assets/images/headers/header_search.jpg");
 }
-body.kb div.header {
+body.kb .phpbb-header {
 	background-image: url("/assets/images/headers/header_kb.jpg");
 }
-body.errordocs div.header {
+body.errordocs .phpbb-header {
 	background-image: url("/assets/images/headers/header_error.jpg");
 }
-body.mailinglist div.header {
+body.mailinglist .phpbb-header {
 	background-image: url("/assets/images/headers/header_lighttower.jpg");
 }
-body.press div.header {
+body.press .phpbb-header {
 	background-image: url("/assets/images/headers/header_press.jpg");
 }
-body.prosilver div.header {
+body.prosilver .phpbb-header {
 	background-image: url("/assets/images/headers/header_prosilver.jpg");
 }
-body.shop div.header {
+body.shop .phpbb-header {
 	background-image: url("/assets/images/headers/header_moon.jpg");
 }
-body.hosting div.header {
+body.hosting .phpbb-header {
 	background-image: url("/assets/images/headers/header_olympus.jpg");
 }
-body.londonvasion div.header {
+body.londonvasion .phpbb-header {
 	background-image: url("/assets/images/headers/header_londonvasion.jpg");
 }
-body.londonvasion2 div.header {
+body.londonvasion2 .phpbb-header {
 	background-image: url("/assets/images/headers/header_londonvasion2.jpg");
 }
-body.libertyvasion div.header {
+body.libertyvasion .phpbb-header {
 	background-image: url("/assets/images/headers/header_libertyvasion.jpg");
 }
-body.mod_rules div.header {
+body.mod_rules .phpbb-header {
 	background-image: url("/assets/images/headers/header_mod_rules.jpg");
 }
-body.umil div.header {
+body.umil .phpbb-header {
 	background-image: url("/assets/images/headers/header_blackhole.jpg");
 }
-body.library div.header {
+body.library .phpbb-header {
 	background-image: url("/assets/images/headers/header_library.jpg");
 }
-body.blog div.header {
+body.blog .phpbb-header {
 	background-image: url("/assets/images/headers/header_blog.jpg");
 }
-body.meetinglogs div.header {
+body.meetinglogs .phpbb-header {
 	background-image: url("/assets/images/headers/header_logs.jpg");
 }
-body.antispam div.header {
+body.antispam .phpbb-header {
 	background-image: url("/assets/images/headers/header_spam.jpg");
 }
-body.code_changes div.header {
+body.code_changes .phpbb-header {
 	background-image: url("/assets/images/headers/header_code_changes.jpg");
 }
-body.libertyvasion div.header {
+body.libertyvasion .phpbb-header {
 	background-image: url("/assets/images/headers/header_libertyvasion.jpg");
 }
-body.get-involved div.header {
+body.get-involved .phpbb-header {
         background-image: url("/assets/images/headers/header_getinvolved.jpg");
 }
-body.home #navbar {
+body.home .phpbb-navbar {
 	margin-bottom: 20px;
 }
 
