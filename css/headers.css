@@ -198,37 +198,3 @@ body.get-involved .phpbb-header {
 body.home .phpbb-navbar {
 	margin-bottom: 20px;
 }
-
-
-
-/* Corners and sides */
-span.side-left, span.side-right {
-	display: block;
-	width: 20px;
-	height: 150px;
-	background: url("/assets/images/images/sides_top.gif") no-repeat;
-}
-span.side-left {
-	background-position: 0 0;
-	float: left;
-	margin-right: 10px;
-}
-span.side-right {
-	background-position: 100% 0;
-	float: right;
-}
-span.fcorners-bottom, span.fcorners-bottom span {
-	font-size: 1px;
-	line-height: 1px;
-	display: block;
-	height: 20px;
-	background-repeat: no-repeat;
-	background-image: url("/assets/images/images/corners_bottom.gif");
-	margin: 0;
-}
-span.fcorners-bottom {
-	background-position: 0 0;
-}
-span.fcorners-bottom span {
-	background-position: 100% -20px;
-}
