@@ -1,24 +1,37 @@
 $(function () {
-	"use strict";
+	'use strict';
+
+	// Swap .nojs and .hasjs
+	phpbb.isTouch = (window && typeof window.ontouchstart !== 'undefined');
+	$('#phpbb.nojs').toggleClass('nojs hasjs');
+	$('#phpbb').toggleClass('hastouch', phpbb.isTouch);
+	$('#phpbb.hastouch').removeClass('notouch');
 
 	function isIE() {
 		return navigator.userAgent.match(/MSIE \d\.\d+/);
 	}
 
+	var $phpbbNavbar = $('#phpbb-navbar');
+	var $phpbbMenu = $('#phpbb-menu');
+
 	// setup the drop downs for mouse-hover
-	$('#phpbb-menu').children('li').hoverIntent(function () {
+	$phpbbMenu.children('li').hoverIntent(function () {
 		// Show
-		$('> .sub-menu', this).toggle();
-		$('a', this).addClass('hovering');
+		if (!(phpbb.isTouch && $(window).width() < 900)) {
+			$('> .sub-menu', this).toggle();
+			$('a', this).addClass('hovering');
+		}
 	}, function () {
 		// Hide
-		$('> .sub-menu', this).toggle();
-		$('a', this).removeClass('hovering');
+		if (!(phpbb.isTouch && $(window).width() < 900)) {
+			$('> .sub-menu', this).toggle();
+			$('a', this).removeClass('hovering');
+		}
 	});
 
 	// IE fun
 	if (isIE()) {
-		$('#phpbb-menu').find('li li').hover(function () {
+		$phpbbMenu.find('li li').hover(function () {
 			$(this).addClass('hover_ie');
 		}, function () {
 			$(this).removeClass('hover_ie');
@@ -41,18 +54,25 @@ $(function () {
 	}
 
 	// responsive navbar menu
-	$('#phpbb-menu-toggle').on('click', function () {
-		$('#phpbb-menu').toggleClass('show');
+	$phpbbNavbar.find('#phpbb-menu-toggle').on('click', function () {
+		$phpbbMenu.toggleClass('show');
+		$phpbbNavbar.toggleClass('menu-open');
 	});
 
 	// add fly-out toggle buttons for responsive submenus
 	if (phpbb.isTouch) {
-		$('#phpbb-menu').find('.nav-button').each(function() {
+		$phpbbMenu.find('.nav-button').each(function() {
 			if($(this).children('.sub-menu').length) {
 				$(this).prepend('<a href="#" class="submenu-toggle"></a>');
 			}
 			$(this).children('.submenu-toggle').on('click', function() {
-				$(this).siblings('.sub-menu').toggle();
+				var $itemMenu = $(this).siblings('.sub-menu');
+				$itemMenu.toggle();
+
+				// close all other sub-menus
+				$phpbbMenu.find('.sub-menu').not($itemMenu).each(function() {
+					$(this).toggle(false);
+				});
 			});
 		});
 	}
