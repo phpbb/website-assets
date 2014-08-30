@@ -3061,6 +3061,12 @@ p.how-can-we-help {
 .clear {
 	clear: both;
 }
+.codesnippet {
+	padding: 5px;
+	border-radius: 5px;
+	background-color: #FAFAD2;
+	font-size: 1.2em;
+}
 
 /* Showcase */
 
