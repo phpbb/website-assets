@@ -3064,8 +3064,9 @@ p.how-can-we-help {
 .codesnippet {
 	padding: 5px;
 	border-radius: 5px;
-	background-color: #FAFAD2;
-	font-size: 1.2em;
+	background-color: #EBEBEB;
+	font-size: 12px;
+	white-space: pre-wrap;
 }
 
 /* Showcase */
