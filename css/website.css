@@ -33,6 +33,12 @@ body {
 	padding: 6px 10px;
 }
 
+#page-body:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
 #page-body .navbar {
 	margin: 4px 0;
 }
