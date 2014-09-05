@@ -1647,6 +1647,19 @@ body.support_docs span.corners-top.grey span, body.support_docs span.corners-bot
 	margin-bottom: 10px;
 }
 
+.information-red {
+	padding: 5px;
+	background-color: #ffdfdf;
+	border: 1px solid #a30004;
+	color: #330002;
+	font-size: 12px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
 .note-box {
 	text-align: justify;
 }
