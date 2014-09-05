@@ -1634,8 +1634,31 @@ body.support_docs span.corners-top.grey span, body.support_docs span.corners-bot
 	margin-bottom: 10px;
 }
 
+.information-green {
+	padding: 5px;
+	background-color: #e5ffdf;
+	border: 1px solid #43a347;
+	color: #043300;
+	font-size: 12px;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	text-align: center;
+	margin-bottom: 10px;
+}
+
 .note-box {
 	text-align: justify;
+}
+
+.compare h4.pros {
+	margin: 0 !important;
+	color: #009900 !important;
+}
+
+.compare h4.cons {
+	margin: 0 !important;
+	color: #d21a4e !important;
 }
 
 .manage-page .article-column {
