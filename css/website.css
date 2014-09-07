@@ -149,7 +149,7 @@ body {
 	font-size: 1em;
 }
 
-#main ul ul, #main ol ol{
+#main ul ul, #main ol ol, #main ol ul, #main ul ol{
 	font-size: 1em;
 }
 #main ul h3, #main ol h3 {
@@ -1839,6 +1839,11 @@ body.support h1 {
 	color: #007700;
 }
 
+/* Policy lists (similar to Rules, but different) */
+#main ul.policy li, #main ol.policy li {
+	margin: 6px 0;
+}
+
 /* calendar */
 table.calendar {
 	border-collapse: collapse;
@@ -3108,6 +3113,9 @@ p.how-can-we-help {
 	background-color: #EBEBEB;
 	font-size: 12px;
 	white-space: pre-wrap;
+}
+span.underline {
+	text-decoration: underline;
 }
 
 /* Showcase */
