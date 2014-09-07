@@ -169,6 +169,9 @@ body {
 #main ul.list li li, #main-extra ul.list li li {
 	font-size: 1em;
 }
+#main ul.list-margin li, #main ol.list-margin li {
+	margin: 6px 0;
+}
 
 #main div.column1 {
 	width: 260px;
@@ -1664,6 +1667,37 @@ body.support_docs span.corners-top.grey span, body.support_docs span.corners-bot
 	text-align: justify;
 }
 
+.mini-tag {
+	display: inline-block;
+	border: 1px solid transparent;
+	border-radius: 3px;
+	margin: 1px 5px 1px 1px;
+	padding: 0 3px;
+	font-weight: bold;
+	color: #000;
+	text-shadow: 0 0 2px rgba(255,255,255,0.5);
+}
+.mini-tag.green {
+	background: #95b178;
+	border-color: #228822;
+	color: #014700;
+}
+.mini-tag.blue {
+	background: #a1d7ff;
+	border-color: #49afff;
+	color: #00507d;
+}
+.mini-tag.orange {
+	background: #ffc561;
+	border-color: #c98a00;
+	color: #6b4600;
+}
+.mini-tag.dirty-green {
+	background: #dcecd6;
+	border-color: #afcca2;
+	color: #284e1e;
+}
+
 .compare h4.pros {
 	margin: 0 !important;
 	color: #009900 !important;
@@ -1837,11 +1871,6 @@ body.support h1 {
 
 #rules code {
 	color: #007700;
-}
-
-/* Policy lists (similar to Rules, but different) */
-#main ul.policy li, #main ol.policy li {
-	margin: 6px 0;
 }
 
 /* calendar */
