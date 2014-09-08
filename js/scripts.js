@@ -112,6 +112,10 @@ $(function () {
 			var $this = $(this),
 				id = $this.attr('id');
 
+			if (!id) {
+				id = $this.parent('li').attr('id');
+			}
+
 			if ($this.is('h2')) {
 				hasH2 = true;
 				indent = '';
