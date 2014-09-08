@@ -14,7 +14,7 @@ $(function () {
 	var $phpbbNavbar = $('#phpbb-navbar');
 	var $phpbbMenu = $('#phpbb-menu');
 
-	// setup the drop downs for mouse-hover
+	// Setup the drop downs for mouse-hover
 	$phpbbMenu.children('li').hoverIntent(function () {
 		// Show
 		if (!(phpbb.isTouch && $(window).width() < 900)) {
@@ -39,12 +39,12 @@ $(function () {
 
 		// For each div with class menu (i.e., the thing we want to be on top)
 		$('.sub-menu').parents().each(function() {
-			var p = $(this),
-				pos = p.css('position');
+			var $p = $(this),
+				pos = $p.css('position');
 
 			// If it's positioned,
 			if (pos === 'relative' || pos === 'absolute' || pos === 'fixed') {
-				p.hover(function() {
+				$p.hover(function() {
 					$(this).addClass('on-top');
 				}, function() {
 					$(this).removeClass('on-top');
@@ -53,13 +53,13 @@ $(function () {
 		});
 	}
 
-	// responsive navbar menu
+	// Responsive navbar menu
 	$phpbbNavbar.find('#phpbb-menu-toggle').on('click', function () {
 		$phpbbMenu.toggleClass('show');
 		$phpbbNavbar.toggleClass('menu-open');
 	});
 
-	// add fly-out toggle buttons for responsive submenus
+	// Add fly-out toggle buttons for responsive submenus
 	if (phpbb.isTouch) {
 		$phpbbMenu.find('.nav-button').each(function() {
 			if($(this).children('.sub-menu').length) {
@@ -77,7 +77,7 @@ $(function () {
 		});
 	}
 
-	// side-bar menu
+	// Responsive side-bar menu
 	var $extras = $('#extras');
 
 	if ($extras.length) {
@@ -90,21 +90,97 @@ $(function () {
 
 	// Hide active dropdowns/menus when click event happens outside
 	$('body').click(function(e) {
-		var parents = $(e.target).parents();
-		if (!parents.is('#phpbb-navbar')) {
+		var $parents = $(e.target).parents();
+		if (!$parents.is('#phpbb-navbar')) {
 			$('#phpbb-menu').toggleClass('show',false);
 			$phpbbNavbar.toggleClass('menu-open', false);
 		}
-		if (!parents.is('#phpbb-sidebar')) {
+		if (!$parents.is('#phpbb-sidebar')) {
 			$('#phpbb-sidebar').toggleClass('show',false);
 		}
 	});
+
+	// Generate side-bar "sections" mini-panel content by parsing headings
+	var $sectionsPanel = $('.mini-panel.js-sections'),
+		sectionsHTML = '';
+
+	if ($sectionsPanel.length) {
+		var hasH2 = false,
+			indent;
+
+		$('#main').find('h2, h3').not('.imgrep').each(function() {
+			var $this = $(this),
+				id = $this.attr('id');
+
+			if ($this.is('h2')) {
+				hasH2 = true;
+				indent = '';
+			} else if (hasH2) {
+				indent = '- ';
+			} else {
+				indent = '';
+			}
+
+			if (id) {
+				sectionsHTML += '<li>' + indent + '<a href="#' + id + '">' + $this.text() + '</a></li>';
+			}
+		});
+
+		if(sectionsHTML) {
+			sectionsHTML = '<div class="inner"><h3>Page Sections</h3></h3><ul class="menu">' + sectionsHTML + '</ul></div>';
+			$sectionsPanel.html(sectionsHTML).toggle(true);
+		}
+	}
+
+	// Side-bar "sections" mini-panel will scroll with content
+	var $scrollPanel = $('.mini-panel.js-scroll'),
+		$pageFooter = $('#page-footer');
+
+	if ($scrollPanel.length && $pageFooter.length) {
+		var extra = 5,
+			footerSpacing = 20,
+			top = $scrollPanel.offset().top - extra,
+			height = $scrollPanel.height(),
+			maxTop = $pageFooter.offset().top - height - footerSpacing,
+			fixed = false,
+			scrollPanelActive = !$scrollPanel.is(':empty');
+
+		scrollSidePanel();
+	}
+
+	function scrollSidePanel() {
+		if (scrollPanelActive) {
+			var windowTop = $(window).scrollTop();
+			if (windowTop <= top || windowTop >= maxTop)
+			{
+				if (fixed)
+				{
+					$scrollPanel.css({
+						position: 'static',
+						top: 'auto'
+					});
+				}
+				fixed = false;
+				return;
+			}
+			if (!fixed)
+			{
+				fixed = true;
+				$scrollPanel.css({
+					position: 'fixed',
+					top: extra + 'px'
+				});
+			}
+		}
+	}
+
+	$(window).scroll(scrollSidePanel);
 
 	// Autofocus cookies debugger thing
 	$('form[action="cookies.php"] [name="url"]').focus();
 
 	// Showcase click tracker
-	$('.showcase').on('click', 'a:[href*="http"]', function (e) {
+	$('.showcase').on('click', 'a:[href*="http"]', function () {
 		var href = this.href,
 			location,
 			letsGo = function () {

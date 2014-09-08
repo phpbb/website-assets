@@ -288,7 +288,7 @@ ul.menu li {
 	border-bottom: 1px solid #CCCCCC;
 	margin: 0;
 }
-ul.menu li.last {
+ul.menu li.last, ul.menu li:last-child {
 	border-bottom: none;
 }
 
@@ -687,6 +687,7 @@ div.mini-panel {
 	padding: 5px 10px;
 	background-color: #ebebeb;
 	margin-bottom: 5px;
+	width: 240px;
 }
 
 div.mini-panel h3 {
