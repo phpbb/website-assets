@@ -488,6 +488,20 @@ dl.download dt {
 	clear: both;
 }
 
+.download-changes dl {
+	margin-bottom: 10px;
+}
+
+.download-changes dt a {
+	margin-left: 5px;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.download-changes dt img {
+	vertical-align: middle;
+}
+
 div.downloads-footer {
 	width: 100%;
 	margin-top: 10px;
@@ -1693,9 +1707,9 @@ body.support_docs span.corners-top.grey span, body.support_docs span.corners-bot
 	color: #6b4600;
 }
 .mini-tag.dirty-green {
-	background: #dcecd6;
-	border-color: #afcca2;
-	color: #284e1e;
+	background: #e1ecd4;
+	border-color: #bccca7;
+	color: #3c4e20;
 }
 
 .compare h4.pros {
