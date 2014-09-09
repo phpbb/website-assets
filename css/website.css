@@ -190,6 +190,16 @@ body {
 	width: 425px;
 	float: right;
 }
+#main div.column-thirds {
+	width: 33.3%;
+	min-width: 175px;
+	float: left;
+	padding: 0 5px;
+	margin-bottom: 10px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 dl.text {
 	font-size: 1.2em;
 }
@@ -488,16 +498,18 @@ dl.download dt {
 	clear: both;
 }
 
+/* Changelog lists */
+.download-changes h3.column-title {
+	font-size: 1.4em !important;
+}
 .download-changes dl {
 	margin-bottom: 10px;
 }
-
 .download-changes dt a {
 	margin-left: 5px;
 	font-weight: bold;
 	font-size: 1.1em;
 }
-
 .download-changes dt img {
 	vertical-align: middle;
 }
@@ -507,12 +519,10 @@ div.downloads-footer {
 	margin-top: 10px;
 	float: right;
 }
-
 div.downloads-footer .menu li {
 	border-bottom: 0;
 	padding: 2px 0 3px;
 }
-
 div.downloads-footer .section {
 	float: left;
 	width: 25%;
