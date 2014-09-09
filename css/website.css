@@ -687,7 +687,11 @@ div.mini-panel {
 	padding: 5px 10px;
 	background-color: #ebebeb;
 	margin-bottom: 5px;
+}
+
+div.mini-panel.fixed {
 	width: 240px;
+	position: fixed;
 }
 
 div.mini-panel h3 {

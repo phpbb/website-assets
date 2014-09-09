@@ -159,10 +159,7 @@ $(function () {
 			{
 				if (fixed)
 				{
-					$scrollPanel.css({
-						position: 'static',
-						top: 'auto'
-					});
+					$scrollPanel.css('top', 'auto').removeClass('fixed');
 				}
 				fixed = false;
 				return;
@@ -170,10 +167,7 @@ $(function () {
 			if (!fixed)
 			{
 				fixed = true;
-				$scrollPanel.css({
-					position: 'fixed',
-					top: extra + 'px'
-				});
+				$scrollPanel.css('top', extra + 'px').addClass('fixed');
 			}
 		}
 	}
