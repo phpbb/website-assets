@@ -93,6 +93,7 @@ $(function () {
 		var parents = $(e.target).parents();
 		if (!parents.is('#phpbb-navbar')) {
 			$('#phpbb-menu').toggleClass('show',false);
+			$phpbbNavbar.toggleClass('menu-open', false);
 		}
 		if (!parents.is('#phpbb-sidebar')) {
 			$('#phpbb-sidebar').toggleClass('show',false);

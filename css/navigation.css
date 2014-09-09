@@ -52,6 +52,7 @@ body.development li.but-development > a,
 body.downloads li.but-downloads > a,
 body.languages li.but-downloads > a,
 body.customise li.but-customise > a,
+body.extensions li.but-customise > a,
 body.mods li.but-customise > a,
 body.styles li.but-customise > a,
 body.support li.but-support > a,
@@ -87,6 +88,7 @@ body.hosting li.but-hosting > a {
 	display: none !important;
 }
 
+/* Responsive menu toggle button */
 .phpbb-navbar .but-menu {
 	display: none;
 	float: left !important;
@@ -140,15 +142,15 @@ body.hosting li.but-hosting > a {
 	box-sizing: content-box;
 }
 
-/* @group Submenu
+/* Submenus
 --------------------------------------------- */
-.sub-menu {
+.phpbb-navbar .sub-menu {
 	display: none;
 	background: #99A1A8 url("/assets/images/images/bg_submenu.png") repeat-x 0 0;
 	border-radius: 5px;
 	box-shadow: 0 3px 3px rgba(69, 73, 76, 0.5);
 	position: absolute;
-	padding: 10px 8px 0 8px;
+	padding: 10px 8px;
 	width: 370px;
 	left: -12px;
 	top: 25px;
@@ -156,86 +158,82 @@ body.hosting li.but-hosting > a {
 	z-index: 9999;
 }
 
-.sub-menu-bottom {
+.phpbb-navbar .sub-menu.wide-menu {
+	width: 420px;
+}
+
+.phpbb-navbar .sub-menu:after {
 	clear: both;
-	height: 10px;
+	content: '';
+	display: block;
 }
 
-.sub-menu-extra {
-	padding-bottom: 10px;
-}
-
-.sub-menu-extra .sub-menu-bottom {
-	height: auto;
-	padding: 10px 2px 0;
+.phpbb-navbar .sub-menu-bottom {
+	clear:  both;
+	margin-bottom: -5px;
+	padding-top: 10px;
 	text-align: right;
 }
 
 .phpbb-navbar .sub-menu-bottom a {
 	border-top: 1px dashed #b2b8bd;
 	display: block;
-	padding-top: 10px;
+	padding: 6px 2px;
 	font-weight: bold;
 }
-
 .phpbb-navbar .sub-menu-bottom a:hover {
 	color: #105289;
 }
 
-.phpbb-navbar li .sub-menu a {
+.phpbb-navbar .sub-menu a {
 	background: none;
-	display:block;
-	height:auto;
-	overflow:hidden;
+	display: block;
+	height: auto;
+	overflow: hidden;
 	position: static;
 	width: auto;
 	color: #FFF;
 }
-
 .phpbb-navbar .sub-menu a:hover {
-	color: #FFF;
 	text-decoration: none;
 }
 
-.sub-menu ul {
+.phpbb-navbar .sub-menu ul {
 	width: 180px;
 	float: left;
 	margin: 0 2px;
 }
-
-ul.wide-menu {
-	width: 364px;
+.phpbb-navbar .sub-menu ul.wide-list {
+	width: auto;
 }
-
-.sub-menu h4 {
-	font-weight: bold;
+.phpbb-navbar .sub-menu ul.narrow-list {
+	width: 136px;
 }
 
 .phpbb-navbar .sub-menu li {
 	display: block;
-	float:  none;
+	float: none;
 	height: auto;
-	padding: 6px;
-	padding-bottom: 8px;
+	padding: 6px 6px 8px;
 	margin-bottom: 4px;
 }
 
-.phpbb-navbar li .sub-menu p {
+.phpbb-navbar .sub-menu .last {
+	margin: 0;
+}
+
+.phpbb-navbar .sub-menu h4 {
+	font-weight: bold;
+}
+
+.phpbb-navbar .sub-menu p {
 	margin: 0;
 	font-size: 10px;
 }
 
-/* External link image by jQuery UI */
-.phpbb-navbar li .sub-menu li:hover h4 a, .phpbb-navbar .hover_ie h4 a, .phpbb-navbar .hover_ie h4 a:hover {
-	font-size: 13px;
-	color: #105289;
-}
-
-.phpbb-navbar li .sub-menu .last {
-	margin: 0;
-}
-
-.phpbb-navbar .sub-menu li:hover, .hover_ie {
+/* Submenu hover states */
+.phpbb-navbar .sub-menu li:hover,
+.phpbb-navbar .hover_ie {
 	background: #ccd1d4 no-repeat;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -247,26 +245,32 @@ ul.wide-menu {
 	padding: 5px 5px 7px 5px;
 }
 
-.phpbb-navbar .sub-menu li:hover a, .phpbb-navbar .hover_ie p a, .phpbb-navbar .hover_ie p a:hover {
+.phpbb-navbar .sub-menu li:hover h4 a,
+.phpbb-navbar .hover_ie h4 a,
+.phpbb-navbar .hover_ie h4 a:hover {
+	font-size: 13px;
+	color: #105289;
+}
+
+.phpbb-navbar .sub-menu li:hover a,
+.phpbb-navbar .hover_ie p a,
+.phpbb-navbar .hover_ie p a:hover {
 	color: #333;
 	text-shadow: none;
 }
 
-.on-top {
+.phpbb-navbar .on-top {
 	z-index: 10000;
 }
 
+/* External link image */
 .phpbb-navbar .sub-menu li.external:hover {
-	background-image: url("images/bg_submenu_external.gif");
-	background-position: 165px 5px;
+	background-image: url("/assets/images/images/bg_submenu_external2.gif");
+	background-position: 100% 0;
 }
 
-.phpbb-navbar .sub-menu li.wide-menu-item:hover {
-	background-position: 349px 5px;
-}
-
-/* @end */
-
+/* Responsive
+--------------------------------------------- */
 @media only screen and (max-width: 915px), only screen and (max-device-width: 915px)
 {
 	.phpbb-navbar.menu-open {
@@ -277,7 +281,7 @@ ul.wide-menu {
 		display: block;
 	}
 
-	#phpbb-menu {
+	.phpbb-navbar .phpbb-menu {
 		background: #828d96;
 		display: none;
 		position: absolute;
@@ -286,11 +290,11 @@ ul.wide-menu {
 		border-radius: 0 0 4px 4px;
 	}
 
-	#phpbb-menu.show {
+	.phpbb-navbar .phpbb-menu.show {
 		display: block;
 	}
 
-	#phpbb-menu:after {
+	.phpbb-navbar .phpbb-menu:after {
 		content: '';
 		clear: both;
 		display: block;
@@ -339,7 +343,7 @@ ul.wide-menu {
 		box-shadow: inset -1px -1px 2px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.7);
 	}
 
-	.sub-menu {
+	.phpbb-navbar .sub-menu {
 		top: 0;
 		left: 100%;
 		border-top-left-radius: 0;
@@ -353,30 +357,31 @@ ul.wide-menu {
 		margin: 1px -5px 0;
 	}
 
-	#phpbb-menu {
-		border-bottom-left-radius: 0;
+	.phpbb-navbar .phpbb-menu {
+		border-bottom-left-radius: 0 !important;
 	}
 }
 
-@media only screen and (max-width: 520px), only screen and (max-device-width: 520px)
+@media only screen and (max-width: 580px), only screen and (max-device-width: 580px)
 {
-	.sub-menu {
-		width: auto;
+	.phpbb-navbar .sub-menu {
+		width: 190px !important;
 	}
 
-	.sub-menu ul {
+	.phpbb-navbar .sub-menu ul {
 		float: none;
+		width: 100% !important;
 	}
 
-	.sub-menu img {
+	.phpbb-navbar .sub-menu img,
+	.phpbb-navbar .sub-menu p{
 		display: none;
 	}
+}
 
-	ul.wide-menu {
-		width: 180px;
-	}
-
-	.phpbb-navbar li .sub-menu p {
-		display: none;
+@media only screen and (max-width: 360px), only screen and (max-device-width: 360px)
+{
+	.phpbb-navbar .sub-menu {
+		width: 140px !important;
 	}
 }
