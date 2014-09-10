@@ -13,6 +13,8 @@ $(function () {
 
 	var $phpbbNavbar = $('#phpbb-navbar');
 	var $phpbbMenu = $('#phpbb-menu');
+	var $phpbbSidebar;
+	var $phpbbSidebarToggle;
 
 	// Setup the drop downs for mouse-hover
 	$phpbbMenu.children('li').hoverIntent(function () {
@@ -54,9 +56,11 @@ $(function () {
 	}
 
 	// Responsive navbar menu
-	$phpbbNavbar.find('#phpbb-menu-toggle').on('click', function () {
+	$phpbbNavbar.find('#phpbb-menu-toggle').on('click', function (e) {
 		$phpbbMenu.toggleClass('show');
 		$phpbbNavbar.toggleClass('menu-open');
+
+		e.preventDefault();
 	});
 
 	// Add fly-out toggle buttons for responsive submenus
@@ -65,7 +69,7 @@ $(function () {
 			if($(this).children('.sub-menu').length) {
 				$(this).prepend('<a href="#" class="submenu-toggle"></a>');
 			}
-			$(this).children('.submenu-toggle').on('click', function() {
+			$(this).children('.submenu-toggle').on('click', function(e) {
 				var $itemMenu = $(this).siblings('.sub-menu');
 				$itemMenu.toggle();
 
@@ -73,6 +77,8 @@ $(function () {
 				$phpbbMenu.find('.sub-menu').not($itemMenu).each(function() {
 					$(this).toggle(false);
 				});
+
+				e.preventDefault();
 			});
 		});
 	}
@@ -83,20 +89,25 @@ $(function () {
 	if ($extras.length) {
 		$extras.wrap('<div id="phpbb-sidebar" class="sidebar"></div>').before('<a href="#" id="phpbb-sidebar-toggle" class="sidebar-toggle" title="Toggle sidebar"></a>');
 		$('#main').addClass('has-sidebar');
+		$phpbbSidebar = $('#phpbb-sidebar');
+		$phpbbSidebarToggle = $('#phpbb-sidebar-toggle');
 	}
-	$('#phpbb-sidebar-toggle').on('click', function() {
-		$('#phpbb-sidebar').toggleClass('show');
+
+	$phpbbSidebarToggle.on('click', function(e) {
+		$phpbbSidebar.toggleClass('show');
+
+		e.preventDefault();
 	});
 
 	// Hide active dropdowns/menus when click event happens outside
 	$('body').click(function(e) {
 		var $parents = $(e.target).parents();
 		if (!$parents.is('#phpbb-navbar')) {
-			$('#phpbb-menu').toggleClass('show',false);
+			$phpbbMenu.toggleClass('show',false);
 			$phpbbNavbar.toggleClass('menu-open', false);
 		}
 		if (!$parents.is('#phpbb-sidebar')) {
-			$('#phpbb-sidebar').toggleClass('show',false);
+			$phpbbSidebar.toggleClass('show',false);
 		}
 	});
 

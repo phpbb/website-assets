@@ -2323,9 +2323,9 @@ span.inlinecode
 {
 	background-color:#EFEFEF;
 	border:1px solid #DDDDDD;
+	border-radius: 2px;
 	color:#2E8B57;
 	font-family: Monaco,"Andale Mono","Courier New",Courier,mono,monospace;
-	font-size:1.2em;
 	font-size-adjust:none;
 	font-stretch:normal;
 	font-style:normal;
@@ -2333,6 +2333,7 @@ span.inlinecode
 	font-weight:normal;
 	line-height:normal;
 	overflow:auto;
+	padding: 0 2px;
 }
 
 /* Wiki link */
@@ -3552,6 +3553,11 @@ h2 sup {
 		margin-left: 35px;
 		border-bottom-left-radius: 10px;
 		box-shadow: 0 3px 3px rgba(69, 73, 76, 0.5);
+	}
+
+	div.mini-panel.fixed {
+		width: auto;
+		position: inherit;
 	}
 
 	.column1, .column2,
