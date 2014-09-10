@@ -3412,7 +3412,6 @@ h2 sup {
 		width: 100%;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
-		padding: 0 10px;
 	}
 
 	#main.has-sidebar {
@@ -3518,6 +3517,10 @@ h2 sup {
 		box-shadow: none;
 		margin: 0;
 		padding: 0 5px 10px;
+	}
+
+	#main {
+		padding: 0 10px;
 	}
 
 	#page-header {
