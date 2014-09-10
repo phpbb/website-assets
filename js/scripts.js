@@ -102,12 +102,12 @@ $(function () {
 	// Hide active dropdowns/menus when click event happens outside
 	$('body').click(function(e) {
 		var $parents = $(e.target).parents();
-		if (!$parents.is('#phpbb-navbar')) {
-			$phpbbMenu.toggleClass('show',false);
-			$phpbbNavbar.toggleClass('menu-open', false);
+		if (!$parents.is($phpbbNavbar)) {
+			$phpbbMenu.removeClass('show');
+			$phpbbNavbar.removeClass('menu-open');
 		}
-		if (!$parents.is('#phpbb-sidebar')) {
-			$phpbbSidebar.toggleClass('show',false);
+		if (!$parents.is($phpbbSidebar)) {
+			$phpbbSidebar.removeClass('show');
 		}
 	});
 
@@ -142,7 +142,7 @@ $(function () {
 		});
 
 		if(sectionsHTML) {
-			sectionsHTML = '<div class="inner"><h3>Page Sections</h3></h3><ul class="menu">' + sectionsHTML + '</ul></div>';
+			sectionsHTML = '<div class="inner"><h3>Page Sections</h3><ul class="menu">' + sectionsHTML + '</ul></div>';
 			$sectionsPanel.html(sectionsHTML).toggle(true);
 		}
 	}
@@ -166,17 +166,14 @@ $(function () {
 	function scrollSidePanel() {
 		if (scrollPanelActive) {
 			var windowTop = $(window).scrollTop();
-			if (windowTop <= top || windowTop >= maxTop)
-			{
-				if (fixed)
-				{
+			if (windowTop <= top || windowTop >= maxTop) {
+				if (fixed) {
 					$scrollPanel.css('top', 'auto').removeClass('fixed');
 				}
 				fixed = false;
 				return;
 			}
-			if (!fixed)
-			{
+			if (!fixed) {
 				fixed = true;
 				$scrollPanel.css('top', extra + 'px').addClass('fixed');
 			}
