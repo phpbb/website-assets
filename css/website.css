@@ -173,6 +173,10 @@ body {
 	margin: 6px 0;
 }
 
+#main li.no-bullet {
+	list-style: none;
+}
+
 #main div.column1 {
 	width: 260px;
 	float: left;
