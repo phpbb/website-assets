@@ -175,7 +175,7 @@ $(function () {
 			}
 			if (!fixed) {
 				fixed = true;
-				$scrollPanel.css('top', extra + 'px').addClass('fixed');
+				$scrollPanel.css('top', extra).addClass('fixed');
 			}
 		}
 	}
