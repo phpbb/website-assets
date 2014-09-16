@@ -2323,13 +2323,14 @@ blockquote.website {
 	margin-left: 0;
 }
 
-span.inlinecode
-{
+/* Inline code tag */
+code.inline, span.inlinecode {
 	background-color: #f9f2f4;
 	border: 0;
 	border-radius: 4px;
 	color: #c7254e;
-	font-family: Monaco,"Andale Mono","Courier New",Courier,mono,monospace;
+	display: inline;
+	font-family: Monaco, "Andale Mono", "Courier New", Courier, monospace;
 	font-size-adjust: none;
 	font-stretch: normal;
 	font-style: normal;
@@ -2352,18 +2353,6 @@ a.kblink {
 	background: url("/assets/images/images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
-}
-/* Inline code tag */
-code.inline {
-	font-family: Monaco, 'Andale Mono', 'Courier New', Courier, monospace;
-	font-size: 0.9em;
-	font-style: normal;
-	line-height: 1.3em;
-	background: #FFF;
-	border: 1px solid #C9D2D8;
-	padding: 0 3px;
-	color: #2E8B57;
-	display: inline;
 }
 
 /* UMIF GUI creator for prosilver style
