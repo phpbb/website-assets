@@ -2323,14 +2323,28 @@ blockquote.website {
 	margin-left: 0;
 }
 
-/* Inline code tag */
-code.inline, span.inlinecode {
+/* Inline code BB-tag (for the forums) */
+code.inline {
+	background: #FFF;
+	border: 1px solid #C9D2D8;
+	color: #2E8B57;
+	display: inline;
+	font-family: Monaco, "Andale Mono", "Courier New", Courier, monospace;
+	font-size: 0.9em;
+	font-style: normal;
+	line-height: 1.3em;
+	padding: 0 3px;
+}
+
+/* Inline code tag (for the website) */
+#main code.inline, span.inlinecode {
 	background-color: #f9f2f4;
-	border: 0;
+	border: none;
 	border-radius: 4px;
 	color: #c7254e;
 	display: inline;
 	font-family: Monaco, "Andale Mono", "Courier New", Courier, monospace;
+	font-size: 1em;
 	font-size-adjust: none;
 	font-stretch: normal;
 	font-style: normal;
