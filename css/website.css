@@ -3487,10 +3487,10 @@ h2 sup {
 
 #epv-results {
     background-color: black;
-    width: 800px;
+    width: 100%;
     overflow-x: visible;
     font-family: Monaco;
-    font-size: 12px;
+    font-size: 9px;
     padding: 5px;
 }
 
