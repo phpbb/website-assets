@@ -1493,6 +1493,12 @@ body.jr-validators .forums dd textarea {
 	width: 95%;
 }
 
+/* Extensions */
+.official-extension-icon {
+	margin-right: 5px;
+	float: left;
+}
+
 /* KB */
 ul.topiclist dt.kb_noapprove {
 	width: 70%
