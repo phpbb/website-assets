@@ -91,13 +91,13 @@ $(function () {
 		$('#main').addClass('has-sidebar');
 		$phpbbSidebar = $('#phpbb-sidebar');
 		$phpbbSidebarToggle = $('#phpbb-sidebar-toggle');
+
+		$phpbbSidebarToggle.on('click', function(e) {
+			$phpbbSidebar.toggleClass('show');
+
+			e.preventDefault();
+		});
 	}
-
-	$phpbbSidebarToggle.on('click', function(e) {
-		$phpbbSidebar.toggleClass('show');
-
-		e.preventDefault();
-	});
 
 	// Hide active dropdowns/menus when click event happens outside
 	$('body').click(function(e) {
@@ -106,7 +106,7 @@ $(function () {
 			$phpbbMenu.removeClass('show');
 			$phpbbNavbar.removeClass('menu-open');
 		}
-		if (!$parents.is($phpbbSidebar)) {
+		if (typeof $phpbbSidebar !== 'undefined' && !$parents.is($phpbbSidebar)) {
 			$phpbbSidebar.removeClass('show');
 		}
 	});
