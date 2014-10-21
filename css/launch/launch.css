@@ -130,7 +130,7 @@ a:active {
 
 @media (max-width: 540px) {
 	.media-title .security-image {
-		width: 105%;
+		width: 100%;
 		position: relative;
 	}
 
@@ -149,15 +149,15 @@ a:active {
 	.media-lg .media-copy,
 	.media-md .media-copy,
 	.media-sm .media-copy {
-		font-size: 1.12rem;
+		font-size: 1rem;
 		line-height: 2.34;
 	}
 
 	.media-lg,
 	.media-md,
 	.media-sm {
-		padding-right: 36px;
-		padding-left: 36px;
+		padding-right: 24px;
+		padding-left: 24px;
 		width: 100%;
 	}
 }
@@ -223,7 +223,7 @@ a:active {
 .features-nav {
 	background-color: #fff;
 
-	padding: 10px;
+	padding: 10px 0;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 			box-sizing: border-box;
@@ -281,10 +281,6 @@ a:active {
 }
 
 @media (max-width: 540px) {
-	.nav {
-		position: relative;
-		left: -20px;
-	}
 
 	.nav-link.admin:before { content: "Admin";	}
 	.nav-link.user:before { content: "User";	}
@@ -449,10 +445,10 @@ a:active {
 
 @media (max-width: 640px) {
 	.lead-title {
-		font-size: 3.5rem;
+		font-size: 2.75rem;
 		display: block;
 	}
-	.lead-sub-title { font-size: 1.25rem; }
+	.lead-sub-title { font-size: 1rem; }
 	.lead-clear-outline {
 		top: 0;
 		margin:48px auto 0;
