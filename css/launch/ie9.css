@@ -1,0 +1,35 @@
+/*--------------------------------------------------------------------------*\
+	$IE Fixes
+/*--------------------------------------------------------------------------*\
+	Fixes for IE 9
+/*--------------------------------------------------------------------------*/
+
+.features-header {
+	overflow: hidden;
+	background-image: url('/assets/images/images/about/launch/phpbb-features-ie.png');
+	background-repeat: no-repeat;
+	height: 294px;
+}
+
+.masthead,
+.masthead-title,
+.masthead-sub-title,
+.masthead-clear-outline { display: none; }
+
+.nav { color: #fff; }
+
+/*----------------------------------------------------------------------------*\
+    $ELEMENTS
+/*----------------------------------------------------------------------------*/
+
+.media-title .security-image { width: 100%; }
+
+.media-copy             { font-size: 14px\9; }
+.media-title            { font-size: 35px\9; }
+.media-lg .media-copy   { font-size: 24px\9; }
+.media-md .media-title  { font-size: 30px\9; }
+.media-md .media-copy   { font-size: 18px\9; }
+.media-sm .media-title  { font-size: 22px\9; }
+.lead-title             { font-size: 72px\9; }
+.lead-sub-title         { font-size: 24px\9; }
+.lead-clear-outline     { font-size: 36px\9; }
