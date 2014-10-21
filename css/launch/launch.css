@@ -70,7 +70,6 @@ a:active {
 	margin: 0 auto 36px;
 }
 
-
 .media-copy .media-image {
 	display: block;
 	margin: 36px auto 0;
@@ -100,6 +99,8 @@ a:active {
 	line-height: 1.84;
 }
 
+.media-lg .media-image { width: 300px; }
+
 .media-md { width: 49%; }
 
 .media-md .media-title {
@@ -111,11 +112,53 @@ a:active {
 	line-height: 2.34;
 }
 
+.media-md .media-image { width: 150px; }
+
 .media-sm { width: 32%; }
 
 .media-sm .media-title {
 	font-size: 1.37rem;
 	line-height: 1.36;
+}
+
+.media-sm .media-image { width: 100px; }
+
+.media-title .security-image {
+	display: block;
+	margin: 0 auto 36px;
+}
+
+@media (max-width: 540px) {
+	.media-title .security-image {
+		width: 145%;
+		position: relative;
+		left: -48px;
+	}
+
+	.media-lg .media-image,
+	.media-md .media-image,
+	.media-sm .media-image {
+		width: 150px;
+	}
+
+	.media-lg .media-title,
+	.media-md .media-title,
+	.media-sm .media-title {
+		font-size: 1.87rem;
+	}
+
+	.media-lg .media-copy,
+	.media-md .media-copy,
+	.media-sm .media-copy {
+		font-size: 1.12rem;
+		line-height: 2.34;
+	}
+
+	.media-md, .media-sm {
+		padding-right: 72px;
+		padding-left: 72px;
+		width: 100%;
+	}
 }
 
 .nav {
@@ -166,6 +209,12 @@ a:active {
 			box-sizing: border-box;
 }
 
+@media (max-width: 900px) {
+	.features-container {
+		width: 110%;
+	}
+}
+
 .features-header {
 	background-image: url('/assets/images/images/about/launch/phpbb-features.png');
 	background-repeat: no-repeat;
@@ -181,6 +230,12 @@ a:active {
 	   -moz-box-sizing: border-box;
 			box-sizing: border-box;
 	z-index: 101;
+}
+
+@media (max-width: 900px) {
+	.features-nav {
+		width: 110%;
+	}
 }
 
 .stuck {
@@ -210,13 +265,40 @@ a:active {
 	z-index: 201;
 }
 
+	.nav-link.admin:before { content: "Administrator";	}
+	.nav-link.user:before { content: "End Users";	}
+	.nav-link.dev:before { content: "Developers";	}
+	.nav-link.design:before { content: "Designers";	}
+
+@media (max-width: 900px) {
+	.nav .top {
+		margin-left: 10px;
+	}
+}
+
+@media (max-width: 540px) {
+	.nav {
+		position: relative;
+		left: -20px;
+	}
+
+	.nav-link.admin:before { content: "Admin";	}
+	.nav-link.user:before { content: "User";	}
+	.nav-link.dev:before { content: "Dev";	}
+	.nav-link.design:before { content: "Designer";	}
+
+	.nav .top {
+		margin-top: -10px;
+		margin-left: 10px;
+	}
+}
+
 .nav .top:hover, .nav .top.active {
 	background-color: transparent;
 	background-position: 0 0;
 }
 
 .feature {
-
 	background-image: -webkit-linear-gradient(top, #e6e6e6 0, #fff 500px);
 	background-image:      -o-linear-gradient(top, #e6e6e6 0, #fff 500px);
 	background-image:         linear-gradient(to bottom, #e6e6e6 0, #fff 500px);
@@ -282,7 +364,7 @@ a:active {
 	border-top: 2px solid #e5e5e5;
 	border-bottom: 2px solid #e5e5e5;
 
-	padding: 80px 160px 30px;
+	padding: 80px 20px 30px;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 			box-sizing: border-box;
@@ -359,4 +441,18 @@ a:active {
 	border: 0;
 
 	padding: 0;
+}
+
+@media (max-width: 640px) {
+	.lead-title {
+		font-size: 3.5rem;
+		display: block;
+	}
+	.lead-sub-title { font-size: 1.25rem; }
+	.lead-clear-outline {
+		top: 0;
+		margin:48px auto 0;
+		display: block;
+		width: 185px;
+	}
 }
