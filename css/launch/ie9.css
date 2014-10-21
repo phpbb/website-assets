@@ -8,13 +8,10 @@
 	overflow: hidden;
 	background-image: url('/assets/images/images/about/launch/phpbb-features-ie.png');
 	background-repeat: no-repeat;
-	height: 294px;
+	height: 278px;
 }
 
-.masthead,
-.masthead-title,
-.masthead-sub-title,
-.masthead-clear-outline { display: none; }
+.lead-masthead { display: none; }
 
 .nav { color: #fff; }
 
@@ -22,7 +19,7 @@
     $ELEMENTS
 /*----------------------------------------------------------------------------*/
 
-.media-title .security-image { width: 100%; }
+/*.media-title .security-image { width: 100%; }*/
 
 .media-copy             { font-size: 14px\9; }
 .media-title            { font-size: 35px\9; }

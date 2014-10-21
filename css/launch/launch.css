@@ -265,7 +265,7 @@ a:active {
 	z-index: 201;
 }
 
-.nav-link.admin:before { content: "Administrator";	}
+.nav-link.admin:before { content: "Administrators";	}
 .nav-link.user:before { content: "End Users";	}
 .nav-link.dev:before { content: "Developers";	}
 .nav-link.design:before { content: "Designers";	}
