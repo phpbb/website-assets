@@ -444,10 +444,12 @@ a:active {
 }
 
 @media (max-width: 640px) {
+	.lead { padding-top: 50px; }
 	.lead-title {
 		font-size: 2.75rem;
 		display: block;
 	}
+
 	.lead-sub-title { font-size: 1rem; }
 	.lead-clear-outline {
 		top: 0;
