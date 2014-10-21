@@ -207,11 +207,11 @@ a:active {
 			box-sizing: border-box;
 }
 
-/*@media (max-width: 900px) {
+@media (max-width: 900px) {
 	.features-container {
-		width: 110%;
+		margin: 0 -5px;
 	}
-}*/
+}
 
 .features-header {
 	background-image: url('/assets/images/images/about/launch/phpbb-features.png');
@@ -240,10 +240,16 @@ a:active {
 	border-bottom: 2px solid #e5e5e5;
 	overflow: initial;
 
-	left: 0;
 	position: fixed;
 	top: 0;
-	width: 100%;
+	width: 900px;
+}
+
+@media (max-width: 900px) {
+	.stuck  {
+		left: 0;
+		width:100%;
+	}
 }
 
 .stuck .nav .top { display: inline-block; }
