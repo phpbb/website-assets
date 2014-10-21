@@ -21,6 +21,9 @@
 /*----------------------------------------------------------------------------*\
     $ELEMENTS
 /*----------------------------------------------------------------------------*/
+
+.media-title .security-image { width: 100%; }
+
 .media-copy             { font-size: 14px\9; }
 .media-title            { font-size: 35px\9; }
 .media-lg .media-copy   { font-size: 24px\9; }

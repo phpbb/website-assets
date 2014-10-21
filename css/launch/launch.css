@@ -125,14 +125,15 @@ a:active {
 
 .media-title .security-image {
 	display: block;
+	height: auto;
+    max-width: 100%;
 	margin: 0 auto 36px;
 }
 
 @media (max-width: 540px) {
-	.media-title .security-image {
+	/*.media-title .security-image {
 		width: 100%;
-		position: relative;
-	}
+	}*/
 
 	.media-lg .media-image,
 	.media-md .media-image,
@@ -230,12 +231,6 @@ a:active {
 	z-index: 101;
 }
 
-/*@media (max-width: 900px) {
-	.features-nav {
-		width: 110%;
-	}
-}*/
-
 .stuck {
 	border-bottom: 2px solid #e5e5e5;
 	overflow: initial;
@@ -286,11 +281,6 @@ a:active {
 	.nav-link.user:before { content: "User";	}
 	.nav-link.dev:before { content: "Dev";	}
 	.nav-link.design:before { content: "Designer";	}
-
-	.nav .top {
-		margin-top: -10px;
-		margin-left: 10px;
-	}
 }
 
 .nav .top:hover, .nav .top.active {
