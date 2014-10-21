@@ -186,7 +186,6 @@ a:active {
 
 .nav-pills > a {
 	border-radius: 20px;
-
 	padding: 6px 12px;
 }
 
@@ -195,6 +194,10 @@ a:active {
 .nav-pills > a:focus {
 	background-color: #f2f2f2;
 	color: #e8305e;
+}
+
+@media (max-width: 540px) {
+	.nav-pills > a { padding: 6px 10px; }
 }
 
 .features-container {
@@ -435,7 +438,7 @@ a:active {
 @media (max-width: 640px) {
 	.lead { padding-top: 50px; }
 	.lead-title {
-		font-size: 2.75rem;
+		font-size: 2.5rem;
 		display: block;
 	}
 
@@ -446,4 +449,6 @@ a:active {
 		display: block;
 		width: 185px;
 	}
+
+	.lead-masthead .lead-title { font-size: 3rem; }
 }
