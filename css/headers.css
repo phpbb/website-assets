@@ -99,10 +99,10 @@ body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_community.jpg");
 }
 
-/* Countdown
-body.community .phpbb-header, body.customise .phpbb-header {
+/* Countdown */
+body.launch .phpbb-header {
 	background-image: url("/assets/images/headers/header_countdown.jpg");
-} */
+}
 
 /* XMAS
 body.community .phpbb-header {
