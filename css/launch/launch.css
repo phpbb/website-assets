@@ -130,9 +130,8 @@ a:active {
 
 @media (max-width: 540px) {
 	.media-title .security-image {
-		width: 145%;
+		width: 105%;
 		position: relative;
-		left: -48px;
 	}
 
 	.media-lg .media-image,
@@ -154,9 +153,11 @@ a:active {
 		line-height: 2.34;
 	}
 
-	.media-md, .media-sm {
-		padding-right: 72px;
-		padding-left: 72px;
+	.media-lg,
+	.media-md,
+	.media-sm {
+		padding-right: 36px;
+		padding-left: 36px;
 		width: 100%;
 	}
 }
@@ -199,24 +200,22 @@ a:active {
 .features-container {
 	color: #333;
 
-	margin-right: auto;
-	margin-left: auto;
-	width: 900px;
-	position: relative;
-	left: -25px;
+	margin: 0 -25px;
+
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 			box-sizing: border-box;
 }
 
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
 	.features-container {
 		width: 110%;
 	}
-}
+}*/
 
 .features-header {
 	background-image: url('/assets/images/images/about/launch/phpbb-features.png');
+	background-position: top center;
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
@@ -224,7 +223,6 @@ a:active {
 .features-nav {
 	background-color: #fff;
 
-	width: 900px;
 	padding: 10px;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
@@ -232,18 +230,20 @@ a:active {
 	z-index: 101;
 }
 
-@media (max-width: 900px) {
+/*@media (max-width: 900px) {
 	.features-nav {
 		width: 110%;
 	}
-}
+}*/
 
 .stuck {
 	border-bottom: 2px solid #e5e5e5;
 	overflow: initial;
 
+	left: 0;
 	position: fixed;
 	top: 0;
+	width: 100%;
 }
 
 .stuck .nav .top { display: inline-block; }
@@ -265,15 +265,13 @@ a:active {
 	z-index: 201;
 }
 
-	.nav-link.admin:before { content: "Administrator";	}
-	.nav-link.user:before { content: "End Users";	}
-	.nav-link.dev:before { content: "Developers";	}
-	.nav-link.design:before { content: "Designers";	}
+.nav-link.admin:before { content: "Administrator";	}
+.nav-link.user:before { content: "End Users";	}
+.nav-link.dev:before { content: "Developers";	}
+.nav-link.design:before { content: "Designers";	}
 
 @media (max-width: 900px) {
-	.nav .top {
-		margin-left: 10px;
-	}
+	.nav .top {	margin-left: 10px; }
 }
 
 @media (max-width: 540px) {
