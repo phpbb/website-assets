@@ -1,6 +1,8 @@
 $(function() {
 	// Cache the page
-	var $page = $('html, body');
+	'use strict';
+
+	var $page = $('body');
 
 	// Set the speed of the assisted page scroll
 	var pageScrollSpeed = 500;
