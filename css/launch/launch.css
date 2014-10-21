@@ -157,8 +157,7 @@ a:active {
 	.media-lg,
 	.media-md,
 	.media-sm {
-		padding-right: 24px;
-		padding-left: 24px;
+		padding: 20px;
 		width: 100%;
 	}
 }
