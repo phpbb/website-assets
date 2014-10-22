@@ -450,3 +450,42 @@ a:active {
 
 	.lead-masthead .lead-title { font-size: 3rem; }
 }
+
+/* Ascraeus Countdown */
+.countdown-big {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	white-space: normal;
+
+	display: block;
+	margin: 0;
+
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+}
+
+.countdown-big .timer-unit {
+	display: inline-block;
+	border-left: 1px solid rgba(255, 255, 255, 0.2);
+	padding: 0 10px;
+}
+
+.countdown-big .timer-unit:first-child {
+	border: none;
+}
+
+.countdown-big .timer-big {
+	font-size: 2.25rem;
+	font-weight: 500;
+	line-height: 1;
+	display: block;
+}
+
+.countdown-big .timer-small {
+	font-size: 11px;
+	display: block;
+}

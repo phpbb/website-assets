@@ -82,4 +82,15 @@ $(function() {
 	});
 
 	$navContainer.waypoint('sticky');
+
+	// COUNTDOWN -------------------------------------------------------------
+
+	var $timer = $('#countdown-big');
+
+	var utc = new Date('Tue Oct 28 2014 23:59:59 GMT+0000 (UTC)').getTime();
+	$timer.countdown(utc, function(event) {
+		$(this).html(event.strftime('<div class="timer-unit days"><span class="timer-big">%D</span><span class="timer-small">days</span></div><div class="timer-unit hours"><span class="timer-big">%H</span><span class="timer-small">hours</span></div><div class="timer-unit minutes"><span class="timer-big">%M</span><span class="timer-small">minutes</span></div><div class="timer-unit seconds"><span class="timer-big">%S</span><span class="timer-small">seconds</span></div>'));
+	});
+
+	$timer.show();
 });
