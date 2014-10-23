@@ -407,15 +407,25 @@ a.text-links-favicon {
 	color: #3c4e20;
 }
 
-/* Comparison headings */
+.mini-tag a {
+	text-decoration: none !important;
+}
+
+/* Comparisons */
+#main div.compare {
+	width: 50%;
+}
+
 #main .compare h4.pros {
-	margin: 0;
 	color: #009900;
+	font-weight: bold;
+	margin: 0;
 }
 
 #main .compare h4.cons {
-	margin: 0;
 	color: #d21a4e;
+	font-weight: bold;
+	margin: 0;
 }
 
 /* Extras column */
@@ -3584,6 +3594,7 @@ h2 sup {
 
 	.column1, .column2,
 	#main div.column1, #main div.column2,
+	#main div.compare,
 	.hosting-left-col, .hosting-right-col {
 		clear: both;
 		float: none;
