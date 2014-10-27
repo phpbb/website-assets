@@ -489,3 +489,15 @@ a:active {
 	font-size: 11px;
 	display: block;
 }
+
+.download-btn {
+	color: #fff;
+	background-color: #65c272;
+	border-color: #65c272;
+}
+
+.download-btn:hover {
+	background-color: #54b362;
+	border-color: #54b362;
+	color: #fff;
+}
