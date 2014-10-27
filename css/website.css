@@ -753,6 +753,28 @@ dl.extra-box.shop:before {
 	bottom: 5px;
 }
 
+dl.extra-box.rocket:before {
+	background: url("/assets/images/images/rocket-icon.png") no-repeat 0 0;
+	content: '';
+	position: absolute;
+	display: block;
+	height: 64px;
+	width: 55px;
+	right: 5px;
+	bottom: 5px;
+}
+
+dl.extra-box.hourglass:before {
+	background: url("/assets/images/images/hourglass-icon.png") no-repeat 0 0;
+	content: '';
+	position: absolute;
+	display: block;
+	height: 64px;
+	width: 55px;
+	right: 5px;
+	bottom: 5px;
+}
+
 dl.extra-box.showcase:before {
 	background: url("/assets/images/images/features/web.png") no-repeat 0 0;
 	content: '';
