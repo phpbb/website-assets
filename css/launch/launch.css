@@ -393,6 +393,10 @@ a:active {
 	text-shadow: .5px .866px 6px rgba(0, 0, 0, .5);
 }
 
+.lead-masthead p {
+	overflow: visible;
+}
+
 .lead-clear-outline {
 	font: inherit;
 	font-size: 2.25rem;
@@ -453,6 +457,14 @@ a:active {
 		width: auto;
 	}
 
+	.lead-sub-buttons {
+		margin-top: 20px;
+	}
+
+	.lead-sub-buttons .lead-clear-outline {
+		font-size: 1.25rem;
+	}
+
 	.lead-masthead .lead-title { font-size: 3rem; }
 }
 
@@ -495,6 +507,10 @@ a:active {
 	display: block;
 }
 
+.lead-sub-buttons {
+	margin-bottom: 0;
+}
+
 .download-btn {
 	font-size: 1.5rem;
 	color: #fff;
@@ -523,22 +539,4 @@ a:active {
 	border-color: #1d8bba;
 	color: #fff;
 	text-decoration: none;
-}
-
-@media (max-width: 640px) {
-	.lead { padding-top: 50px; }
-	.lead-title {
-		font-size: 2.5rem;
-		display: block;
-	}
-
-	.lead-sub-title { font-size: 1rem; }
-	.lead-clear-outline {
-		top: 0;
-		margin:48px auto 0;
-		display: block;
-		width: 185px;
-	}
-
-	.lead-masthead .lead-title { font-size: 3rem; }
 }
