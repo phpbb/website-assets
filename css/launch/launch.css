@@ -448,6 +448,11 @@ a:active {
 		width: 185px;
 	}
 
+	.lead-sub-title .lead-clear-outline {
+		display: inline-block;
+		width: auto;
+	}
+
 	.lead-masthead .lead-title { font-size: 3rem; }
 }
 
@@ -488,4 +493,52 @@ a:active {
 .countdown-big .timer-small {
 	font-size: 11px;
 	display: block;
+}
+
+.download-btn {
+	font-size: 1.5rem;
+	color: #fff;
+	background-color: #65c272;
+	border-color: #65c272;
+	margin-top: 0;
+}
+
+.download-btn:hover {
+	background-color: #54b362;
+	border-color: #54b362;
+	color: #fff;
+	text-decoration: none;
+}
+
+.test-btn {
+	font-size: 1.5rem;
+	color: #fff;
+	background-color: #2697c8;
+	border-color: #2697c8;
+	margin-top: 0;
+}
+
+.test-btn:hover {
+	background-color: #1d8bba;
+	border-color: #1d8bba;
+	color: #fff;
+	text-decoration: none;
+}
+
+@media (max-width: 640px) {
+	.lead { padding-top: 50px; }
+	.lead-title {
+		font-size: 2.5rem;
+		display: block;
+	}
+
+	.lead-sub-title { font-size: 1rem; }
+	.lead-clear-outline {
+		top: 0;
+		margin:48px auto 0;
+		display: block;
+		width: 185px;
+	}
+
+	.lead-masthead .lead-title { font-size: 3rem; }
 }
