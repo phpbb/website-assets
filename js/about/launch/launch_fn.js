@@ -92,7 +92,7 @@ $(function() {
 		$(this).html(event.strftime('<div class="timer-unit days"><span class="timer-big">%D</span><span class="timer-small">days</span></div><div class="timer-unit hours"><span class="timer-big">%H</span><span class="timer-small">hours</span></div><div class="timer-unit minutes"><span class="timer-big">%M</span><span class="timer-small">minutes</span></div><div class="timer-unit seconds"><span class="timer-big">%S</span><span class="timer-small">seconds</span></div>'));
 	}).on('finish.countdown', function() {
 		$('.lead-masthead').find('.countdown-big').remove();
-		$('.lead-masthead').html.append('<p class="text-center"><a class="lead-clear-outline download-btn" href="{{ U_DOWNLOADS }}" style="">Download 3.1</a></p>');
+		$('.lead-masthead').html.append('<p class="lead-sub-title text-center"><a class="lead-clear-outline download-btn" href="{{ U_DOWNLOADS }}" style="">Download 3.1</a> <span>or</span> <a class="lead-clear-outline test-btn" href="{{ U_DEMO }}" style="">Try It</a></p>');
 	});
 
 	$timer.show();

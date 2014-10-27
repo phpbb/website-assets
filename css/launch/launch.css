@@ -500,4 +500,18 @@ a:active {
 	background-color: #54b362;
 	border-color: #54b362;
 	color: #fff;
+	text-decoration: none;
+}
+
+.test-btn {
+	color: #fff;
+	background-color: #2697c8;
+	border-color: #2697c8;
+}
+
+.test-btn:hover {
+	background-color: #1d8bba;
+	border-color: #1d8bba;
+	color: #fff;
+	text-decoration: none;
 }
