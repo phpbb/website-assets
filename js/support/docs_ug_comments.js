@@ -6,8 +6,8 @@ var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote
 var form_name = 'add-comment';
 var text_name = 'comment_text';
 
-function add_comment_submit(tab, section)
-{
+function add_comment_submit(tab, section) {
+	'use strict';
 	// alert(tab + '.....' + section);
 
 	jQuery.ajax({
@@ -24,15 +24,17 @@ function add_comment_submit(tab, section)
 	});
 }
 
-function comment_inline_edit(commentID)
-{
+function comment_inline_edit(commentID) {
+	'use strict';
+
 	jQuery("div[id='comment-body-" + commentID + "']").toggle();
 	jQuery("div[id='comment-edit-" + commentID + "']").toggle();
 	jQuery("div[id='comment-body-" + commentID + "']").focus();
 }
 
-function comment_edit(commentID)
-{
+function comment_edit(commentID) {
+	'use strict';
+
 	jQuery.ajax({
 		type: "POST",
 		url: "index.php",
@@ -46,8 +48,9 @@ function comment_edit(commentID)
 }
 
 /* Delete */
-function comment_delete(commentID)
-{
+function comment_delete(commentID) {
+	'use strict';
+
 	if (confirm("Are you sure you wish to delete this comment?"))
 	{
 		jQuery.ajax({
@@ -63,8 +66,9 @@ function comment_delete(commentID)
 }
 
 /* Approve */
-function comment_approve(commentID)
-{
+function comment_approve(commentID) {
+	'use strict';
+
 	if (confirm("Are you sure you wish to approve this comment?"))
 	{
 		jQuery.ajax({
@@ -75,41 +79,43 @@ function comment_approve(commentID)
 				$('#display_comments_block').replaceWith(html);
 				return true;
 			}
-		})
+		});
 	}
 }
-$(document).ready(function()
-{
-	jQuery("form#add-comment").submit(function(e){
+$(document).ready(function() {
+	'use strict';
+
+	$('form#add-comment').submit(function(e){
 		e.preventDefault();
 		alert('fire2');
 		return false;
-	})
+	});
 
-	jQuery("form[id^='new-form-']").submit(function(e){
+	$('form[id^=\"new-form-\"]').submit(function(e){
 		e.preventDefault();
 		alert('fire1');
 		return false;
-	})
+	});
 
-	jQuery(body).on('click', "a[id^='delete-']", function()
+	$('body').on('click', "a[id^='delete-']", function()
 	{
-		var delID = jQuery(this).attr('id').split('-')[1];
+		var delID = $(this).attr('id').split('-')[1];
 		//alert(delID);
 		comment_delete(delID);
 		return false;
-	})
+	});
 
-	jQuery(body).on('click', "a[id^='approve-']", function()
+	$('body').on('click', "a[id^='approve-']", function()
 	{
-		var appID = jQuery(this).attr('id').split('-')[1];
+		var appID = $(this).attr('id').split('-')[1];
 		comment_approve(appID);
 		return false;
-	})
+	});
 })
 
-function hide_qr(show)
-{
+function hide_qr(show) {
+	'use strict';
+
 	dE('qr_editor_div');
 	dE('qr_showeditor_div');
 	/*if (show && document.getElementById('qr_editor_div').style.display != 'none')
