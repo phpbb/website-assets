@@ -714,6 +714,7 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 	width: auto;
 }
 
+/* Article meta info */
 .article-body h2.article-title {
 	color: #d21a4e;
 	font-family: arial,sans-serif;
@@ -732,6 +733,23 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 
 .article-body .article-meta li {
 	margin: 3px 0;
+}
+
+/* Article status and quick-moderation */
+.article-body .article-mod:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
+.article-body .article-mod form {
+	float: right;
+	margin-top: 3px;
+}
+
+.article-body .article-mod img {
+	float: left;
+	margin-bottom: 5px;
 }
 
 .article-body .content {
@@ -757,12 +775,17 @@ ul.kb-index dt {
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
-	.support_docs.kb .article-meta {
+	.article-body .article-meta {
 		float: none;
 		margin-left: 0;
 	}
 
-	.support_docs.kb h2.article-title {
+	.article-body .article-mod form,
+	.article-body .article-mod img {
+		float: none;
+	}
+
+	.article-body h2.article-title {
 		clear: both;
 		margin-top: 10px;
 	}
@@ -826,18 +849,6 @@ dd.kb_actions span {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 1.3em;
 	text-transform: none;
-}
-
-.article-body .article-img {
-	float: right;
-	width: auto;
-	margin-bottom: -60px;
-	position: relative;
-}
-
-.article-body .article-img img {
-	float: right;
-	margin-top: 4px;
 }
 
 .article-body h3.notice_kb {
