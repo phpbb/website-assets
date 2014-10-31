@@ -360,6 +360,10 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 	border-color: #FFF;
 }
 
+.support_docs #tabs .dropdown-contents {
+	font-size: 12px;
+}
+
 /*------------------------------------------------------*\
 	User Guide
 /*------------------------------------------------------*/
@@ -728,11 +732,27 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 .article-body .article-meta {
 	list-style: none;
 	float: right;
-	margin-left: 10px;
+	margin: 0 0 10px 10px;
 }
 
 .article-body .article-meta li {
 	margin: 3px 0;
+}
+
+.article-body .article-description {
+	margin: 10px 0 10px 0;
+}
+
+.article-body .article-categories {
+	margin-bottom: 15px;
+}
+
+.article-body .article-categories a:after {
+	content: ',';
+}
+
+.article-body .article-categories a:last-child:after {
+	content: '';
 }
 
 /* Article status and quick-moderation */
@@ -760,18 +780,110 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 	margin: 8px 0;
 }
 
+/* Manage own articles legend */
+ul.status-legend li {
+	list-style: none !important;
+	font-size: 12px;
+	min-height: 23px;
+	line-height: 22px;
+	background: no-repeat left top;
+	padding-left: 88px;
+	margin-bottom: 4px;
+}
+
 /* KB index lists */
 ul.kb-index dt {
-	margin-right: -270px;
+	margin-right: -255px;
 }
 
 .kb-index dt.article-column .list-inner {
-	margin-right: 270px;
+	margin-right: 255px;
 }
 
-.kb-index .author-column {
+.kb-index .views,
+.kb-manage .views,
+.kb-admin .views {
+	width: 80px;
+}
+
+.kb-index .author-column,
+.kb-admin .author-column,
+.kb-manage .date-column {
 	width: 170px;
 	text-align: center;
+}
+
+/* KB manage lists */
+ul.kb-manage dt {
+	margin-right: -480px;
+}
+
+.kb-manage dt.article-column .list-inner {
+	margin-right: 480px;
+}
+
+.kb-manage .status-column {
+	width: 85px;
+	text-align: center;
+}
+
+.kb-manage .revisions-column {
+	width: 220px;
+	text-align: center;
+}
+
+/* KB admin lists */
+ul.kb-admin dt {
+	margin-right: -425px;
+}
+
+.kb-admin dt.article-column .list-inner {
+	margin-right: 425px;
+}
+
+.kb-admin .author-column span {
+	line-height: 16px;
+}
+
+.kb-admin .status-column {
+	width: 250px;
+	text-align: center;
+}
+
+.kb-admin .row .status-column {
+	padding: 0;
+}
+
+.kb-admin .status-column a {
+	display: inline-block;
+}
+
+.kb-admin .status-column img {
+	display: block;
+}
+
+/* KB responsive lists */
+@media only screen and (max-width: 800px), only screen and (max-device-width: 800px) {
+	ul.kb-manage dt {
+		margin-right: -310px;
+	}
+
+	.kb-manage dt.article-column .list-inner {
+		margin-right: 310px;
+	}
+
+	ul.kb-admin dt {
+		margin-right: -255px;
+	}
+
+	.kb-admin dt.article-column .list-inner {
+		margin-right: 255px;
+	}
+
+	.kb-manage .date-column,
+	.kb-admin .author-column {
+		display: none;
+	}
 }
 
 @media only screen and (max-width: 700px), only screen and (max-device-width: 700px) {
@@ -791,49 +903,31 @@ ul.kb-index dt {
 	}
 
 	ul.kb-index dt,
-	.kb-index dt.article-column .list-inner {
+	.kb-index dt.article-column .list-inner,
+	ul.kb-manage dt,
+	.kb-manage dt.article-column .list-inner,
+	ul.kb-admin dt,
+	.kb-admin dt.article-column .list-inner {
 		margin-right: 0;
+	}
+
+	.kb-manage .revisions-column,
+	.kb-admin .row .status-column {
+		width: 100%;
+		text-align: left;
+		padding: 4px 5px;
+	}
+
+	.kb-admin .row .status-column fieldset {
+		float: left;
 	}
 }
 
 
 
+
+
 /* TODO: haven't checked anything below this point */
-ul.topiclist dt.kb_noapprove {
-	width: 70%
-}
-
-ul.topiclist dt.kb_noapprove_small {
-	width: 60%
-}
-
-dd.kb_writtenby { /* TODO: Unused? */
-	width: 20%;
-	font-size: 1.1em;
-	text-align: center;
-}
-
-dd.kb_writtenby_small { /* TODO: Unused? */
-	width: 20%;
-	font-size: 1.1em;
-	text-align: center;
-}
-
-dd.kb_writtenby span,
-dd.kb_writtenby_small span { /* TODO: Unused? */
-	display: block;
-	padding: 0 5px;
-}
-
-dd.kb_actions {
-	width: 20%;
-	font-size: 1.1em;
-}
-
-dd.kb_actions span {
-	display: block;
-	padding: 0 5px;
-}
 
 .article-body .postbody h3 {
 	color: #d21a4e;
@@ -868,73 +962,6 @@ body.support_docs .temp {
 }
 
 /* KB manage page */
-.manage-page .article-column {
-	width: 43%;
-	font-size: 1.3em;
-}
-
-.manage-page .views-column {
-	width: 7%;
-	text-align: center;
-	font-size: 12px;
-}
-
-.manage-page .revisions-column {
-	width: 18%;
-	text-align: center;
-}
-
-.manage-page .status-column {
-	width: 12%;
-	text-align: center;
-}
-
-.manage-page .date-column {
-	width: 18%;
-	text-align: center;
-}
-
-.manage-page dt.article-column a {
-	font-weight: bold;
-}
-
-ul.status-legend li {
-	list-style: none !important;
-	font-size: 12px;
-	font-weight: bold;
-	min-height: 23px;
-	line-height: 22px;
-	background: no-repeat left top;
-	padding-left: 88px;
-	margin-bottom: 4px;
-}
-
-.adm-page .article-column {
-	width: 48%;
-	padding: 0 .5em;
-	font-size: 1.3em;
-}
-
-.adm-page .article-column a {
-	font-weight: bold;
-}
-
-.adm-page .author-column {
-	width: 20%;
-	text-align: center;
-}
-
-.adm-page .modified-column {
-	width: 19%;
-	text-align: center;
-}
-
-.adm-page .status-column {
-	width: 12%;
-	padding: 0;
-	text-align: center;
-}
-
 .kb_dont_send_pm {
 	width: 150px;
 	height: 29px;
