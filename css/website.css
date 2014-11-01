@@ -1157,19 +1157,7 @@ div.subscribe fieldset  {
 	border-top: 1px solid #FFFFFF;
 }
 
-/* About Page: Team Listing */
-div.column1wide {
-	width: 50%;
-	float: left;
-	clear: left;
-	margin-bottom: 20px;
-}
-div.column2wide {
-	width: 50%;
-	float: right;
-	margin-bottom: 20px;
-}
-
+/* Get Involved */
 #main-extra h3.teamtitle {
 	font-size: 1.8em;
 	font-weight: bold;
@@ -1178,7 +1166,6 @@ div.column2wide {
 	border: none;
 	text-transform: none;
 }
-
 #main h3.teamtitle {
 	font-size: 1.8em;
 	font-weight: bold;
@@ -1187,148 +1174,8 @@ div.column2wide {
 	border: none;
 	text-transform: none;
 }
-
 #main h3.teamtitle + h4 {
 	margin-top: 10px;
-}
-
-#main-extra p.teamdesc {
-	margin: 0;
-	padding: 0 20px;
-}
-
-#main-extra dl.member-outline {
-	margin: 0.5em 0 0;
-	padding: 0 20px;
-	font-size: 1.2em;
-}
-
-#main-extra dl.member-outline dt.name-term a,
-#main-extra dl.member-outline dt.name-term a strong {
-	text-decoration: none;
-	color: #536482;
-}
-
-#main-extra dd.detailed-definition {
-	padding: 0 10px;
-	background-color: #ebebeb;
-	margin: 5px 15px 20px 15px;
-}
-
-#main-extra dd.detailed-definition span.corners-top,
-#main-extra dd.detailed-definition span.corners-bottom {
-	margin: 0 -10px;
-}
-
-#main-extra dl.info-snippets {
-	margin: 0;
-	padding: 0;
-}
-
-#main-extra div.user-photo {
-	float: left;
-	text-align: center;
-	vertical-align: top;
-	font-size: 1.0em;
-	padding: 0 10px 5px 0;
-}
-
-#main-extra div.user-photo img {
-	border: 1px solid #000000;
-}
-
-#main-extra div.content-panel {
-	text-align: left;
-	vertical-align: top;
-	padding: 8px 5px;
-}
-
-#main-extra div.user-photo a:link,
-#main-extra div.user-photo a:hover,
-#main-extra div.user-photo a:visited,
-#main-extra div.content-panel a:link,
-#main-extra div.content-panel a:hover,
-#main-extra div.content-panel a:visited {
-	text-decoration: none;
-}
-
-#main-extra dt.snippet-name {
-	font-weight: bold;
-	font-size: 1.20em;
-	color: #000000;
-	margin: 0;
-	padding: 0;
-}
-
-#main-extra dl.info-snippets dd.snippet-location,
-#main-extra dl.info-snippets dd.snippet-blurb {
-	margin: 0 0 1em;
-	font-size: 0.925em;
-}
-
-#main-extra dl.info-snippets dd.snippet-links {
-	font-size: 0.875em;
-}
-
-#main-extra dl.info-snippets dd.snippet-rank{
-	font-size: 0.85em;
-	font-weight: 500;
-}
-
-#about-acp {
-	text-align: center;
-	clear: both;
-	padding-top: 1em;
-}
-
-/* About Page: Team Map */
-#pinTextTable .name {
-	font-size: 1.4em;
-	font-weight: bold;
-	color: #000000;
-	padding: 0 0 4px 0;
-	text-align: left;
-}
-
-#pinTextTable .contentTD {
-	font-size: 1.0em;
-	font-weight: normal;
-	color: #000000;
-	padding: 5px 4px 4px 5px;
-	margin: 0;
-	text-align: left;
-}
-
-#pinTextTable .imgTD {
-	padding: 4px 5px 4px 4px;
-	margin: 0;
-}
-
-#pinTextTable img {
-	border: 1px solid #000000;
-}
-
-#pinTextTable a:link,
-#pinTextTable a:visited,
-#pinTextTable a:active {
-	color: #0071DB;
-	text-decoration: none;
-}
-#pinTextTable a:hover {
-	color: #000000;
-}
-
-/* About Page: Team Administration */
-#listTable th {
-	font-size: 1.3em;
-	font-weight: bold;
-	text-align: center;
-}
-
-#listTable td {
-	font-size: 1.2em;
-	font-weight: normal;
-	padding: 5px;
 }
 
 /* Languages */
@@ -1513,82 +1360,6 @@ body.jr-validators .forums dd textarea {
 .official-extension-icon {
 	margin-right: 5px;
 	float: left;
-}
-
-/* Teams pages */
-body.team_new .forumbg {
-	margin-bottom: 0;
-	background-image: none;
-}
-
-body.team .main-content {
-	background-color: #FAFBFD !important;
-}
-
-body.team_new .forumbg .main-content  {
-	background-color: #F0F4F7;
-	border-top: 1px solid #FFFFFF;
-	margin-top: 3px;
-	padding: 0 5px;
-}
-
-body.team_new span.corners-top.grey {
-	background-image: url("/assets/images/images/corners_left2.png");
-}
-
-body.team_new span.corners-top.grey  {
-	margin-top: -1px;
-}
-
-* html body.team_new span.corners-top.grey {
-	background-image: url("/assets/images/images/corners_left2.gif");
-}
-
-body.team_new span.corners-top.grey span {
-	background-image: url("/assets/images/images/corners_right2.png");
-}
-
-* html body.team span.corners-top.grey span{
-	background-image: url("/assets/images/images/corners_right2.gif");
-}
-
-/* Custom Corners - TODO: what are these for? Cant find any usage of intro-head, nor intro-body */
-.intro-head span.corners-top,
-.intro-body span.corners-bottom {
-	background-image: url("/assets/images/images/corners_left3.png");
-}
-
-* html .intro-head span.corners-top,
-* html .intro-body span.corners-bottom {
-	background-image: url("/assets/images/images/corners_left3.gif");
-}
-
-.intro-head span.corners-top span,
-.intro-body span.corners-bottom span {
-	background-image: url("/assets/images/images/corners_right3.png");
-}
-
-* html .intro-head span.corners-top span,
-* html .intro-body span.corners-bottom span {
-	background-image: url("/assets/images/images/corners_right3.gif");
-}
-
-.intro-head span.corners-top {
-	margin: -4px 0 0 -4px;
-	position: relative;
-}
-
-.intro-head span.corners-top span {
-	margin-right: -4px;
-}
-
-.intro-body span.corners-bottom {
-	margin: 0 0 -6px -6px;
-	position: relative;
-}
-
-.intro-body span.corners-bottom span {
-	margin-right: -6px;
 }
 
 /* Rules */
