@@ -885,9 +885,9 @@ div.panel-emphasis {
 	font-size: 12px;
 	line-height: 18px;
 	font-weight: normal;
-	right: 175px;
+	right: 150px;
 	text-align: center;
-	top: 25px;
+	top: 16px;
 	height: 77px;
 	width: 124px;
 	background: url("/assets/images/images/home-version-bg.png") no-repeat;
@@ -903,6 +903,7 @@ div.panel-emphasis {
 
 #home-try-link span {
 	display: block;
+	margin-top: 5px;
 }
 
 #home-try-link .version {
@@ -924,9 +925,9 @@ div.panel-emphasis {
 	font-size: 12px;
 	line-height: 18px;
 	font-weight: normal;
-	right: 25px;
 	text-align: center;
-	top: 25px;
+	right: 16px;
+	top: 16px;
 	height: 77px;
 	width: 124px;
 	background: url("/assets/images/images/home-version-bg.png") no-repeat;
@@ -955,6 +956,17 @@ div.panel-emphasis {
 	/*
 	background: url("/assets/images/images/home-version-bg.png") no-repeat -124px 0;
 	*/
+}
+
+@media only screen and (max-width: 500px), only screen and (max-device-width: 500px)
+{
+	#home-dl-link {
+		display: none;
+	}
+
+	#home-try-link {
+		right: 16px;
+	}
 }
 
 #main ul.announcements {

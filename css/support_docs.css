@@ -854,12 +854,9 @@ ul.kb-admin dt {
 	padding: 0;
 }
 
-.kb-admin .status-column a {
-	display: inline-block;
-}
-
+.kb-admin .status-column a,
 .kb-admin .status-column img {
-	display: block;
+	display: inline-block;
 }
 
 /* KB responsive lists */
