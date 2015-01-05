@@ -94,20 +94,21 @@ body.demo .phpbb-header {
 	background-image: url("/assets/images/headers/header_lighttower.jpg");
 }
 
-/* Normal Community
+/* Normal Community */
 body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_community.jpg");
-}*/
+}
 
 /* Countdown */
 body.launch .phpbb-header {
 	background-image: url("/assets/images/headers/header_launch.jpg");
 }
 
-/* XMAS */
+/* XMAS
 body.community .phpbb-header {
 	background-image: url("./header.php");
 }
+*/
 
 /* Halloween
 body.community .phpbb-header {
