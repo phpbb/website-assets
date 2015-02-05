@@ -1,5 +1,6 @@
 {
     "name": "phpbb/website-assets",
+    "type": "phpbb-style",
     "require": {
         "composer/installers": "~1.0"
     }
