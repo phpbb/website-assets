@@ -1,3 +1,6 @@
 {
-    "name": "phpbb/website-assets"
+    "name": "phpbb/website-assets",
+    "require": {
+        "composer/installers": "~1.0"
+    }
 }
