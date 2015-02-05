@@ -210,6 +210,47 @@ $(function () {
 
 		$(this).parents('dt').siblings('dd').toggle();
 	});
+
+	$('#tabs.stats').find('.tab').click(function (evt) {
+		var showPanel = $(this).attr('data-show-panel');
+		for (var i=0; i < panels.length; i++) {
+			var $panel = $('#' + panels[i]);
+			if (panels[i] == showPanel) {
+				$panel.show();
+			}
+			else {
+				$panel.hide();
+			}
+		}
+		$('.tab').removeClass('activetab');
+		$(this).addClass('activetab');
+		evt.preventDefault();
+		evt.stopPropagation();
+	});
+
+	$('#tabs.stats').find('.activetab').click();
+
+	$('dl.codebox > dt > a').click(function (e){
+		e.preventDefault();
+		var code = $(this).parent().parent().find('code')[0];
+		if (!window.getSelection && !document.getSelection) {
+			var r = document.body.createTextRange();
+			r.moveToElementText(code);
+			r.select();
+		}
+		else {
+			var s = (window.getSelection ? window.getSelection() : document.getSelection());
+			if (!window.getSelection && s.setBaseAndExtent) {
+				s.setBaseAndExtent(code, 0, code, code.innerText.length - 1);
+			}
+			else {
+				var r = document.createRange();
+				r.selectNodeContents(code);
+				s.removeAllRanges();
+				s.addRange(r);
+			}
+		}
+	});
 });
 
 $.fn.toggleFadeSlide = function (duration, easing, callback) {
