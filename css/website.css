@@ -384,7 +384,7 @@ a.text-links-favicon {
 }
 
 /* Generic colored tags */
-.mini-tag, .big-tag {
+.mini-tag, .big-tag, .status-tag {
 	display: inline-block;
 	border: 1px solid transparent;
 	border-radius: 3px;
@@ -451,21 +451,29 @@ a.text-links-favicon {
 	box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
 }
 
-/* Status indicators */
-#main .status {
-	font-weight: bold;
+/* Status tags */
+.status-tag {
+	color: #FFF;
+	margin: 1px;
+	min-width: 26px;
+	text-align: center;
+	text-shadow: 0 0 2px rgba(0,0,0,0.5);
 }
 
-#main .status.safe {
-	color: #009900;
+.status-tag.safe {
+	background: #009900;
 }
 
-#main .status.unsafe {
-	color: #dd6800
+.status-tag.unsafe {
+	background: #dd6800
 }
 
-#main .status.dangerous {
-	color: #d21a4e;
+.status-tag.dangerous {
+	background: #d21a4e;
+}
+
+.status-tag.unreleased {
+	background: #35a0c2;
 }
 
 
