@@ -2799,9 +2799,11 @@ h2 sup {
     background-color: black;
     width: 100%;
     overflow-x: visible;
-    font-family: Monaco,monospace;
-    font-size: 10px;
+    font-family: Monaco, monospace;
+    font-size: 11px;
     padding: 5px;
+	margin: 10px 0;
+	border-radius: 3px;
 }
 
 /* Responsive mode
