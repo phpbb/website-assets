@@ -211,7 +211,6 @@ body.home .phpbb-navbar {
 	border: 3px solid #fff;
 	border-radius: 4px;
 
-	-webkit-box-shadow: 1px 1px 6px rgba(0, 0, 0, .6);
 	box-shadow: 1px 1px 6px rgba(0, 0, 0, .6);
 	color: rgba(0, 0, 0, .5);
 	text-shadow: none;
@@ -221,8 +220,6 @@ body.home .phpbb-navbar {
 	position: absolute;
 	top: 20px;
 	right: 33px;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	-webkit-appearance: none;
 }

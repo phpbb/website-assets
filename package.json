@@ -7,6 +7,7 @@
   "homepage": "https://github.com/phpbb/website-assets",
   "private": true,
   "devDependencies": {
+    "autoprefixer": "^5.2.0",
     "gulp": "^3.8.11",
     "gulp-postcss": "^5.1.8",
     "postcss-import": "^5.2.2"

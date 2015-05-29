@@ -7,7 +7,8 @@ var config = {
 
 gulp.task('css', function () {
 	var processors = [
-		require('postcss-import')()
+		require('postcss-import')(),
+		require('autoprefixer')()
 	];
 
 	return gulp.src('css/index.css')
