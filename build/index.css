@@ -958,7 +958,7 @@ div.panel-emphasis {
 	text-decoration: none;
 	color: #CCCCCC;
 	/*
-	background: url("/assets/images/images/home-version-bg.png") no-repeat -124px 0;
+	background: url("images/home-version-bg.png") no-repeat -124px 0;
 	*/
 }
 
@@ -997,7 +997,7 @@ div.panel-emphasis {
 	text-decoration: none;
 	color: #CCCCCC;
 	/*
-	background: url("/assets/images/images/home-version-bg.png") no-repeat -124px 0;
+	background: url("images/home-version-bg.png") no-repeat -124px 0;
 	*/
 }
 
@@ -1839,7 +1839,7 @@ body.features span.feature-collapse:hover {
 	color: #D31141;
 }
 /*body.features span.feature-collapse:before {
-	content: url('/assets/images/images/features/sm-arrow-up.gif');
+	content: url('images/features/sm-arrow-up.gif');
 }*/
 /* END NEW FEATURES */
 
@@ -2816,7 +2816,7 @@ th.cookie {
 	padding: 3px 4px;
 	border-width: 0 1px 1px 0;
 	color: #FFFFFF;
-	background: #70AED3 url("gradient2b.gif") bottom left repeat-x;
+	background: #70AED3 url("/assets/images/gradient2b.gif") bottom left repeat-x;
 	border-top: 1px solid #6DACD2;
 	border-bottom: 1px solid #327AA5;
 	text-align: left;
@@ -3194,12 +3194,12 @@ body.community .phpbb-header {
 
 /* Halloween
 body.community .phpbb-header {
-	background-image: url("/assets/images/headers/header_halloween03.gif");
+	background-image: url("headers/header_halloween03.gif");
 } */
 
 /* Valentine's Day
 body.community .phpbb-header {
-	background-image: url("/assets/images/headers/header_valentines02.jpg");
+	background-image: url("headers/header_valentines02.jpg");
 } */
 
 body.mods .phpbb-header {

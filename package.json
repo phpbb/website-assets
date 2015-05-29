@@ -11,6 +11,7 @@
     "gulp": "^3.8.11",
     "gulp-postcss": "^5.1.8",
     "pixrem": "^1.2.4",
-    "postcss-import": "^5.2.2"
+    "postcss-import": "^5.2.2",
+    "postcss-url": "^3.2.0"
   }
 }

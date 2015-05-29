@@ -21,7 +21,7 @@ body {
 ---------------------------------------- */
 #wrap {
 	max-width: 850px;
-	background: #FFFFFF url("/assets/images/images/bg_header.png") repeat-x 0 0;
+	background: #FFFFFF url("images/bg_header.png") repeat-x 0 0;
 	margin: 0 auto;
 	text-align: left;
 	padding: 13px 23px;
@@ -292,7 +292,7 @@ body.home #main div.column1 li, body.home #main div.column2 li {
 
 #main .mini-panel.feed-stats p a, .mini-panel.feed-stats p a {
 	padding: 1px 0 1px 17px;
-	background: transparent url("/assets/images/images/feed-icon-14x14.png") no-repeat scroll 0 50%;
+	background: transparent url("images/feed-icon-14x14.png") no-repeat scroll 0 50%;
 }
 
 #main .mini-panel.feed-stats p img {
@@ -587,7 +587,7 @@ dl.extra-box.download dd.extras a {
 }
 
 dl.download:before {
-	background: url("/assets/images/images/download-arrow.png") no-repeat 0 0;
+	background: url("images/download-arrow.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -772,7 +772,7 @@ div.downloads .mini-panel h3 {
 }
 
 dl.extra-box.shop:before {
-	background: url("/assets/images/images/shop-icon.png") no-repeat 0 0;
+	background: url("images/shop-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -783,7 +783,7 @@ dl.extra-box.shop:before {
 }
 
 dl.extra-box.rocket:before {
-	background: url("/assets/images/images/rocket-icon.png") no-repeat 0 0;
+	background: url("images/rocket-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -794,7 +794,7 @@ dl.extra-box.rocket:before {
 }
 
 dl.extra-box.hourglass:before {
-	background: url("/assets/images/images/hourglass-icon.png") no-repeat 0 0;
+	background: url("images/hourglass-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -805,7 +805,7 @@ dl.extra-box.hourglass:before {
 }
 
 dl.extra-box.showcase:before {
-	background: url("/assets/images/images/features/web.png") no-repeat 0 0;
+	background: url("images/features/web.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -816,7 +816,7 @@ dl.extra-box.showcase:before {
 }
 
 dl.sourceforge-cca2007 {
-	background-image: url("/assets/images/images/sourceforge_cca_2007_260x58.png");
+	background-image: url("images/sourceforge_cca_2007_260x58.png");
 	height: 58px;
 }
 
@@ -903,10 +903,10 @@ div.panel-emphasis {
 	margin: 0;
 }
 
-#home-buttons a.what-is			{ background-image: url("/assets/images/images/hb-what-is-phpbb.png"); }
-#home-buttons a.get-started		{ background-image: url("/assets/images/images/hb-get-started.png?2010061000"); }
-#home-buttons a.enhance			{ background-image: url("/assets/images/images/hb-enhance-phpbb.png?2010061100"); }
-#home-buttons a.contribute		{ background-image: url("/assets/images/images/hb-contribute.png?2010061000"); }
+#home-buttons a.what-is			{ background-image: url("images/hb-what-is-phpbb.png"); }
+#home-buttons a.get-started		{ background-image: url("images/hb-get-started.png?2010061000"); }
+#home-buttons a.enhance			{ background-image: url("images/hb-enhance-phpbb.png?2010061100"); }
+#home-buttons a.contribute		{ background-image: url("images/hb-contribute.png?2010061000"); }
 
 #home-try-link {
 	position: absolute;
@@ -919,7 +919,7 @@ div.panel-emphasis {
 	top: 16px;
 	height: 77px;
 	width: 124px;
-	background: url("/assets/images/images/home-version-bg.png") no-repeat;
+	background: url("images/home-version-bg.png") no-repeat;
 }
 
 #home-try-link a {
@@ -944,7 +944,7 @@ div.panel-emphasis {
 	text-decoration: none;
 	color: #CCCCCC;
 	/*
-	background: url("/assets/images/images/home-version-bg.png") no-repeat -124px 0;
+	background: url("images/home-version-bg.png") no-repeat -124px 0;
 	*/
 }
 
@@ -959,7 +959,7 @@ div.panel-emphasis {
 	top: 16px;
 	height: 77px;
 	width: 124px;
-	background: url("/assets/images/images/home-version-bg.png") no-repeat;
+	background: url("images/home-version-bg.png") no-repeat;
 }
 
 #home-dl-link a {
@@ -983,7 +983,7 @@ div.panel-emphasis {
 	text-decoration: none;
 	color: #CCCCCC;
 	/*
-	background: url("/assets/images/images/home-version-bg.png") no-repeat -124px 0;
+	background: url("images/home-version-bg.png") no-repeat -124px 0;
 	*/
 }
 
@@ -1080,7 +1080,7 @@ div.panel-emphasis {
 .home-sponsors ul.ads li a {
 	padding: 2px 0 2px 18px;
 	background-position: 0 50%;
-	background-image: url("/assets/images/images/favicons/blank.png");
+	background-image: url("images/favicons/blank.png");
 	background-repeat: no-repeat;
 }
 
@@ -1161,7 +1161,7 @@ div.panel-emphasis {
 	margin: 0 auto;
 	border-radius: 6px;
 	border: 1px solid #828d96;
-	background: url("/assets/images/images/need-hosting.png") 50% 0;
+	background: url("images/need-hosting.png") 50% 0;
 	overflow: hidden;
 	text-indent: -5000px;
 }
@@ -1234,7 +1234,7 @@ body.languages ul.packages li {
 body.languages ul.packages img {
 	float: left;
 	margin: 0 10px 0 0;
-	background: url("/assets/images/images/flags/flag_generic.gif") no-repeat scroll 0 0 transparent;
+	background: url("images/flags/flag_generic.gif") no-repeat scroll 0 0 transparent;
 	color: transparent;
 	height: 48px;
 	width: 48px;
@@ -1284,7 +1284,7 @@ body.trackers div.notice img {
 }
 
 .issue-icon span {
-	background-image: url("/assets/images/images/button_new_ticket.gif");
+	background-image: url("images/button_new_ticket.gif");
 }
 
 .buttons div.issue-icon {
@@ -1495,7 +1495,7 @@ body.shop div#bertie-hugger {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url("/assets/images/images/loading_wait.gif") 50% 30% no-repeat;
+	background: transparent url("images/loading_wait.gif") 50% 30% no-repeat;
 }
 
 body.shop ul#bertie {
@@ -1506,7 +1506,7 @@ body.shop ul#bertie {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url("/assets/images/images/olympus-prosilver-bertie.jpg?20080629") 0 0 no-repeat;
+	background: transparent url("images/olympus-prosilver-bertie.jpg?20080629") 0 0 no-repeat;
 }
 
 body.shop ul#bertie li {
@@ -1524,7 +1524,7 @@ body.shop ul#bertie li a {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-	background: transparent url("/assets/images/images/olympus-prosilver-bertie.jpg?20080629") 480px 0 no-repeat;
+	background: transparent url("images/olympus-prosilver-bertie.jpg?20080629") 480px 0 no-repeat;
 	position: absolute;
 }
 
@@ -1726,10 +1726,10 @@ a.feature-extra:hover span.hover {
 	padding-right: 70px;
 }
 .feature-box .features-item-head.unselected {
-	background: url("/assets/images/images/features/feat-arrow-right.png") 335px center no-repeat;
+	background: url("images/features/feat-arrow-right.png") 335px center no-repeat;
 }
 .feature-box .features-item-head.selected {
-	background: url("/assets/images/images/features/feat-arrow-down.png") 335px center no-repeat;
+	background: url("images/features/feat-arrow-down.png") 335px center no-repeat;
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
@@ -1765,7 +1765,7 @@ a.feature-extra:hover span.hover {
 ul.feature-list li {
 	margin-left: -10px;
 	list-style-type: none;
-	background-image: url("/assets/images/images/features/accept.png");
+	background-image: url("images/features/accept.png");
 	background-repeat: no-repeat;
 	background-position: 0 3px;
 	padding-left: 25px;
@@ -1778,7 +1778,7 @@ div.feature-item p {
 	font-size: 0.9em;
 }
 div.feature-item {
-	background: url("/assets/images/images/features/arrow-right-24.png") left center no-repeat;
+	background: url("images/features/arrow-right-24.png") left center no-repeat;
 	padding-left: 40px;
 	margin-left: 10px;
 }
@@ -1825,7 +1825,7 @@ body.features span.feature-collapse:hover {
 	color: #D31141;
 }
 /*body.features span.feature-collapse:before {
-	content: url('/assets/images/images/features/sm-arrow-up.gif');
+	content: url('images/features/sm-arrow-up.gif');
 }*/
 /* END NEW FEATURES */
 
@@ -1873,14 +1873,14 @@ code.inline {
 
 /* Wiki link */
 a.wikilink {
-	background: url("/assets/images/images/wiki_badge.gif") center right no-repeat;
+	background: url("images/wiki_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
 
 /* kb link */
 a.kblink {
-	background: url("/assets/images/images/kb_badge.gif") center right no-repeat;
+	background: url("images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
@@ -2340,11 +2340,11 @@ p.speaker span img {
 }
 
 a.download-png {
-	background: url("/assets/images/images/logos/download.png") no-repeat 0 50%;
+	background: url("images/logos/download.png") no-repeat 0 50%;
 }
 
 a.download-psd {
-	background: url("/assets/images/images/logos/photoshop.png") no-repeat 0 50%;
+	background: url("images/logos/photoshop.png") no-repeat 0 50%;
 }
 
 a.logo-only {
@@ -2391,7 +2391,7 @@ p.psd-download {
 .top-corners {
 	width: 425px;
 	height: 23px;
-	background: url("/assets/images/images/hosting/top-corners.png") no-repeat left top;
+	background: url("images/hosting/top-corners.png") no-repeat left top;
 }
 
 .middle-content {
@@ -2401,19 +2401,19 @@ p.psd-download {
 	overflow: hidden;
 	font-size: 1.2em;
 	color: #00284f;
-	background: url("/assets/images/images/hosting/middle-content.png") repeat-y left top;
+	background: url("images/hosting/middle-content.png") repeat-y left top;
 }
 
 .bottom-corners-left {
 	width: 425px;
 	height: 43px;
-	background: url("/assets/images/images/hosting/corners-bottom.png") no-repeat left top;
+	background: url("images/hosting/corners-bottom.png") no-repeat left top;
 }
 
 .bottom-corners-right  {
 	width: 425px;
 	height: 43px;
-	background: url("/assets/images/images/hosting/bottom-corners-right.png") no-repeat left top;
+	background: url("images/hosting/bottom-corners-right.png") no-repeat left top;
 }
 
 .provider-badge {
@@ -2421,7 +2421,7 @@ p.psd-download {
 	float: left;
 	margin: 0 19px 10px 0;
 	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow.png") no-repeat 50% bottom;
+	background: url("images/hosting/badge-shadow.png") no-repeat 50% bottom;
 }
 
 .provider-badge-forumatic {
@@ -2429,7 +2429,7 @@ p.psd-download {
 	float: left;
 	margin: 0 79px 10px 0;
 	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow-long.png") no-repeat 50% bottom;
+	background: url("images/hosting/badge-shadow-long.png") no-repeat 50% bottom;
 }
 
 h1.hostname {
@@ -2454,7 +2454,7 @@ ul.host-featurelist {
 
 ul.host-featurelist li {
 	font-size: 12px;
-	list-style-image: url("/assets/images/images/hosting/tick-small.png");
+	list-style-image: url("images/hosting/tick-small.png");
 	line-height: normal !important;
 }
 
@@ -2517,7 +2517,7 @@ span.underline {
 }
 
 .github-link:before {
-	background: url("/assets/images/icons/github/GitHub-Mark-16px-plus.png") no-repeat;
+	background: url("icons/github/GitHub-Mark-16px-plus.png") no-repeat;
 	content: '';
 	display: inline-block;
 	height: 16px;
@@ -2549,7 +2549,7 @@ ul.showcasebuttons li {
 li.showall a {
 	width: 96px;
 	height: 36px;
-	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -162px top;
+	background: url("images/showcase/buttons.gif") no-repeat -162px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2567,7 +2567,7 @@ li.showall a:active {
 li.suggestsite a {
 	width: 131px;
 	height: 36px;
-	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -354px top;
+	background: url("images/showcase/buttons.gif") no-repeat -354px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2585,7 +2585,7 @@ li.suggestsite a:active {
 li.sort a.sortbutton {
 	width: 162px;
 	height: 36px;
-	background: url("/assets/images/images/showcase/buttons.gif") no-repeat left top;
+	background: url("images/showcase/buttons.gif") no-repeat left top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2603,7 +2603,7 @@ li.sort a:active {
 li.manage a {
 	width: 96px;
 	height: 36px;
-	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -258px top;
+	background: url("images/showcase/buttons.gif") no-repeat -258px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2634,7 +2634,7 @@ ul.sortoptions li {
 	font-size: 12px;
 	font-family: Tahoma, Geneva, sans-serif;
 	font-weight: bold;
-	background: url("/assets/images/images/showcase/divider.png") no-repeat 50% bottom;
+	background: url("images/showcase/divider.png") no-repeat 50% bottom;
 }
 
 ul.sortoptions li.lastoption {
@@ -2665,7 +2665,7 @@ li.sort:hover > ul.sortoptions {
 .showcase-site {
 	width: 246px;
 	height: 270px;
-	background: url("/assets/images/images/showcase/panelbg.png") no-repeat 50% top;
+	background: url("images/showcase/panelbg.png") no-repeat 50% top;
 	float: left;
 	margin: 10px 6px 10px;
 	padding: 11px;
@@ -2684,7 +2684,7 @@ li.sort:hover > ul.sortoptions {
 .topcorners {
 	width: 245px;
 	height: 5px;
-	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left top;
+	background: url("images/showcase/cornermask.png") no-repeat left top;
 	position: absolute;
 	z-index: 9997;
 }
@@ -2692,7 +2692,7 @@ li.sort:hover > ul.sortoptions {
 .bottomcorners {
 	width: 245px;
 	height: 5px;
-	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left bottom;
+	background: url("images/showcase/cornermask.png") no-repeat left bottom;
 	position: absolute;
 	z-index: 9996;
 	margin-top: 120px;
@@ -2723,7 +2723,7 @@ span.editlink {
 .sitetags {
 	position: absolute;
 	z-index: 9998;
-	background: url("/assets/images/images/showcase/tag_blue.png") no-repeat left 50%;
+	background: url("images/showcase/tag_blue.png") no-repeat left 50%;
 	height: 16px;
 	margin-top: 240px;
 	padding-left: 22px;
