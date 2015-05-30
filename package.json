@@ -12,6 +12,7 @@
     "gulp-postcss": "^5.1.8",
     "pixrem": "^1.2.4",
     "postcss-import": "^5.2.2",
+    "postcss-sprites": "^1.0.1",
     "postcss-url": "^3.2.0"
   }
 }

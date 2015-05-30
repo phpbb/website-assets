@@ -772,7 +772,7 @@ div.downloads .mini-panel h3 {
 }
 
 dl.extra-box.shop:before {
-	background: url("images/shop-icon.png") no-repeat 0 0;
+	background: url("../images/images/shop-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -783,7 +783,7 @@ dl.extra-box.shop:before {
 }
 
 dl.extra-box.rocket:before {
-	background: url("images/rocket-icon.png") no-repeat 0 0;
+	background: url("../images/images/rocket-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -794,7 +794,7 @@ dl.extra-box.rocket:before {
 }
 
 dl.extra-box.hourglass:before {
-	background: url("images/hourglass-icon.png") no-repeat 0 0;
+	background: url("../images/images/hourglass-icon.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -805,7 +805,7 @@ dl.extra-box.hourglass:before {
 }
 
 dl.extra-box.showcase:before {
-	background: url("images/features/web.png") no-repeat 0 0;
+	background: url("../images/images/features/web.png") no-repeat 0 0;
 	content: '';
 	position: absolute;
 	display: block;
@@ -903,10 +903,10 @@ div.panel-emphasis {
 	margin: 0;
 }
 
-#home-buttons a.what-is			{ background-image: url("images/hb-what-is-phpbb.png"); }
-#home-buttons a.get-started		{ background-image: url("images/hb-get-started.png?2010061000"); }
-#home-buttons a.enhance			{ background-image: url("images/hb-enhance-phpbb.png?2010061100"); }
-#home-buttons a.contribute		{ background-image: url("images/hb-contribute.png?2010061000"); }
+#home-buttons a.what-is			{ background-image: url("../images/images/hb-what-is-phpbb.png"); }
+#home-buttons a.get-started		{ background-image: url("../images/images/hb-get-started.png"); }
+#home-buttons a.enhance			{ background-image: url("../images/images/hb-enhance-phpbb.png"); }
+#home-buttons a.contribute		{ background-image: url("../images/images/hb-contribute.png"); }
 
 #home-try-link {
 	position: absolute;
@@ -2517,7 +2517,7 @@ span.underline {
 }
 
 .github-link:before {
-	background: url("icons/github/GitHub-Mark-16px-plus.png") no-repeat;
+	background: url("../images/icons/github/GitHub-Mark-16px-plus.png") no-repeat;
 	content: '';
 	display: inline-block;
 	height: 16px;

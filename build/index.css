@@ -25,14 +25,13 @@ body {
 /* Main blocks
 ---------------------------------------- */
 #wrap {
-	max-width: 850px;
-	background: #FFFFFF url("/assets/images/images/bg_header.png") repeat-x 0 0;
+	max-width: 850px; /*@replace|images/bg_header.png*/
 	margin: 0 auto;
 	text-align: left;
 	padding: 13px 23px;
 	border: 2px solid #FFF;
 	border-radius: 15px;
-	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25);
+	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25); background-color: #FFFFFF;
 }
 #simple-wrap {
 	padding: 6px 10px;
@@ -296,8 +295,7 @@ body.home #main div.column1 li, body.home #main div.column2 li {
 }
 
 #main .mini-panel.feed-stats p a, .mini-panel.feed-stats p a {
-	padding: 1px 0 1px 17px;
-	background: transparent url("/assets/images/images/feed-icon-14x14.png") no-repeat scroll 0 50%;
+	padding: 1px 0 1px 17px; /*@replace|images/feed-icon-14x14.png*/
 }
 
 #main .mini-panel.feed-stats p img {
@@ -598,8 +596,7 @@ dl.extra-box.download dd.extras a {
 	text-shadow: none;
 }
 
-dl.download:before {
-	background: url("/assets/images/images/download-arrow.png") no-repeat 0 0;
+dl.download:before { /*@replace|images/download-arrow.png*/
 	content: '';
 	position: absolute;
 	display: block;
@@ -785,8 +782,7 @@ div.downloads .mini-panel h3 {
 	font-weight: bolder;
 }
 
-dl.extra-box.shop:before {
-	background: url("/assets/images/images/shop-icon.png") no-repeat 0 0;
+dl.extra-box.shop:before { background-image: url(/assets/build/sprite.png); background-position: 0 -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -796,8 +792,7 @@ dl.extra-box.shop:before {
 	bottom: 5px;
 }
 
-dl.extra-box.rocket:before {
-	background: url("/assets/images/images/rocket-icon.png") no-repeat 0 0;
+dl.extra-box.rocket:before { background-image: url(/assets/build/sprite.png); background-position: -55px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -807,8 +802,7 @@ dl.extra-box.rocket:before {
 	bottom: 5px;
 }
 
-dl.extra-box.hourglass:before {
-	background: url("/assets/images/images/hourglass-icon.png") no-repeat 0 0;
+dl.extra-box.hourglass:before { background-image: url(/assets/build/sprite.png); background-position: -110px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -818,8 +812,7 @@ dl.extra-box.hourglass:before {
 	bottom: 5px;
 }
 
-dl.extra-box.showcase:before {
-	background: url("/assets/images/images/features/web.png") no-repeat 0 0;
+dl.extra-box.showcase:before { background-image: url(/assets/build/sprite.png); background-position: -165px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -829,8 +822,7 @@ dl.extra-box.showcase:before {
 	top: 15px;
 }
 
-dl.sourceforge-cca2007 {
-	background-image: url("/assets/images/images/sourceforge_cca_2007_260x58.png");
+dl.sourceforge-cca2007 { /*@replace|images/sourceforge_cca_2007_260x58.png*/
 	height: 58px;
 }
 
@@ -917,10 +909,10 @@ div.panel-emphasis {
 	margin: 0;
 }
 
-#home-buttons a.what-is			{ background-image: url("/assets/images/images/hb-what-is-phpbb.png"); }
-#home-buttons a.get-started		{ background-image: url("/assets/images/images/hb-get-started.png?2010061000"); }
-#home-buttons a.enhance			{ background-image: url("/assets/images/images/hb-enhance-phpbb.png?2010061100"); }
-#home-buttons a.contribute		{ background-image: url("/assets/images/images/hb-contribute.png?2010061000"); }
+#home-buttons a.what-is			{ background-image: url(/assets/build/sprite.png); background-position: 0 0; }
+#home-buttons a.get-started		{ background-image: url(/assets/build/sprite.png); background-position: -200px 0; }
+#home-buttons a.enhance			{ background-image: url(/assets/build/sprite.png); background-position: 0 -104px; }
+#home-buttons a.contribute		{ background-image: url(/assets/build/sprite.png); background-position: -200px -104px; }
 
 #home-try-link {
 	position: absolute;
@@ -932,8 +924,7 @@ div.panel-emphasis {
 	text-align: center;
 	top: 16px;
 	height: 77px;
-	width: 124px;
-	background: url("/assets/images/images/home-version-bg.png") no-repeat;
+	width: 124px; /*@replace|images/home-version-bg.png*/
 }
 
 #home-try-link a {
@@ -972,8 +963,7 @@ div.panel-emphasis {
 	right: 16px;
 	top: 16px;
 	height: 77px;
-	width: 124px;
-	background: url("/assets/images/images/home-version-bg.png") no-repeat;
+	width: 124px; /*@replace|images/home-version-bg.png*/
 }
 
 #home-dl-link a {
@@ -1093,9 +1083,7 @@ div.panel-emphasis {
 
 .home-sponsors ul.ads li a {
 	padding: 2px 0 2px 18px;
-	background-position: 0 50%;
-	background-image: url("/assets/images/images/favicons/blank.png");
-	background-repeat: no-repeat;
+	background-position: 0 50%; /*@replace|images/favicons/blank.png*/
 }
 
 .home-sponsors ul.ads li a.no-favicon {
@@ -1174,8 +1162,7 @@ div.panel-emphasis {
 	line-height: 90px;
 	margin: 0 auto;
 	border-radius: 6px;
-	border: 1px solid #828d96;
-	background: url("/assets/images/images/need-hosting.png") 50% 0;
+	border: 1px solid #828d96; /*@replace|images/need-hosting.png*/
 	overflow: hidden;
 	text-indent: -5000px;
 }
@@ -1739,11 +1726,9 @@ a.feature-extra:hover span.hover {
 	cursor: pointer;
 	padding-right: 70px;
 }
-.feature-box .features-item-head.unselected {
-	background: url("/assets/images/images/features/feat-arrow-right.png") 335px center no-repeat;
+.feature-box .features-item-head.unselected { /*@replace|images/features/feat-arrow-right.png*/
 }
-.feature-box .features-item-head.selected {
-	background: url("/assets/images/images/features/feat-arrow-down.png") 335px center no-repeat;
+.feature-box .features-item-head.selected { /*@replace|images/features/feat-arrow-down.png*/
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
@@ -1778,9 +1763,7 @@ a.feature-extra:hover span.hover {
 }
 ul.feature-list li {
 	margin-left: -10px;
-	list-style-type: none;
-	background-image: url("/assets/images/images/features/accept.png");
-	background-repeat: no-repeat;
+	list-style-type: none; /*@replace|images/features/accept.png*/
 	background-position: 0 3px;
 	padding-left: 25px;
 	line-height: 20px;
@@ -1791,8 +1774,7 @@ div.feature-item h4 {
 div.feature-item p {
 	font-size: 0.9em;
 }
-div.feature-item {
-	background: url("/assets/images/images/features/arrow-right-24.png") left center no-repeat;
+div.feature-item { /*@replace|images/features/arrow-right-24.png*/
 	padding-left: 40px;
 	margin-left: 10px;
 }
@@ -2353,12 +2335,10 @@ p.speaker span img {
 	color: #2e3748;
 }
 
-a.download-png {
-	background: url("/assets/images/images/logos/download.png") no-repeat 0 50%;
+a.download-png { /*@replace|images/logos/download.png*/
 }
 
-a.download-psd {
-	background: url("/assets/images/images/logos/photoshop.png") no-repeat 0 50%;
+a.download-psd { /*@replace|images/logos/photoshop.png*/
 }
 
 a.logo-only {
@@ -2404,8 +2384,7 @@ p.psd-download {
 
 .top-corners {
 	width: 425px;
-	height: 23px;
-	background: url("/assets/images/images/hosting/top-corners.png") no-repeat left top;
+	height: 23px; /*@replace|images/hosting/top-corners.png*/
 }
 
 .middle-content {
@@ -2414,36 +2393,31 @@ p.psd-download {
 	padding: 0 27px 2px;
 	overflow: hidden;
 	font-size: 1.2em;
-	color: #00284f;
-	background: url("/assets/images/images/hosting/middle-content.png") repeat-y left top;
+	color: #00284f; /*@replace|images/hosting/middle-content.png*/
 }
 
 .bottom-corners-left {
 	width: 425px;
-	height: 43px;
-	background: url("/assets/images/images/hosting/corners-bottom.png") no-repeat left top;
+	height: 43px; /*@replace|images/hosting/corners-bottom.png*/
 }
 
 .bottom-corners-right  {
 	width: 425px;
-	height: 43px;
-	background: url("/assets/images/images/hosting/bottom-corners-right.png") no-repeat left top;
+	height: 43px; /*@replace|images/hosting/bottom-corners-right.png*/
 }
 
 .provider-badge {
 	width: 125px;
 	float: left;
 	margin: 0 19px 10px 0;
-	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow.png") no-repeat 50% bottom;
+	padding-bottom: 6px; /*@replace|images/hosting/badge-shadow.png*/
 }
 
 .provider-badge-forumatic {
 	width: 370px;
 	float: left;
 	margin: 0 79px 10px 0;
-	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow-long.png") no-repeat 50% bottom;
+	padding-bottom: 6px; /*@replace|images/hosting/badge-shadow-long.png*/
 }
 
 h1.hostname {
@@ -2530,8 +2504,7 @@ span.underline {
 	text-decoration: underline;
 }
 
-.github-link:before {
-	background: url("/assets/images/icons/github/GitHub-Mark-16px-plus.png") no-repeat;
+.github-link:before { background-image: url(/assets/build/sprite.png); background-position: -213px -208px;
 	content: '';
 	display: inline-block;
 	height: 16px;
@@ -2647,8 +2620,7 @@ ul.sortoptions li {
 	padding: 8px;
 	font-size: 12px;
 	font-family: Tahoma, Geneva, sans-serif;
-	font-weight: bold;
-	background: url("/assets/images/images/showcase/divider.png") no-repeat 50% bottom;
+	font-weight: bold; /*@replace|images/showcase/divider.png*/
 }
 
 ul.sortoptions li.lastoption {
@@ -2678,8 +2650,7 @@ li.sort:hover > ul.sortoptions {
 
 .showcase-site {
 	width: 246px;
-	height: 270px;
-	background: url("/assets/images/images/showcase/panelbg.png") no-repeat 50% top;
+	height: 270px; /*@replace|images/showcase/panelbg.png*/
 	float: left;
 	margin: 10px 6px 10px;
 	padding: 11px;
@@ -2697,16 +2668,14 @@ li.sort:hover > ul.sortoptions {
 
 .topcorners {
 	width: 245px;
-	height: 5px;
-	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left top;
+	height: 5px; /*@replace|images/showcase/cornermask.png*/
 	position: absolute;
 	z-index: 9997;
 }
 
 .bottomcorners {
 	width: 245px;
-	height: 5px;
-	background: url("/assets/images/images/showcase/cornermask.png") no-repeat left bottom;
+	height: 5px; /*@replace|images/showcase/cornermask.png*/
 	position: absolute;
 	z-index: 9996;
 	margin-top: 120px;
@@ -2736,8 +2705,7 @@ span.editlink {
 
 .sitetags {
 	position: absolute;
-	z-index: 9998;
-	background: url("/assets/images/images/showcase/tag_blue.png") no-repeat left 50%;
+	z-index: 9998; /*@replace|images/showcase/tag_blue.png*/
 	height: 16px;
 	margin-top: 240px;
 	padding-left: 22px;
@@ -3106,8 +3074,7 @@ body .phpbb-header h1 a {
 	text-decoration: none;
 	margin: 0;
 }
-html>body .phpbb-header h1 a {
-	background: url("/assets/images/images/logo_phpbb.png") 25px 30px no-repeat;
+html>body .phpbb-header h1 a { /*@replace|images/logo_phpbb.png*/
 }
 * html .phpbb-header h1 a {
 	background: url("/assets/images/images/logo_phpbb.gif") 25px 30px no-repeat; /* .gif */
@@ -3343,11 +3310,10 @@ Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
 /* Navbar */
 .phpbb-navbar {
 	clear: both;
-	margin-top: 1px;
-	background: #828d96 url("/assets/images/images/bg_navbar.png") 0 0 repeat-x;
+	margin-top: 1px; /*@replace|images/bg_navbar.png*/
 	box-shadow: inset 0 5px 5px rgba(69, 73, 76, 0.5);
 	border-radius: 0 0 10px 10px;
-	position: relative;
+	position: relative; background-color: #828d96;
 }
 
 .phpbb-navbar:after {
@@ -3395,17 +3361,15 @@ body.support li.but-support > a,
 body.community  li.but-community > a,
 body.shop li.but-shop > a,
 body.blog li.but-blog > a,
-body.hosting li.but-hosting > a {
-	background: #e0e0e0 url("/assets/images/images/bg_navbar_active.png") 0 -1px repeat-x;
+body.hosting li.but-hosting > a { /*@replace|images/bg_navbar_active.png*/
 	color: #de0a46;
-	text-shadow: 0 1px 1px #F1F1F1;
+	text-shadow: 0 1px 1px #F1F1F1; background-color: #e0e0e0;
 }
 
 .phpbb-navbar .nav-button:hover > a,
-.phpbb-navbar .nav-button.hovering > a {
-	background: #b1b7bc url("/assets/images/images/bg_navbar_hover.png") 0 0 repeat-x;
+.phpbb-navbar .nav-button.hovering > a { /*@replace|images/bg_navbar_hover.png*/
 	color: #FFF;
-	text-shadow: 0 1px 2px #525d66;
+	text-shadow: 0 1px 2px #525d66; background-color: #b1b7bc;
 }
 
 .phpbb-navbar .nav-button > a:hover {
@@ -3479,8 +3443,7 @@ body.hosting li.but-hosting > a {
 /* Submenus
 --------------------------------------------- */
 .phpbb-navbar .sub-menu {
-	display: none;
-	background: #99A1A8 url("/assets/images/images/bg_submenu.png") repeat-x 0 0;
+	display: none; /*@replace|images/bg_submenu.png*/
 	border-radius: 5px;
 	box-shadow: 0 3px 3px rgba(69, 73, 76, 0.5);
 	position: absolute;
@@ -3489,7 +3452,7 @@ body.hosting li.but-hosting > a {
 	left: -12px;
 	top: 25px;
 	overflow: visible;
-	z-index: 9999;
+	z-index: 9999; background-color: #99A1A8;
 }
 
 .phpbb-navbar .sub-menu.wide-menu {
