@@ -5,7 +5,8 @@ var gulp = require('gulp');
 var postcss = require('gulp-postcss');
 
 var config = {
-	BUILD_DEST: 'build'
+	BUILD_DEST: 'build',
+	MINIFY: false
 };
 
 gulp.task('css', function () {
@@ -30,6 +31,10 @@ gulp.task('css', function () {
 		require('autoprefixer')(),
 		require('pixrem')
 	];
+	
+	if (config.MINIFY) {
+		processors.push(require('csswring')());
+	}
 
 	return gulp.src('css/index.css')
 		.pipe(postcss(processors))
