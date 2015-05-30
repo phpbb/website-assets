@@ -3,8 +3,7 @@ var gulp = require('gulp');
 var postcss = require('gulp-postcss');
 
 var config = {
-	BUILD_DEST: 'build',
-	MAX_SPRITE_SIZE: 50 * 1024 // 50kb
+	BUILD_DEST: 'build'
 };
 
 gulp.task('css', function () {
