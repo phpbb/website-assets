@@ -1,3 +1,8 @@
+/* phpBB Website Styles Index
+   Copyright 2006 phpBB Group ( http://www.phpbb.com/ )
+   --------------------------------------------------------------
+*/
+
 /* phpbb.com Website Style Sheet
 --------------------------------------------------------------
 Copyright 2010 phpBB Group ( http://www.phpbb.com/ )
@@ -20,14 +25,13 @@ body {
 /* Main blocks
 ---------------------------------------- */
 #wrap {
-	max-width: 850px;
-	background: #FFFFFF url("images/bg_header.png") repeat-x 0 0;
+	max-width: 850px; /*@replace|images/bg_header.png*/
 	margin: 0 auto;
 	text-align: left;
 	padding: 13px 23px;
 	border: 2px solid #FFF;
 	border-radius: 15px;
-	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25);
+	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25); background-color: #FFFFFF;
 }
 #simple-wrap {
 	padding: 6px 10px;
@@ -291,8 +295,7 @@ body.home #main div.column1 li, body.home #main div.column2 li {
 }
 
 #main .mini-panel.feed-stats p a, .mini-panel.feed-stats p a {
-	padding: 1px 0 1px 17px;
-	background: transparent url("images/feed-icon-14x14.png") no-repeat scroll 0 50%;
+	padding: 1px 0 1px 17px; /*@replace|images/feed-icon-14x14.png*/
 }
 
 #main .mini-panel.feed-stats p img {
@@ -535,42 +538,49 @@ dl.extra-box dt a:hover {
 
 dl.extra-box, .big-tag {
 	background: #95b178;
+	background: -webkit-linear-gradient(top, #95b178 0%, #b1d28e 100%);
 	background: linear-gradient(to bottom, #95b178 0%,#b1d28e 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95b178', endColorstr='#b1d28e',GradientType=0 );
 }
 
 dl.extra-box.blue, .big-tag.blue {
 	background: #698cc0;
+	background: -webkit-linear-gradient(top, #698cc0 0%, #7ca7e4 100%);
 	background: linear-gradient(to bottom, #698cc0 0%,#7ca7e4 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#698cc0', endColorstr='#7ca7e4',GradientType=0 );
 }
 
 dl.extra-box.orange, .big-tag.orange {
 	background: #ffc561;
+	background: -webkit-linear-gradient(45deg, #ffc561 0%, #ff8a2b 100%);
 	background: linear-gradient(45deg, #ffc561 0%,#ff8a2b 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc561', endColorstr='#ff8a2b',GradientType=1 );
 }
 
 dl.extra-box.dirty-green, .big-tag.dirty-green {
 	background: #97a382;
+	background: -webkit-linear-gradient(top, #97a382 0%, #b3bc9e 100%);
 	background: linear-gradient(to bottom, #97a382 0%,#b3bc9e 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#97a382', endColorstr='#b3bc9e',GradientType=0 );
 }
 
 dl.extra-box.dirty-blue, .big-tag.dirty-blue {
 	background: #8492a5;
+	background: -webkit-linear-gradient(top, #8492a5 0%, #9ca9bc 100%);
 	background: linear-gradient(to bottom, #8492a5 0%,#9ca9bc 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8492a5', endColorstr='#9ca9bc',GradientType=0 );
 }
 
 dl.extra-box.light-blue, .big-tag.light-blue {
 	background: #a9cded;
+	background: -webkit-linear-gradient(top, #a9cded 0%, #56b1df 100%);
 	background: linear-gradient(to bottom, #a9cded 0%,#56b1df 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a9cded', endColorstr='#56b1df',GradientType=0 );
 }
 
 dl.extra-box.purple, .big-tag.purple {
 	background: #8d7fcc;
+	background: -webkit-linear-gradient(45deg, #8d7fcc 0%, #9262cc 100%);
 	background: linear-gradient(45deg, #8d7fcc 0%, #9262cc 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d7fcc', endColorstr='#9262cc',GradientType=1 );
 }
@@ -586,8 +596,7 @@ dl.extra-box.download dd.extras a {
 	text-shadow: none;
 }
 
-dl.download:before {
-	background: url("images/download-arrow.png") no-repeat 0 0;
+dl.download:before { /*@replace|images/download-arrow.png*/
 	content: '';
 	position: absolute;
 	display: block;
@@ -683,6 +692,7 @@ div.downloads .mini-panel h3 {
 
 .download-version-switch a.disabled:hover {
 	background-color: #FFFFFF;
+	background-image: -webkit-linear-gradient(top, #FFFFFF, #E9E9E9);
 	background-image: linear-gradient(to bottom, #FFFFFF, #E9E9E9);
 	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#FFFFFF', EndColorStr='#E9E9E9')";
 	box-shadow: 0 0 0 1px #FFFFFF inset;
@@ -720,6 +730,7 @@ div.downloads .mini-panel h3 {
 
 .olympus #tabs .activetab > a, .olympus #tabs .activetab > a:hover {
 	background: #ebebeb;
+	background: -webkit-linear-gradient(top, #f0f0f0 0%, #ebebeb 100%);
 	background: linear-gradient(to bottom, #f0f0f0 0%, #ebebeb 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#ebebeb', GradientType=0 );
 	border-color: #ebebeb;
@@ -771,8 +782,7 @@ div.downloads .mini-panel h3 {
 	font-weight: bolder;
 }
 
-dl.extra-box.shop:before {
-	background: url("../images/images/shop-icon.png") no-repeat 0 0;
+dl.extra-box.shop:before { background-image: url(/assets/build/sprite.png); background-position: 0 -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -782,8 +792,7 @@ dl.extra-box.shop:before {
 	bottom: 5px;
 }
 
-dl.extra-box.rocket:before {
-	background: url("../images/images/rocket-icon.png") no-repeat 0 0;
+dl.extra-box.rocket:before { background-image: url(/assets/build/sprite.png); background-position: -55px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -793,8 +802,7 @@ dl.extra-box.rocket:before {
 	bottom: 5px;
 }
 
-dl.extra-box.hourglass:before {
-	background: url("../images/images/hourglass-icon.png") no-repeat 0 0;
+dl.extra-box.hourglass:before { background-image: url(/assets/build/sprite.png); background-position: -110px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -804,8 +812,7 @@ dl.extra-box.hourglass:before {
 	bottom: 5px;
 }
 
-dl.extra-box.showcase:before {
-	background: url("../images/images/features/web.png") no-repeat 0 0;
+dl.extra-box.showcase:before { background-image: url(/assets/build/sprite.png); background-position: -165px -208px;
 	content: '';
 	position: absolute;
 	display: block;
@@ -815,8 +822,7 @@ dl.extra-box.showcase:before {
 	top: 15px;
 }
 
-dl.sourceforge-cca2007 {
-	background-image: url("images/sourceforge_cca_2007_260x58.png");
+dl.sourceforge-cca2007 { /*@replace|images/sourceforge_cca_2007_260x58.png*/
 	height: 58px;
 }
 
@@ -903,10 +909,10 @@ div.panel-emphasis {
 	margin: 0;
 }
 
-#home-buttons a.what-is			{ background-image: url("../images/images/hb-what-is-phpbb.png"); }
-#home-buttons a.get-started		{ background-image: url("../images/images/hb-get-started.png"); }
-#home-buttons a.enhance			{ background-image: url("../images/images/hb-enhance-phpbb.png"); }
-#home-buttons a.contribute		{ background-image: url("../images/images/hb-contribute.png"); }
+#home-buttons a.what-is			{ background-image: url(/assets/build/sprite.png); background-position: 0 0; }
+#home-buttons a.get-started		{ background-image: url(/assets/build/sprite.png); background-position: -200px 0; }
+#home-buttons a.enhance			{ background-image: url(/assets/build/sprite.png); background-position: 0 -104px; }
+#home-buttons a.contribute		{ background-image: url(/assets/build/sprite.png); background-position: -200px -104px; }
 
 #home-try-link {
 	position: absolute;
@@ -918,8 +924,7 @@ div.panel-emphasis {
 	text-align: center;
 	top: 16px;
 	height: 77px;
-	width: 124px;
-	background: url("images/home-version-bg.png") no-repeat;
+	width: 124px; /*@replace|images/home-version-bg.png*/
 }
 
 #home-try-link a {
@@ -958,8 +963,7 @@ div.panel-emphasis {
 	right: 16px;
 	top: 16px;
 	height: 77px;
-	width: 124px;
-	background: url("images/home-version-bg.png") no-repeat;
+	width: 124px; /*@replace|images/home-version-bg.png*/
 }
 
 #home-dl-link a {
@@ -1079,9 +1083,7 @@ div.panel-emphasis {
 
 .home-sponsors ul.ads li a {
 	padding: 2px 0 2px 18px;
-	background-position: 0 50%;
-	background-image: url("images/favicons/blank.png");
-	background-repeat: no-repeat;
+	background-position: 0 50%; /*@replace|images/favicons/blank.png*/
 }
 
 .home-sponsors ul.ads li a.no-favicon {
@@ -1160,8 +1162,7 @@ div.panel-emphasis {
 	line-height: 90px;
 	margin: 0 auto;
 	border-radius: 6px;
-	border: 1px solid #828d96;
-	background: url("images/need-hosting.png") 50% 0;
+	border: 1px solid #828d96; /*@replace|images/need-hosting.png*/
 	overflow: hidden;
 	text-indent: -5000px;
 }
@@ -1234,7 +1235,7 @@ body.languages ul.packages li {
 body.languages ul.packages img {
 	float: left;
 	margin: 0 10px 0 0;
-	background: url("images/flags/flag_generic.gif") no-repeat scroll 0 0 transparent;
+	background: url("/assets/images/images/flags/flag_generic.gif") no-repeat scroll 0 0 transparent;
 	color: transparent;
 	height: 48px;
 	width: 48px;
@@ -1284,7 +1285,7 @@ body.trackers div.notice img {
 }
 
 .issue-icon span {
-	background-image: url("images/button_new_ticket.gif");
+	background-image: url("/assets/images/images/button_new_ticket.gif");
 }
 
 .buttons div.issue-icon {
@@ -1495,7 +1496,7 @@ body.shop div#bertie-hugger {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url("images/loading_wait.gif") 50% 30% no-repeat;
+	background: transparent url("/assets/images/images/loading_wait.gif") 50% 30% no-repeat;
 }
 
 body.shop ul#bertie {
@@ -1506,7 +1507,7 @@ body.shop ul#bertie {
 	padding: 0;
 	float: left;
 	position: relative;
-	background: transparent url("images/olympus-prosilver-bertie.jpg?20080629") 0 0 no-repeat;
+	background: transparent url("/assets/images/images/olympus-prosilver-bertie.jpg?20080629") 0 0 no-repeat;
 }
 
 body.shop ul#bertie li {
@@ -1524,7 +1525,7 @@ body.shop ul#bertie li a {
 	text-align: center;
 	text-decoration: none;
 	font-weight: bold;
-	background: transparent url("images/olympus-prosilver-bertie.jpg?20080629") 480px 0 no-repeat;
+	background: transparent url("/assets/images/images/olympus-prosilver-bertie.jpg?20080629") 480px 0 no-repeat;
 	position: absolute;
 }
 
@@ -1725,11 +1726,9 @@ a.feature-extra:hover span.hover {
 	cursor: pointer;
 	padding-right: 70px;
 }
-.feature-box .features-item-head.unselected {
-	background: url("images/features/feat-arrow-right.png") 335px center no-repeat;
+.feature-box .features-item-head.unselected { /*@replace|images/features/feat-arrow-right.png*/
 }
-.feature-box .features-item-head.selected {
-	background: url("images/features/feat-arrow-down.png") 335px center no-repeat;
+.feature-box .features-item-head.selected { /*@replace|images/features/feat-arrow-down.png*/
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
@@ -1764,9 +1763,7 @@ a.feature-extra:hover span.hover {
 }
 ul.feature-list li {
 	margin-left: -10px;
-	list-style-type: none;
-	background-image: url("images/features/accept.png");
-	background-repeat: no-repeat;
+	list-style-type: none; /*@replace|images/features/accept.png*/
 	background-position: 0 3px;
 	padding-left: 25px;
 	line-height: 20px;
@@ -1777,8 +1774,7 @@ div.feature-item h4 {
 div.feature-item p {
 	font-size: 0.9em;
 }
-div.feature-item {
-	background: url("images/features/arrow-right-24.png") left center no-repeat;
+div.feature-item { /*@replace|images/features/arrow-right-24.png*/
 	padding-left: 40px;
 	margin-left: 10px;
 }
@@ -1873,14 +1869,14 @@ code.inline {
 
 /* Wiki link */
 a.wikilink {
-	background: url("images/wiki_badge.gif") center right no-repeat;
+	background: url("/assets/images/images/wiki_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
 
 /* kb link */
 a.kblink {
-	background: url("images/kb_badge.gif") center right no-repeat;
+	background: url("/assets/images/images/kb_badge.gif") center right no-repeat;
 	padding-right: 34px;
 	zoom: 1; /* IE6/IE7 Wrapping fix */
 }
@@ -2339,12 +2335,10 @@ p.speaker span img {
 	color: #2e3748;
 }
 
-a.download-png {
-	background: url("images/logos/download.png") no-repeat 0 50%;
+a.download-png { /*@replace|images/logos/download.png*/
 }
 
-a.download-psd {
-	background: url("images/logos/photoshop.png") no-repeat 0 50%;
+a.download-psd { /*@replace|images/logos/photoshop.png*/
 }
 
 a.logo-only {
@@ -2390,8 +2384,7 @@ p.psd-download {
 
 .top-corners {
 	width: 425px;
-	height: 23px;
-	background: url("images/hosting/top-corners.png") no-repeat left top;
+	height: 23px; /*@replace|images/hosting/top-corners.png*/
 }
 
 .middle-content {
@@ -2400,36 +2393,31 @@ p.psd-download {
 	padding: 0 27px 2px;
 	overflow: hidden;
 	font-size: 1.2em;
-	color: #00284f;
-	background: url("images/hosting/middle-content.png") repeat-y left top;
+	color: #00284f; /*@replace|images/hosting/middle-content.png*/
 }
 
 .bottom-corners-left {
 	width: 425px;
-	height: 43px;
-	background: url("images/hosting/corners-bottom.png") no-repeat left top;
+	height: 43px; /*@replace|images/hosting/corners-bottom.png*/
 }
 
 .bottom-corners-right  {
 	width: 425px;
-	height: 43px;
-	background: url("images/hosting/bottom-corners-right.png") no-repeat left top;
+	height: 43px; /*@replace|images/hosting/bottom-corners-right.png*/
 }
 
 .provider-badge {
 	width: 125px;
 	float: left;
 	margin: 0 19px 10px 0;
-	padding-bottom: 6px;
-	background: url("images/hosting/badge-shadow.png") no-repeat 50% bottom;
+	padding-bottom: 6px; /*@replace|images/hosting/badge-shadow.png*/
 }
 
 .provider-badge-forumatic {
 	width: 370px;
 	float: left;
 	margin: 0 79px 10px 0;
-	padding-bottom: 6px;
-	background: url("images/hosting/badge-shadow-long.png") no-repeat 50% bottom;
+	padding-bottom: 6px; /*@replace|images/hosting/badge-shadow-long.png*/
 }
 
 h1.hostname {
@@ -2454,7 +2442,7 @@ ul.host-featurelist {
 
 ul.host-featurelist li {
 	font-size: 12px;
-	list-style-image: url("images/hosting/tick-small.png");
+	list-style-image: url("/assets/images/images/hosting/tick-small.png");
 	line-height: normal !important;
 }
 
@@ -2516,8 +2504,7 @@ span.underline {
 	text-decoration: underline;
 }
 
-.github-link:before {
-	background: url("../images/icons/github/GitHub-Mark-16px-plus.png") no-repeat;
+.github-link:before { background-image: url(/assets/build/sprite.png); background-position: -213px -208px;
 	content: '';
 	display: inline-block;
 	height: 16px;
@@ -2549,7 +2536,7 @@ ul.showcasebuttons li {
 li.showall a {
 	width: 96px;
 	height: 36px;
-	background: url("images/showcase/buttons.gif") no-repeat -162px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -162px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2567,7 +2554,7 @@ li.showall a:active {
 li.suggestsite a {
 	width: 131px;
 	height: 36px;
-	background: url("images/showcase/buttons.gif") no-repeat -354px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -354px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2585,7 +2572,7 @@ li.suggestsite a:active {
 li.sort a.sortbutton {
 	width: 162px;
 	height: 36px;
-	background: url("images/showcase/buttons.gif") no-repeat left top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat left top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2603,7 +2590,7 @@ li.sort a:active {
 li.manage a {
 	width: 96px;
 	height: 36px;
-	background: url("images/showcase/buttons.gif") no-repeat -258px top;
+	background: url("/assets/images/images/showcase/buttons.gif") no-repeat -258px top;
 	display: block;
 	text-indent: -9999px;
 	outline: none;
@@ -2633,8 +2620,7 @@ ul.sortoptions li {
 	padding: 8px;
 	font-size: 12px;
 	font-family: Tahoma, Geneva, sans-serif;
-	font-weight: bold;
-	background: url("images/showcase/divider.png") no-repeat 50% bottom;
+	font-weight: bold; /*@replace|images/showcase/divider.png*/
 }
 
 ul.sortoptions li.lastoption {
@@ -2664,8 +2650,7 @@ li.sort:hover > ul.sortoptions {
 
 .showcase-site {
 	width: 246px;
-	height: 270px;
-	background: url("images/showcase/panelbg.png") no-repeat 50% top;
+	height: 270px; /*@replace|images/showcase/panelbg.png*/
 	float: left;
 	margin: 10px 6px 10px;
 	padding: 11px;
@@ -2683,16 +2668,14 @@ li.sort:hover > ul.sortoptions {
 
 .topcorners {
 	width: 245px;
-	height: 5px;
-	background: url("images/showcase/cornermask.png") no-repeat left top;
+	height: 5px; /*@replace|images/showcase/cornermask.png*/
 	position: absolute;
 	z-index: 9997;
 }
 
 .bottomcorners {
 	width: 245px;
-	height: 5px;
-	background: url("images/showcase/cornermask.png") no-repeat left bottom;
+	height: 5px; /*@replace|images/showcase/cornermask.png*/
 	position: absolute;
 	z-index: 9996;
 	margin-top: 120px;
@@ -2722,8 +2705,7 @@ span.editlink {
 
 .sitetags {
 	position: absolute;
-	z-index: 9998;
-	background: url("images/showcase/tag_blue.png") no-repeat left 50%;
+	z-index: 9998; /*@replace|images/showcase/tag_blue.png*/
 	height: 16px;
 	margin-top: 240px;
 	padding-left: 22px;
@@ -2802,7 +2784,7 @@ th.cookie {
 	padding: 3px 4px;
 	border-width: 0 1px 1px 0;
 	color: #FFFFFF;
-	background: #70AED3 url("gradient2b.gif") bottom left repeat-x;
+	background: #70AED3 url("/assets/images/gradient2b.gif") bottom left repeat-x;
 	border-top: 1px solid #6DACD2;
 	border-bottom: 1px solid #327AA5;
 	text-align: left;
@@ -3065,4 +3047,659 @@ h2 sup {
 	.announcements .announce_img {
 		display: none;
 	}
+}
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+/* Header block with images */
+body .phpbb-header {
+	background-repeat: no-repeat;
+	background-position: 50% 0;
+	width: 100%;
+	height: 129px;
+	border-radius: 8px 8px 0 0;
+	position: relative;
+}
+body .phpbb-header h1 {
+	margin: 0;
+}
+body .phpbb-header h1 a {
+	display: block;
+	width: 100%;
+	height: 129px;
+	text-indent: -5000px;
+	text-decoration: none;
+	margin: 0;
+}
+html>body .phpbb-header h1 a { /*@replace|images/logo_phpbb.png*/
+}
+* html .phpbb-header h1 a {
+	background: url("/assets/images/images/logo_phpbb.gif") 25px 30px no-repeat; /* .gif */
+}
+
+/* Section header images */
+body .phpbb-header {
+	background-image: url("/assets/images/headers/header_misc.jpg");
+}
+body.home .phpbb-header {
+	background-image: url("/assets/images/headers/header_olympus.jpg");
+}
+body.downloads .phpbb-header {
+	background-image: url("/assets/images/headers/header_downloads.jpg");
+}
+body.changelog .phpbb-header {
+	background-image: url("/assets/images/headers/header_changelog.jpg");
+}
+body.about .phpbb-header {
+	background-image: url("/assets/images/headers/header_about.jpg");
+}
+body.contact .phpbb-header {
+	background-image: url("/assets/images/headers/header_about.jpg");
+}
+body.features .phpbb-header {
+	background-image: url("/assets/images/headers/header_features.jpg");
+}
+body.history .phpbb-header {
+	background-image: url("/assets/images/headers/header_history.jpg");
+}
+body.support .phpbb-header {
+	background-image: url("/assets/images/headers/header_support.jpg");
+}
+body.documentation .phpbb-header {
+	background-image: url("/assets/images/headers/header_documentation.jpg");
+}
+body.irc .phpbb-header {
+	background-image: url("/assets/images/headers/header_irc.jpg");
+}
+body.intl .phpbb-header {
+	background-image: url("/assets/images/headers/header_intl.jpg");
+}
+body.development .phpbb-header {
+	background-image: url("/assets/images/headers/header_eiffel.jpg");
+}
+body.incidents .phpbb-header {
+	background-image: url("/assets/images/headers/header_incidents.jpg");
+}
+body.pastebin .phpbb-header {
+	background-image: url("/assets/images/headers/header_pastebin.jpg");
+}
+body.security .phpbb-header {
+	background-image: url("/assets/images/headers/header_security.jpg");
+}
+body.customise .phpbb-header {
+	background-image: url("/assets/images/headers/header_customise.jpg");
+}
+body.customisation-database .phpbb-header {
+	background-image: url("/assets/images/headers/header_customisation_database.jpg");
+}
+
+body.showcase .phpbb-header {
+	background-image: url("/assets/images/headers/header_showcase.jpg");
+}
+body.demo .phpbb-header {
+	background-image: url("/assets/images/headers/header_lighttower.jpg");
+}
+
+/* Normal Community */
+body.community .phpbb-header {
+	background-image: url("/assets/images/headers/header_community.jpg");
+}
+
+/* Countdown */
+body.launch .phpbb-header {
+	background-image: url("/assets/images/headers/header_launch.jpg");
+}
+
+/* XMAS
+body.community .phpbb-header {
+	background-image: url("./header.php");
+}
+*/
+
+/* Halloween
+body.community .phpbb-header {
+	background-image: url("headers/header_halloween03.gif");
+} */
+
+/* Valentine's Day
+body.community .phpbb-header {
+	background-image: url("headers/header_valentines02.jpg");
+} */
+
+body.mods .phpbb-header {
+	background-image: url("/assets/images/headers/header_mods.jpg");
+}
+body.modx .phpbb-header {
+	background-image: url("/assets/images/headers/header_modx.jpg");
+}
+body.styles .phpbb-header {
+	background-image: url("/assets/images/headers/header_styles.jpg");
+}
+body.languages .phpbb-header {
+	background-image: url("/assets/images/headers/header_languages.jpg");
+}
+body.bugs .phpbb-header {
+	background-image: url("/assets/images/headers/header_bugs.jpg");
+}
+body.search .phpbb-header {
+	background-image: url("/assets/images/headers/header_search.jpg");
+}
+body.kb .phpbb-header {
+	background-image: url("/assets/images/headers/header_kb.jpg");
+}
+body.errordocs .phpbb-header {
+	background-image: url("/assets/images/headers/header_error.jpg");
+}
+body.mailinglist .phpbb-header {
+	background-image: url("/assets/images/headers/header_lighttower.jpg");
+}
+body.press .phpbb-header {
+	background-image: url("/assets/images/headers/header_press.jpg");
+}
+body.prosilver .phpbb-header {
+	background-image: url("/assets/images/headers/header_prosilver.jpg");
+}
+body.shop .phpbb-header {
+	background-image: url("/assets/images/headers/header_moon.jpg");
+}
+body.hosting .phpbb-header {
+	background-image: url("/assets/images/headers/header_olympus.jpg");
+}
+body.londonvasion .phpbb-header {
+	background-image: url("/assets/images/headers/header_londonvasion.jpg");
+}
+body.londonvasion2 .phpbb-header {
+	background-image: url("/assets/images/headers/header_londonvasion2.jpg");
+}
+body.libertyvasion .phpbb-header {
+	background-image: url("/assets/images/headers/header_libertyvasion.jpg");
+}
+body.mod_rules .phpbb-header {
+	background-image: url("/assets/images/headers/header_mod_rules.jpg");
+}
+body.umil .phpbb-header {
+	background-image: url("/assets/images/headers/header_blackhole.jpg");
+}
+body.library .phpbb-header {
+	background-image: url("/assets/images/headers/header_library.jpg");
+}
+body.blog .phpbb-header {
+	background-image: url("/assets/images/headers/header_blog.jpg");
+}
+body.meetinglogs .phpbb-header {
+	background-image: url("/assets/images/headers/header_logs.jpg");
+}
+body.antispam .phpbb-header {
+	background-image: url("/assets/images/headers/header_spam.jpg");
+}
+body.code_changes .phpbb-header {
+	background-image: url("/assets/images/headers/header_code_changes.jpg");
+}
+body.libertyvasion .phpbb-header {
+	background-image: url("/assets/images/headers/header_libertyvasion.jpg");
+}
+body.get-involved .phpbb-header {
+        background-image: url("/assets/images/headers/header_getinvolved.jpg");
+}
+body.home .phpbb-navbar {
+	margin-bottom: 20px;
+}
+
+/* Ascraeus Countdown */
+.countdown-block {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	vertical-align: middle;
+	white-space: normal;
+
+	background: #fff none;
+	border: 3px solid #fff;
+	border-radius: 4px;
+
+	box-shadow: 1px 1px 6px rgba(0, 0, 0, .6);
+	color: rgba(0, 0, 0, .5);
+	text-shadow: none;
+	display: inline-block;
+	margin: 0;
+	padding: 6px 12px;
+	position: absolute;
+	top: 20px;
+	right: 33px;
+	box-sizing: border-box;
+	-webkit-appearance: none;
+}
+
+.countdown-block:hover {
+	text-decoration: none;
+}
+
+/* Content of the block is constantly updated by timer, this makes the link less twitchy */
+.countdown-block:after {
+	display: block;
+	background: none;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	content: '';
+	top: 0;
+	left: 0;
+}
+
+.countdown-block .timer-big {
+	font-size: 36px;
+	font-size: 2.25rem;
+	font-weight: 500;
+	line-height: 1;
+	display: block;
+}
+
+.countdown-block .timer-small {
+	font-size: 11px;
+	display: block;
+}
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+/* Navbar */
+.phpbb-navbar {
+	clear: both;
+	margin-top: 1px; /*@replace|images/bg_navbar.png*/
+	box-shadow: inset 0 5px 5px rgba(69, 73, 76, 0.5);
+	border-radius: 0 0 10px 10px;
+	position: relative; background-color: #828d96;
+}
+
+.phpbb-navbar:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
+.phpbb-navbar ul {
+	list-style: none;
+	display: block;
+}
+
+.phpbb-navbar .nav-button {
+	display: block;
+	margin: 0 3px;
+	float: left;
+	position: relative;
+}
+
+/* Rolloff state */
+.phpbb-navbar .nav-button > a {
+	font-family: "Trebuchet MS",Verdana,Helvetica,Arial,Sans-serif;
+	color: #FFF;
+	cursor: pointer;
+	display: block;
+	font-size: 13px;
+	font-weight: bold;
+	height: 30px;
+	line-height: 30px;
+	text-shadow: 0 1px 2px #525d66;
+	padding: 0 10px;
+}
+
+/* Always active states */
+body.about li.but-about > a,
+body.development li.but-development > a,
+body.downloads li.but-downloads > a,
+body.languages li.but-downloads > a,
+body.customise li.but-customise > a,
+body.extensions li.but-customise > a,
+body.mods li.but-customise > a,
+body.styles li.but-customise > a,
+body.support li.but-support > a,
+body.community  li.but-community > a,
+body.shop li.but-shop > a,
+body.blog li.but-blog > a,
+body.hosting li.but-hosting > a { /*@replace|images/bg_navbar_active.png*/
+	color: #de0a46;
+	text-shadow: 0 1px 1px #F1F1F1; background-color: #e0e0e0;
+}
+
+.phpbb-navbar .nav-button:hover > a,
+.phpbb-navbar .nav-button.hovering > a { /*@replace|images/bg_navbar_hover.png*/
+	color: #FFF;
+	text-shadow: 0 1px 2px #525d66; background-color: #b1b7bc;
+}
+
+.phpbb-navbar .nav-button > a:hover {
+	text-decoration: none;
+}
+
+.phpbb-navbar .nav-button:first-child {
+	margin-left: 0;
+}
+
+.phpbb-navbar .nav-button:first-child > a {
+	border-bottom-left-radius: 10px;
+}
+
+.phpbb-navbar .submenu-toggle {
+	display: none !important;
+}
+
+/* Responsive menu toggle button */
+.phpbb-navbar .but-menu {
+	display: none;
+	float: left !important;
+	margin: 0 5px !important;
+}
+
+.phpbb-navbar .but-menu > a {
+	font-size: 16px;
+	padding-left: 30px;
+	border-radius: 0 !important;
+}
+
+.phpbb-navbar .but-menu > a:before {
+	content: '';
+	position: absolute;
+	left: 8px;
+	top: 10px;
+	height: .125em;
+	width: 14px;
+	border-bottom: 0.125em solid #FFF;
+	border-top: 0.375em double #FFF;
+}
+
+/* Search box
+--------------------------------------------- */
+.phpbb-navbar #searchbox {
+	display: block;
+	float: right;
+	height: 30px;
+	margin: 0;
+	position: static;
+}
+
+.phpbb-navbar #searchbox fieldset {
+	border: none;
+	padding-top: 5px;
+}
+
+.phpbb-navbar #searchbox input {
+	width: 130px;
+	height: 16px !important;
+	margin: 5px 5px 0;
+	border: none !important;
+	box-shadow: inset 0 1px 0 #404040, inset 0 0 2px #CCC;
+	background: #FFF url("/assets/images/images/bg_search_input.gif") no-repeat 3px 50%;
+	border-radius: 7px;
+	font-size: 1.1em !important;
+	padding: 2px 5px 2px 25px;
+	box-sizing: content-box;
+}
+
+/* Submenus
+--------------------------------------------- */
+.phpbb-navbar .sub-menu {
+	display: none; /*@replace|images/bg_submenu.png*/
+	border-radius: 5px;
+	box-shadow: 0 3px 3px rgba(69, 73, 76, 0.5);
+	position: absolute;
+	padding: 10px 8px;
+	width: 370px;
+	left: -12px;
+	top: 25px;
+	overflow: visible;
+	z-index: 9999; background-color: #99A1A8;
+}
+
+.phpbb-navbar .sub-menu.wide-menu {
+	width: 420px;
+}
+
+.phpbb-navbar .sub-menu:after {
+	clear: both;
+	content: '';
+	display: block;
+}
+
+.phpbb-navbar .sub-menu-bottom {
+	clear:  both;
+	margin-bottom: -5px;
+	padding-top: 10px;
+	text-align: right;
+}
+
+.phpbb-navbar .sub-menu-bottom a {
+	border-top: 1px dashed #b2b8bd;
+	display: block;
+	padding: 6px 2px;
+	font-weight: bold;
+}
+.phpbb-navbar .sub-menu-bottom a:hover {
+	color: #105289;
+}
+
+.phpbb-navbar .sub-menu a {
+	background: none;
+	display: block;
+	height: auto;
+	overflow: hidden;
+	position: static;
+	width: auto;
+	color: #FFF;
+}
+.phpbb-navbar .sub-menu a:hover {
+	text-decoration: none;
+}
+
+.phpbb-navbar .sub-menu ul {
+	width: 180px;
+	float: left;
+	margin: 0 2px;
+}
+.phpbb-navbar .sub-menu ul.wide-list {
+	width: auto;
+}
+.phpbb-navbar .sub-menu ul.narrow-list {
+	width: 136px;
+}
+
+.phpbb-navbar .sub-menu li {
+	display: block;
+	float: none;
+	height: auto;
+	padding: 6px 6px 8px;
+	margin-bottom: 4px;
+}
+
+.phpbb-navbar .sub-menu .last {
+	margin: 0;
+}
+
+.phpbb-navbar .sub-menu h4 {
+	font-weight: bold;
+}
+
+.phpbb-navbar .sub-menu p {
+	margin: 0;
+	font-size: 10px;
+}
+
+/* Submenu hover states */
+.phpbb-navbar .sub-menu li:hover,
+.phpbb-navbar .hover_ie {
+	background: #ccd1d4 no-repeat;
+	border-radius: 5px;
+	box-shadow: 0 0 2px rgba(0,0,0,0.3);
+	border:  1px solid #DDD;
+	padding: 5px 5px 7px 5px;
+}
+
+.phpbb-navbar .sub-menu li:hover h4 a,
+.phpbb-navbar .hover_ie h4 a,
+.phpbb-navbar .hover_ie h4 a:hover {
+	font-size: 13px;
+	color: #105289;
+}
+
+.phpbb-navbar .sub-menu li:hover a,
+.phpbb-navbar .hover_ie p a,
+.phpbb-navbar .hover_ie p a:hover {
+	color: #333;
+	text-shadow: none;
+}
+
+.phpbb-navbar .on-top {
+	z-index: 10000;
+}
+
+/* External link image */
+.phpbb-navbar .sub-menu li.external:hover {
+	background-image: url("/assets/images/images/bg_submenu_external2.gif");
+	background-position: 100% 0;
+}
+
+/* Responsive
+--------------------------------------------- */
+@media only screen and (max-width: 915px), only screen and (max-device-width: 915px)
+{
+	.phpbb-navbar.menu-open {
+		border-bottom-left-radius: 0;
+	}
+
+	.phpbb-navbar .but-menu {
+		display: block;
+	}
+
+	.phpbb-navbar .phpbb-menu {
+		background: #828d96;
+		display: none;
+		position: absolute;
+		top: 30px;
+		z-index: 11;
+		border-radius: 0 0 4px 4px;
+	}
+
+	.phpbb-navbar .phpbb-menu.show {
+		display: block;
+	}
+
+	.phpbb-navbar .phpbb-menu:after {
+		content: '';
+		clear: both;
+		display: block;
+	}
+
+	.phpbb-navbar .nav-button {
+		margin: 5px 0;
+		float: none;
+	}
+
+	.phpbb-navbar .nav-button > a {
+		border-radius: 0 !important;
+		padding-right: 30px;
+	}
+
+	.phpbb-navbar .nav-button:hover > a,
+	.phpbb-navbar .nav-button.hovering > a {
+		background: #b1b7bc;
+		box-shadow: 0 0 2px rgba(0,0,0,0.3);
+	}
+
+	.phpbb-navbar .nav-button > .submenu-toggle {
+		display: block !important;
+		float: none;
+		position: absolute;
+		background: rgba(0,0,0,0.1);
+		margin: 5px;
+		border-radius: 4px !important;
+		box-shadow: inset 1px 1px 2px rgba(0,0,0,0.2);
+		height: 20px;
+		width: 20px;
+		right: 0;
+		padding: 0;
+		text-align: center;
+	}
+
+	.phpbb-navbar .nav-button > .submenu-toggle:before {
+		content: '\000BB';
+		display: block;
+		line-height: 16px;
+		opacity: 0.5;
+		font-size: 18px;
+	}
+
+	.phpbb-navbar .nav-button > .submenu-toggle:hover {
+		box-shadow: inset -1px -1px 2px rgba(0,0,0,0.4), inset 1px 1px 2px rgba(255,255,255,0.7);
+	}
+
+	.phpbb-navbar .sub-menu {
+		top: 0;
+		left: 100%;
+		border-top-left-radius: 0;
+	}
+}
+
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+{
+	.phpbb-navbar {
+		border-radius: 0 !important;
+		margin: 1px -5px 0;
+	}
+
+	.phpbb-navbar .phpbb-menu {
+		border-bottom-left-radius: 0 !important;
+	}
+}
+
+@media only screen and (max-width: 580px), only screen and (max-device-width: 580px)
+{
+	.phpbb-navbar .sub-menu {
+		width: 190px !important;
+	}
+
+	.phpbb-navbar .sub-menu ul {
+		float: none;
+		width: 100% !important;
+	}
+
+	.phpbb-navbar .sub-menu img,
+	.phpbb-navbar .sub-menu p{
+		display: none;
+	}
+}
+
+@media only screen and (max-width: 360px), only screen and (max-device-width: 360px)
+{
+	.phpbb-navbar .sub-menu {
+		width: 140px !important;
+	}
+}
+/* phpbb.com Website Style Sheet
+--------------------------------------------------------------
+Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
+--------------------------------------------------------------
+*/
+
+body {
+	font-size: 10px;
+}
+
+.forabg  {
+	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+}
+
+.forumbg  {
+	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+}
+
+.navbar {
+	background: transparent url("/assets/images/images/silver/innerbox_bg.gif") repeat-x;
+}
+
+li.row {
+	background: #e8ecee url("/assets/images/images/silver/row_bg.gif");
 }

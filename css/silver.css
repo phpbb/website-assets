@@ -9,17 +9,17 @@ body {
 }
 
 .forabg  {
-	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+	background: #505C65 url("images/silver/forabg.gif") repeat-x;
 }
 
 .forumbg  {
-	background: #505C65 url("/assets/images/images/silver/forabg.gif") repeat-x;
+	background: #505C65 url("images/silver/forabg.gif") repeat-x;
 }
 
 .navbar {
-	background: transparent url("/assets/images/images/silver/innerbox_bg.gif") repeat-x;
+	background: transparent url("images/silver/innerbox_bg.gif") repeat-x;
 }
 
 li.row {
-	background: #e8ecee url("/assets/images/images/silver/row_bg.gif");
+	background: #e8ecee url("images/silver/row_bg.gif");
 }
