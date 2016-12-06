@@ -7,3 +7,6 @@
 @import url("/assets/css/headers.css?1");
 @import url("/assets/css/navigation.css?1");
 @import url("/assets/css/silver.css?1");
+/*@import url("/assets/css/cp2.css?2");
+
+cp.css is a copy of phpBB's cp.css but with classes changed to ids */
