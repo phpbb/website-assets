@@ -220,10 +220,6 @@ dl.text dt  {
 	margin-top: 1.2em;
 }
 
-#page-footer {
-    clear: both;
-}
-
 /* Tools listing */
 dl.tools dt {
 	font-size: 1em;
