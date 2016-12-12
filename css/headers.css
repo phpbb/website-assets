@@ -259,6 +259,11 @@ body.home .phpbb-navbar {
 	top: 16px;
 }
 
+#home-try-link {
+	right: 255px;
+	top: 16px;
+}
+
 @media only screen and (max-width: 500px), only screen and (max-device-width: 500px)
 {
 	#home-dl-link {
