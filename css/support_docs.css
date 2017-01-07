@@ -146,7 +146,7 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 	box-shadow: 0 1px 1px -1px rgba(255, 255, 255, 0.5) inset;
 }
 
-.phpbb-docs-nav .docs-version-switch .switch-ascraeus {
+.phpbb-docs-nav .docs-version-switch .switch-rhea {
 	border-color: #7ca7e4;
 	background: #698cc0;
 	background: -moz-linear-gradient(top, #698cc0 0%, #7ca7e4 100%);
@@ -158,7 +158,7 @@ Copyright 2014 phpBB Group ( http://www.phpbb.com/ )
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#698cc0', endColorstr='#7ca7e4',GradientType=0 );
 }
 
-.phpbb-docs-nav .docs-version-switch .switch-olympus {
+.phpbb-docs-nav .docs-version-switch .switch-ascraeus {
 	border-color: #b1d28e;
 	background: #95b178;
 	background: -moz-linear-gradient(top, #95b178 0%, #b1d28e 100%);
