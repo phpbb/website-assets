@@ -1013,9 +1013,24 @@ ul#tutorials li {
 	margin: 0 25px 10px 0;
 }
 
-@media only screen and (max-width: 915px), only screen and (max-device-width: 915px)
+@media only screen and (max-width: 915px)
 {
 	ul#tutorials {
 		width: auto;
+	}
+}
+
+@media only screen and (max-width: 740px)
+{
+	.phpbb-docs-nav .version-switch {
+		width: 27%;
+	}
+
+	.phpbb-docs-nav .section-switch {
+		margin-left: 27%;
+	}
+
+	.phpbb-docs-nav {
+		margin: 0 0 24px;
 	}
 }
