@@ -217,6 +217,7 @@ a:active {
 .features-header {
 	background-image: url('/assets/images/images/about/launch/phpbb-features.png');
 	background-position: top center;
+	background-size: cover;
 	background-repeat: no-repeat;
 	overflow: hidden;
 }
