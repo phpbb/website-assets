@@ -9,6 +9,7 @@ html {
 	font-size: 100%;
 
 }
+
 body {
 	/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
 	background-color: #ACA8A1;
@@ -20,11 +21,11 @@ body {
 /* Main blocks
 ---------------------------------------- */
 #wrap {
-	max-width: 850px;
+	max-width: 1152px;
 	background: #FFFFFF url("/assets/images/images/bg_header.png") repeat-x 0 0;
-	margin: 0 auto;
+	margin: 20px auto;
 	text-align: left;
-	padding: 13px 23px;
+	padding: 14px 24px;
 	border: 2px solid #FFF;
 	border-radius: 15px;
 	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25);
@@ -40,22 +41,31 @@ body {
 /* Page body content styles */
 #main {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-	width: 560px;
+	width: 75%;
 	float: left;
 	clear: both;
+	box-sizing: border-box;
 }
+
 #main-extra {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-	width: 560px;
+	width: 75%;
 	float: none;
 	clear: both;
 }
+
 .wide {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	width: 100% !important;
 	float: none;
 	clear: both;
 }
+
+.showcase {
+	width: 100% !important;
+	margin: 0 auto;
+}
+
 #main a, #main-extra a {
 	text-decoration: underline;
 }
@@ -186,20 +196,20 @@ body {
 	display: block;
 }
 #main div.column1 {
-	width: 260px;
+	width: 48%;
 	float: left;
 	clear: left;
 }
 #main div.column2 {
-	width: 260px;
+	width: 48%;
 	float: right;
 }
 #wide div.column1 {
-	width: 425px;
+	width: 48%;
 	float: left;
 }
 #wide div.column2 {
-	width: 425px;
+	width: 48%;
 	float: right;
 }
 #main div.column-thirds {
@@ -1094,7 +1104,6 @@ div.panel-emphasis {
 }
 
 #extras.homepage, #extras.downloads {
-	width: 270px;
 }
 
 #extras.homepage .extra-box, #extras.downloads .extra-box {
@@ -2419,13 +2428,14 @@ p.psd-download {
 }
 
 .hosting-left-col {
-	width: 425px;
+	width: 51%;
 	float: left;
 }
 
 .hosting-right-col {
-	width: 425px;
-	float: right;
+	width: 44%;
+	float: left;
+	margin-left: 30px;
 }
 
 .information {
@@ -2435,6 +2445,8 @@ p.psd-download {
 	font-size: 12px;
 	margin: 10px 0;
 	padding: 10px;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 .information p {
@@ -2443,31 +2455,25 @@ p.psd-download {
 }
 
 .top-corners {
-	width: 425px;
-	height: 23px;
-	background: url("/assets/images/images/hosting/top-corners.png") no-repeat left top;
 }
 
 .middle-content {
-	width: 379px;
-	height: 280px;
-	padding: 0 27px 2px;
-	overflow: hidden;
+	width: 100%;
+	padding: 20px 20px 0;
+	box-sizing: border-box;
 	font-size: 1.2em;
 	color: #00284f;
-	background: url("/assets/images/images/hosting/middle-content.png") repeat-y left top;
+	border-radius: 9px;
+	border: 2px solid rgba(0,0,0,0.025);
+	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .bottom-corners-left {
 	width: 425px;
 	height: 43px;
-	background: url("/assets/images/images/hosting/corners-bottom.png") no-repeat left top;
 }
 
 .bottom-corners-right  {
-	width: 425px;
-	height: 43px;
-	background: url("/assets/images/images/hosting/bottom-corners-right.png") no-repeat left top;
 }
 
 .provider-badge {
@@ -2712,17 +2718,18 @@ li.sort:hover > ul.sortoptions {
 }
 
 .showcase-panel {
-	width: 840px;
+	width: 100%;
 	margin: 0 auto;
 }
 
 .showcase-site {
-	width: 246px;
-	height: 270px;
+	width: 270px;
+	height: 290px;
 	background: url("/assets/images/images/showcase/panelbg.png") no-repeat 50% top;
 	float: left;
 	margin: 10px 6px 10px;
-	padding: 11px;
+	padding: 12px;
+	box-sizing: border-box;
 }
 
 .showcase-image {
@@ -2779,8 +2786,9 @@ span.editlink {
 	z-index: 9998;
 	background: url("/assets/images/images/showcase/tag_blue.png") no-repeat left 50%;
 	height: 16px;
-	margin-top: 240px;
+	margin-top: 236px;
 	padding-left: 22px;
+	width: 100%;
 }
 
 .sitetags a {
@@ -2796,11 +2804,12 @@ span.editlink {
 
 /* Demo Page */
 body.demo div#main > div.floatleft {
-	width: 530px;
+	width: 69%;
 }
 
 body.demo div#main > div.floatright {
-	width: 300px;
+	width: 30%;
+	text-align: right;
 }
 
 @media only screen and (max-width: 600px), only screen and (max-device-width: 600px) {
@@ -2819,9 +2828,14 @@ body.demo div#main > div.floatright img {
 	width: 270px;
 	border: 1px solid #eee;
 }
+
+body.demo div#main > div.floatright p {
+	text-align: center;
+}
+
 div.launch {
 	width: 70px;
-	margin: 0 0 0 10px;
+	margin: 0 0 0 40px;
 	text-align: center;
 	font-size: 1.2em;
 	font-weight: bold;
@@ -2989,8 +3003,62 @@ h2 sup {
 	border-top: 0.375em double #FFF;
 }
 
-@media only screen and (max-width: 915px), only screen and (max-device-width: 915px)
+@media only screen and (max-width: 1200px)
 {
+	#wrap {
+		max-width: 88%;
+	}
+
+	#main {
+		width: 70%;
+		padding: 10px;
+	}
+
+	body.demo div#main > div.floatright {
+		width: 33%;
+	}
+
+	body.demo div#main > div.floatleft {
+		width: 64%;
+	}
+}
+
+@media only screen and (max-width: 1000px)
+{
+	#main {
+		width: 66%;
+	}
+}
+
+@media only screen and (max-width: 900px)
+{
+	#main {
+		width: 63%;
+	}
+
+	body.demo div#main > div.floatright {
+		width: 37%;
+	}
+
+	body.demo div#main > div.floatleft {
+		width: 60%;
+	}
+}
+
+@media only screen and (max-width: 850px)
+{
+
+	#main {
+		width: 60%;
+	}
+}
+
+@media only screen and (max-width: 800px)
+{
+	#wrap {
+		max-width: 86%;
+	}
+
 	#main {
 		width: 100%;
 		-moz-box-sizing: border-box;
@@ -2999,6 +3067,14 @@ h2 sup {
 
 	#main.has-sidebar {
 		padding-right: 30px;
+	}
+
+	body.demo div#main > div.floatright {
+		width: 42%;
+	}
+
+	body.demo div#main > div.floatleft {
+		width: 55%;
 	}
 
 	.sidebar {
@@ -3089,13 +3165,14 @@ h2 sup {
 	}
 }
 
-@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+@media only screen and (max-width: 700px)
 {
 	body {
 		padding: 0;
 	}
 
 	#wrap {
+		max-width: 100%;
 		border-radius: 0;
 		border: none;
 		box-shadow: none;
@@ -3143,8 +3220,28 @@ h2 sup {
 	}
 }
 
-@media only screen and (max-width: 440px), only screen and (max-device-width: 440px)
+@media only screen and (max-width: 440px)
 {
+	#wrap {
+		border-radius: 0;
+		border: none;
+		box-shadow: none;
+		margin: 0;
+		padding: 0 5px 10px;
+	}
+
+	#main {
+		padding: 0 10px;
+	}
+
+	#page-header {
+		margin: 0 -5px;
+	}
+
+	.phpbb-header {
+		border-radius: 0 !important;
+	}
+
 	#home-buttons a {
 		width: 138px;
 	}
