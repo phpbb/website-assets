@@ -1788,10 +1788,10 @@ a.feature-extra:hover span.hover {
 	padding-right: 70px;
 }
 .feature-box .features-item-head.unselected {
-	background: url("/assets/images/images/features/feat-arrow-right.png") 335px center no-repeat;
+	background: url("/assets/images/images/features/feat-arrow-right.png") 100% center no-repeat;
 }
 .feature-box .features-item-head.selected {
-	background: url("/assets/images/images/features/feat-arrow-down.png") 335px center no-repeat;
+	background: url("/assets/images/images/features/feat-arrow-down.png") 100% center no-repeat;
 }
 .feature-box .features-item-head img {
 	margin-right: 20px;
