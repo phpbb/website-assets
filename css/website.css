@@ -2915,6 +2915,16 @@ h2 sup {
 	border-radius: 3px;
 }
 
+/* GSoC page */
+#main h3.gsoc-page {
+	font-size: 1.4em;
+}
+
+#main h4.gsoc-page {
+	font-weight: bold;
+	margin: 1em 0 0.5em;
+}
+
 /* Responsive mode
 --------------------------------------------- */
 
