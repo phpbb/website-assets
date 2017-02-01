@@ -2916,6 +2916,14 @@ h2 sup {
 }
 
 /* GSoC page */
+#main h2.gsoc-page {
+	border-bottom: 1px solid #ccc;
+}
+
+#main h2.gsoc-page a {
+	text-decoration: none;
+}
+
 #main h3.gsoc-page {
 	font-size: 1.4em;
 }
