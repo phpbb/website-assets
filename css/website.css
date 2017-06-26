@@ -1192,6 +1192,11 @@ div.panel-emphasis {
 	color: #222222;
 }
 
+/* Rules page styling */
+ .ruleitems li { 
+	 margin-bottom: 5px; 
+}
+
 /* Advertisement */
 .ads-button-hosting {
 	display: block;
