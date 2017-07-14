@@ -2796,9 +2796,23 @@ span.editlink {
 body.demo div#main > div.floatleft {
 	width: 530px;
 }
+
 body.demo div#main > div.floatright {
 	width: 300px;
 }
+
+@media only screen and (max-width: 600px), only screen and (max-device-width: 600px) {
+	body.demo div#main > div.floatleft {
+		width: auto;
+	}
+	
+	body.demo div#main > div.floatright {
+		float: none;
+		margin: 0 auto;
+		width: 300px;
+	}
+}
+
 body.demo div#main > div.floatright img {
 	width: 270px;
 	border: 1px solid #eee;
