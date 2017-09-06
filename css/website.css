@@ -1416,12 +1416,14 @@ body.section-viewtopic .pagination {
    margin-top: 3px;
 }
 
-.pm .postbody {
-   width: 73%;
-}
+@media only screen and (max-width: 700px) {
+	.pm .postbody {
+	   width: 73%;
+	}
 
-.pm .postprofile {
-   width: 26%;
+	.pm .postprofile {
+	   width: 26%;
+	}
 }
 
 .section-mcp .fields2 select, .section-ucp #timezone , .section-ucp #dateoptions {
