@@ -62,8 +62,11 @@ body {
 }
 
 .showcase {
-	width: 100% !important;
 	margin: 0 auto;
+}
+
+div#main.showcase {
+	width: 100%;
 }
 
 #main a, #main-extra a {
@@ -1816,10 +1819,11 @@ a.feature-extra:hover span.hover {
 	margin: -4px 0 0 8px;
 
 }
+
 .feature-box .features-item-content {
 	margin-top: 20px;
-	width: 380px;
 }
+
 .feature-box .features-item-content div {
 	font-size: 1.0em;
 	color: #555;
@@ -3004,6 +3008,11 @@ h2 sup {
 	width: 16px;
 	border-bottom: 0.125em solid #FFF;
 	border-top: 0.375em double #FFF;
+}
+
+div#map {
+	width: 100% !important;
+	overflow: scroll;
 }
 
 @media only screen and (max-width: 1200px)
