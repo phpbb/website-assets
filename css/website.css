@@ -945,9 +945,10 @@ div.panel-emphasis {
 /* Home Page
 ---------------------------------------- */
 #home-buttons {
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	border-bottom: 5px solid #E5E5E5;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: center;
 }
 
@@ -957,17 +958,13 @@ div.panel-emphasis {
 
 #home-buttons a {
 	display: block;
-	width: 200px;
+	width: 196px;
 	height: 104px;
 	float: left;
-	margin-right: 20px;
+	margin: 10px;
 	text-indent: -999em;
 	background-position: 50%;
 	border-radius: 5px;
-}
-
-#home-buttons a.last {
-	margin: 0;
 }
 
 #home-buttons a.what-is			{ background-image: url("/assets/images/images/hb-what-is-phpbb.png"); }
@@ -3042,6 +3039,10 @@ div#map {
 	#main {
 		width: 64%;
 	}
+
+	#home-buttons a {
+		width: 170px;
+	}
 }
 
 @media only screen and (max-width: 900px)
@@ -3057,13 +3058,20 @@ div#map {
 	body.demo div#main > div.floatleft {
 		width: 60%;
 	}
+
+	#home-buttons a {
+		width: 162px;
+	}
 }
 
 @media only screen and (max-width: 850px)
 {
-
 	#main {
 		width: 58%;
+	}
+
+	#home-buttons a {
+		width: 152px;
 	}
 }
 
@@ -3135,19 +3143,6 @@ div#map {
 		width: auto;
 	}
 
-	/* home-page */
-	#home-buttons {
-		text-align: center;
-	}
-
-	#home-buttons h2 {
-		display: inline-block;
-	}
-
-	#home-buttons a {
-		width: 142px;
-	}
-
 	/* features */
 	.feature-box .features-item-content {
 		width: auto;
@@ -3176,6 +3171,10 @@ div#map {
 		padding: 20px;
 		width: auto;
 		height: auto;
+	}
+
+	#home-buttons a {
+		width: 136px;
 	}
 }
 
@@ -3213,24 +3212,19 @@ div#map {
 	#page-footer .navbar {
 		margin: 4px -5px 15px;
 	}
+}
 
-	/* home-page */
-	#home-buttons .responsive-clear {
-		clear: both;
-		display: block !important;
-	}
-
+@media only screen and (max-width: 650px)
+{
 	#home-buttons a {
-		float: none;
-		width: 200px;
+		width: 152px;
 	}
+}
 
-	#home-buttons a.responsive-top {
-		margin: 0 2px 4px;
-	}
-
-	#home-buttons a.responsive-bottom {
-		margin: 4px 2px 0;
+@media only screen and (max-width: 500px)
+{
+	#home-buttons a {
+		width: 196px;
 	}
 }
 
@@ -3252,12 +3246,12 @@ div#map {
 		margin: 0 -5px;
 	}
 
-	.phpbb-header {
-		border-radius: 0 !important;
+	#home-buttons a {
+		width: 152px;
 	}
 
-	#home-buttons a {
-		width: 138px;
+	.phpbb-header {
+		border-radius: 0 !important;
 	}
 
 	.announcements .announce_img {
