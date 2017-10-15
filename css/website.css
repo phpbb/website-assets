@@ -945,8 +945,10 @@ div.panel-emphasis {
 /* Home Page
 ---------------------------------------- */
 #home-buttons {
-	padding-bottom: 5px;
+	padding-bottom: 20px;
 	border-bottom: 5px solid #E5E5E5;
+	display: flex;
+	justify-content: center;
 }
 
 #home-buttons h2 {
@@ -958,7 +960,7 @@ div.panel-emphasis {
 	width: 200px;
 	height: 104px;
 	float: left;
-	margin-right: 16px;
+	margin-right: 20px;
 	text-indent: -999em;
 	background-position: 50%;
 	border-radius: 5px;
