@@ -949,22 +949,39 @@ div.panel-emphasis {
 	border-bottom: 5px solid #E5E5E5;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	flex-direction: row;
 }
 
 #home-buttons h2 {
-	margin: 0;
+	margin: 10px;
+	flex: 1 0 0%;
+	flex-direction: column;
+	display: flex;
+	position: relative;
+	max-width: calc(100% - 20px);
+	min-width: calc(100% - 20px);
 }
 
 #home-buttons a {
-	display: block;
-	width: 196px;
-	height: 104px;
-	float: left;
-	margin: 10px;
-	text-indent: -999em;
-	background-position: 50%;
+	position: relative;
+	flex: 1 1 auto;
+	padding: 80px 8px 4px;
+	background-position: 0 0px;
+	background-size: 100% 132px;
+	text-align: center;
 	border-radius: 5px;
+	color: white;
+	font-size: 16px;
+}
+
+#home-buttons a:after {
+	position: absolute;
+	left: 0px;
+	content: '';
+	height: 27px;
+	background-color: rgba(255,255,255,0.5);
+	width: 100%;
+	bottom: -1px;
 }
 
 #home-buttons a.what-is			{ background-image: url("/assets/images/images/hb-what-is-phpbb.png"); }
@@ -3039,10 +3056,6 @@ div#map {
 	#main {
 		width: 64%;
 	}
-
-	#home-buttons a {
-		width: 170px;
-	}
 }
 
 @media only screen and (max-width: 900px)
@@ -3058,20 +3071,12 @@ div#map {
 	body.demo div#main > div.floatleft {
 		width: 60%;
 	}
-
-	#home-buttons a {
-		width: 162px;
-	}
 }
 
 @media only screen and (max-width: 850px)
 {
 	#main {
 		width: 58%;
-	}
-
-	#home-buttons a {
-		width: 152px;
 	}
 }
 
@@ -3172,14 +3177,11 @@ div#map {
 		width: auto;
 		height: auto;
 	}
-
-	#home-buttons a {
-		width: 136px;
-	}
 }
 
 @media only screen and (max-width: 700px)
 {
+
 	body {
 		padding: 0;
 	}
@@ -3214,17 +3216,19 @@ div#map {
 	}
 }
 
-@media only screen and (max-width: 650px)
+@media only screen and (min-width: 500px)
 {
-	#home-buttons a {
-		width: 152px;
+	#home-buttons h2 {
+		min-width: calc(100%/2 - 20px);
+		max-width: calc(100%/2 - 20px);
 	}
 }
 
-@media only screen and (max-width: 500px)
+@media only screen and (min-width: 950px)
 {
-	#home-buttons a {
-		width: 196px;
+	#home-buttons h2 {
+		min-width: calc(25% - 20px);
+		max-width: calc(25% - 20px);
 	}
 }
 
@@ -3244,10 +3248,6 @@ div#map {
 
 	#page-header {
 		margin: 0 -5px;
-	}
-
-	#home-buttons a {
-		width: 152px;
 	}
 
 	.phpbb-header {
