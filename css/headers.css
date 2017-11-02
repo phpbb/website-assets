@@ -8,6 +8,7 @@ Copyright 2007 phpBB Group ( http://www.phpbb.com/ )
 body .phpbb-header {
 	background-repeat: no-repeat;
 	background-position: 50% 0;
+	background-size: cover;
 	width: 100%;
 	height: 129px;
 	border-radius: 8px 8px 0 0;
@@ -192,10 +193,10 @@ body.libertyvasion .phpbb-header {
 	background-image: url("/assets/images/headers/header_libertyvasion.jpg");
 }
 body.get-involved .phpbb-header {
-        background-image: url("/assets/images/headers/header_getinvolved.jpg");
+	background-image: url("/assets/images/headers/header_getinvolved.jpg");
 }
 body.home .phpbb-navbar {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
 /* Ascraeus Countdown */
