@@ -98,7 +98,7 @@ body.demo .phpbb-header {
 /* Normal Community 
 body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_community.jpg");
-} */
+} 
 
 /* Countdown */
 body.launch .phpbb-header {
@@ -108,7 +108,7 @@ body.launch .phpbb-header {
 /* XMAS */
 body.community .phpbb-header {
 	background-image: url("./header.php");
-} 
+} */
 
 /* Halloween
 body.community .phpbb-header {
