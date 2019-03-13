@@ -1,0 +1,298 @@
+/*------------------------------------------------------------------------------
+ * Branding
+ *------------------------------------------------------------------------------
+ * @description classes associated with the branding page
+ *
+ *----------------------------------------------------------------------------*/
+
+.branding-container {
+	position: relative;
+	max-width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 16px;
+	padding-left: 16px;
+}
+
+@media (min-width: 576px) {
+	.branding-container {
+		width: 540px;
+	}
+}
+
+@media (min-width: 768px) {
+	.branding-container {
+		width: 720px;
+	}
+}
+
+@media (min-width: 992px) {
+	.branding-container {
+		width: 960px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.branding-container {
+		width: 1140px;
+	}
+}
+
+.branding-row {
+	color: #29303d;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 16px 12px 16px -12px;
+}
+
+.branding-row-heading {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 36px;
+	font-weight: 200;
+	line-height: 1.2;
+	color: #29303d;
+	box-sizing: border-box;
+	margin: 0 0 24px;
+	margin-bottom: 6px;
+}
+
+.branding-row-heading-sub {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-weight: 400;
+	line-height: 1.2;
+	color: #29303d;
+	box-sizing: border-box;
+	margin: 0 0 24px;
+	margin-bottom: 6px;
+}
+
+.branding-row-heading-sub-small {
+	font-weight: 200;
+	display: block;
+}
+
+.branding-copy {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 24px !important;
+	font-weight: 300;
+	line-height: 1.5;
+	color: #29303d;
+	box-sizing: border-box;
+	margin-bottom: 24px !important;
+}
+
+.c-card {
+	word-wrap: break-word;
+	background-color: #f5f5f5;
+	background-clip: border-box;
+	border-radius: 2px;
+	box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+	position: relative;
+	display: flex;
+	overflow: hidden;
+	flex-direction: column;
+	min-width: 0;
+	margin: 0 12px 24px;
+}
+
+.c-card-body {
+	text-align: center;
+	padding: 24px;
+}
+
+.c-card-media {
+	height: 256px;
+}
+
+.c-card-header {
+	text-align: center;
+	background-color: #f5f5f5;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+	padding: 16px 16px 0;
+}
+
+.c-card-footer {
+	font-size: 16px;
+	text-align: center;
+	border-top: 1px solid rgba(0, 0, 0, 0.125);
+	padding: 16px;
+}
+
+.c-card-meta {
+	padding: 0 16px;
+}
+
+.c-card-meta-title {
+	font-weight: 600;
+}
+
+.c-card-meta-value {
+	font-size: 12px;
+	font-weight: 200;
+	margin: 0;
+}
+
+.c-type {
+	margin: 0 12px;
+}
+
+.c-logo {
+	text-align: center;
+	margin: 24px 12px;
+}
+
+.c-logo-info {
+	font-size: 16px;
+	text-align: center;
+	margin-top: 16px;
+	margin-bottom: 8px;
+}
+
+.c-logo-info small {
+	display: inline;
+}
+
+.c-logo-large {
+	color: #009bdf;
+	height: 96px;
+}
+
+.c-logo-medium {
+	color: #009bdf;
+	height: 48px;
+	margin-top: 48px;
+}
+
+.c-logo-small {
+	color: #009bdf;
+	height: 24px;
+	margin-top: 72px;
+}
+
+.c-logo-full {
+	width: 100%;
+}
+
+.col-4-2-1 {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.col-4-2-1 {
+		width: calc(50% - 24px);
+	}
+}
+
+@media (min-width: 992px) {
+	.col-4-2-1 {
+		width: calc(50% - 24px);
+	}
+}
+
+@media (min-width: 1200px) {
+	.col-4-2-1 {
+		width: calc(25% - 24px);
+	}
+}
+
+.col-2-1 {
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.col-2-1 {
+		width: calc(50% - 24px);
+	}
+}
+
+.col-3-2-1 {
+	width: 100%;
+}
+
+@media (min-width: 992px) {
+	.col-3-2-1 {
+		width: calc(50% - 24px);
+	}
+}
+
+@media (min-width: 1200px) {
+	.col-3-2-1 {
+		width: calc(33% - 24px);
+	}
+}
+
+.half {
+	width: 50%;
+}
+
+.full {
+	width: 100%;
+}
+
+.bg-img {
+	background: url('https://www.phpbb.com/assets/images/images/about/launch/phpbb-features.png');
+}
+
+.bg-img .c-logo-full {
+	color: #ffffff;
+}
+
+.bg-dark {
+	background-color: #000000;
+}
+
+.bg-dark .c-logo-full {
+	color: #ffffff;
+}
+
+.bg-med {
+	background-color: #dfe1e5;
+}
+
+.bg-med .c-logo-full {
+	color: #505f79;
+}
+
+.bg-light {
+	background-color: #ffffff;
+}
+
+.bg-light .c-logo-full {
+	color: #009bdf;
+}
+
+.bg-white {
+	background-color: #ffffff;
+}
+
+.bg-cosmos {
+	background-color: #29303d;
+}
+
+.bg-odessey {
+	background-color: #505f79;
+}
+
+.bg-cosmic {
+	background-color: #009bdf;
+}
+
+.type {
+	text-align: left;
+	width: 100%;
+}
+
+.construction {
+	width: 100%;
+	height: 350px;
+	margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+	.construction {
+		width: 580px;
+		height: 350px;
+	}
+}
