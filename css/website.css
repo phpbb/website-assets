@@ -18,6 +18,10 @@ body {
 	padding: 6px 0;
 }
 
+ svg {
+	fill: currentColor;
+}
+
 /* Main blocks
 ---------------------------------------- */
 #wrap {
@@ -30,6 +34,7 @@ body {
 	border-radius: 15px;
 	box-shadow: 0 0 5px 2px #9D9A93, inset 0 3px 18px rgba(100,100,100,0.25);
 }
+
 #simple-wrap {
 	padding: 6px 10px;
 }
@@ -72,12 +77,15 @@ div#main.showcase {
 #main a, #main-extra a {
 	text-decoration: underline;
 }
+
 #main a.no-underline, #main-extra a.no-underline {
 	text-decoration: none;
 }
+
 #main .pagination a {
 	text-decoration: none;
 }
+
 #main h2.imgrep  {
 	color: #4f84ad;
 	font-size: 2.8em;
@@ -85,6 +93,7 @@ div#main.showcase {
 	font-family: Helvetica,Arial,sans-serif;
 	margin: 0 0 .25em 0;
 }
+
 #main h2.imgrep a {
 	text-decoration: none;
 	font-family: Helvetica,Arial,sans-serif;
