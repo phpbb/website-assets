@@ -26,10 +26,7 @@ body .phpbb-header h1 a {
 	margin: 0;
 }
 html>body .phpbb-header h1 a {
-	background: url("/assets/images/images/logo_phpbb.png") 25px 30px no-repeat;
-}
-* html .phpbb-header h1 a {
-	background: url("/assets/images/images/logo_phpbb.gif") 25px 30px no-repeat; /* .gif */
+	background: url("/assets/images/images/logo_phpbb.svg") 25px 30px no-repeat;
 }
 
 /* Section header images */
@@ -98,7 +95,7 @@ body.demo .phpbb-header {
 /* Normal Community */
 body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_community.jpg");
-} 
+}
 
 /* Countdown */
 body.launch .phpbb-header {
