@@ -27,6 +27,7 @@ body .phpbb-header h1 a {
 }
 html>body .phpbb-header h1 a {
 	background: url("/assets/images/images/logo_phpbb.svg") 25px 30px no-repeat;
+	background-size: 175px;
 }
 
 /* Section header images */
