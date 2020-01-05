@@ -215,7 +215,7 @@ a:active {
 }
 
 .features-header {
-	background-image: url('/assets/images/images/about/launch/phpbb-features.png');
+	background-image: url('/assets/images/images/about/launch/proteus_featured_header.png');
 	background-position: top center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -366,13 +366,12 @@ a:active {
 	font-size: 4.5rem;
 	font-weight: 400;
 	line-height: 0.5;
-
-	color: inherit;
-
+	color: transparent;
 	margin: 0 0 24px;
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
 			box-sizing: border-box;
+	text-shadow: none;
 }
 
 .lead-sub-title {
@@ -407,16 +406,8 @@ a:active {
 	text-decoration: none;
 	vertical-align: middle;
 	white-space: normal;
-
-	background-color: #fff;
+	background-color: none;
 	background-image: none;
-	border-color: #fff;
-	border-style: solid;
-	border-width: 3px;
-	border-radius: 4px;
-	-webkit-box-shadow: .5px .866px 6px rgba(0, 0, 0, .5);
-			box-shadow: .5px .866px 6px rgba(0, 0, 0, .5);
-	color: rgba(0, 0, 0, .5);
 	text-shadow: none;
 
 
@@ -517,7 +508,10 @@ a:active {
 	color: #fff;
 	background-color: #65c272;
 	border-color: #65c272;
+	border-radius: 4px;
 	margin-top: 0;
+	-webkit-box-shadow: .5px .866px 6px rgba(0, 0, 0, .5);
+			box-shadow: .5px .866px 6px rgba(0, 0, 0, .5);
 }
 
 .download-btn:hover {
