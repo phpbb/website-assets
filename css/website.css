@@ -1940,6 +1940,7 @@ code.inline {
 	font-size: 0.9em;
 	font-style: normal;
 	line-height: 1.3em;
+	white-space: pre;
 	padding: 0 3px;
 }
 
@@ -1958,6 +1959,7 @@ code.inline {
 	font-variant: normal;
 	font-weight: normal;
 	line-height: normal;
+	white-space: pre;
 	overflow: auto;
 	padding: 1px 4px;
 }
