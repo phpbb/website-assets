@@ -1178,11 +1178,12 @@ div.panel-emphasis {
 	font-style: italic;
 }
 
+.lynkorama {
+	margin: 15px 0 0;
+}
+
 /* Page footer styles */
 #page-footer p {
-/*	border-top: 1px solid #CCCCCC; */
-	margin: 15px 0 0;
-/*	padding-top: 10px;*/
 	text-align: center;
 }
 #page-footer .navbar {
