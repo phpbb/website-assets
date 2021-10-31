@@ -108,10 +108,10 @@ body.community .phpbb-header {
 	background-image: url("./header.php");
 } */
 
-/* Halloween
+/* Halloween */
 body.community .phpbb-header {
 	background-image: url("/assets/images/headers/header_halloween03.gif");
-} */
+}
 
 /* Valentine's Day
 body.community .phpbb-header {
