@@ -1306,12 +1306,14 @@ div.subscribe fieldset  {
 body.languages ul.packages {
 	clear: right;
 	list-style: none;
+	display: inline-block; 
 }
 
 body.languages ul.packages li {
-	width: 33%;
+	width: 300px;
 	height: 110px;
 	float: left;
+	margin-bottom: 15px;
 }
 
 body.languages ul.packages img {
@@ -1334,7 +1336,7 @@ body.languages .wide h3 {
 
 body.languages ul.packages p {
 	font-weight: bold;
-	margin-top: 5px;
+	margin-bottom: 10px;
 }
 
 body.languages pre {
