@@ -18,7 +18,7 @@ body {
 	padding: 6px 0;
 }
 
- svg {
+svg {
 	fill: currentColor;
 }
 
@@ -243,7 +243,7 @@ dl.text dt  {
 }
 
 #page-footer {
-    clear: both;
+	clear: both;
 }
 
 /* Tools listing */
@@ -1231,8 +1231,8 @@ div.panel-emphasis {
 }
 
 /* Rules page styling */
- .ruleitems li {
-	 margin-bottom: 5px;
+.ruleitems li {
+	margin-bottom: 5px;
 }
 
 /* Advertisement */
@@ -1306,7 +1306,7 @@ div.subscribe fieldset  {
 body.languages ul.packages {
 	clear: right;
 	list-style: none;
-	display: inline-block; 
+	display: inline-block;
 }
 
 body.languages ul.packages li {
@@ -1446,32 +1446,32 @@ dt.bold:hover {
 
 /* Begin Community tweaks *O* */
 dl.attachbox{
-   max-width: 620px;
-   overflow: auto !important;
+	max-width: 620px;
+	overflow: auto !important;
 }
 
 body.section-viewtopic .pagination {
-   float: none;
-   line-height: 1.9em;
-   margin-top: 3px;
+	float: none;
+	line-height: 1.9em;
+	margin-top: 3px;
 }
 
 @media only screen and (min-width: 900px) {
 	.pm .postbody {
-	   width: 73%;
+		width: 73%;
 	}
 
 	.pm .postprofile {
-	   width: 26%;
+		width: 26%;
 	}
 }
 
 .section-mcp .fields2 select, .section-ucp #timezone , .section-ucp #dateoptions {
-  max-width: 100% !important;
+	max-width: 100% !important;
 }
 
 .section-mcp dl.icon dt {
-  padding-left: 44px;
+	padding-left: 44px;
 }
 /* End Community tweaks -O- */
 
@@ -1767,7 +1767,7 @@ body.hosting div#main div.affiliate h2.logoed span {
 a.feature-extra:hover {
 	background-color: transparent;
 	text-decoration:none;
- 	cursor: help;
+	cursor: help;
 }
 
 .feature-extra span.hover {
@@ -2065,7 +2065,7 @@ li.row dd.long, li.header dd.long {
 input.gsc-search-button {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: #000;
-	background: #FAFAFA url("/community/styles/prosilver/theme/images/bg_button.gif") repeat-x top;
+	background: #FAFAFA url("/web/web/community/styles/prosilver/theme/images/bg_button.gif") repeat-x top;
 	border: 1px solid #666666;
 	margin-left: 6px;
 }
@@ -2455,21 +2455,20 @@ p.psd-download {
 	margin-top: 5px !important;
 }
 
-/* new hosting page */
+/* new new hosting page. Making Yuriy happy. */
+
+.text-links-favicon {
+	background-image: url(/img/hosting/favicon-dreamhost.svg);
+	background-size: 23px;
+}
 
 .hostrow, .clear-both {
 	clear: both;
 }
 
-.hosting-left-col {
-	width: 51%;
+.hosting-col {
+	width: 99%;
 	float: left;
-}
-
-.hosting-right-col {
-	width: 44%;
-	float: left;
-	margin-left: 30px;
 }
 
 .information {
@@ -2514,21 +2513,18 @@ p.psd-download {
 }
 
 .provider-badge {
-	width: 125px;
+	width: 100%;
 	float: left;
 	margin: 0 19px 10px 0;
 	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow.png") no-repeat 50% bottom;
+	text-align: center;
 }
 
-.provider-badge-forumatic {
-	width: 370px;
-	float: left;
-	margin: 0 79px 10px 0;
-	padding-bottom: 6px;
-	background: url("/assets/images/images/hosting/badge-shadow-long.png") no-repeat 50% bottom;
-}
+.provider-badge img {
+	width: 300px;
+	height: 60px;
 
+}
 h1.hostname {
 	margin: 0 0 4px 0;
 }
@@ -2543,10 +2539,6 @@ h1.hostname a {
 
 h1.hostname a:hover {
 	color: #0054a6;
-}
-
-ul.host-featurelist {
-	padding-left: 128px;
 }
 
 ul.host-featurelist li {
@@ -2977,12 +2969,12 @@ h2 sup {
 
 /* EPV */
 #epv-results {
-    background-color: black;
-    width: 100%;
-    overflow-x: visible;
-    font-family: Monaco, monospace;
-    font-size: 11px;
-    padding: 5px;
+	background-color: black;
+	width: 100%;
+	overflow-x: visible;
+	font-family: Monaco, monospace;
+	font-size: 11px;
+	padding: 5px;
 	margin: 10px 0;
 	border-radius: 3px;
 }
