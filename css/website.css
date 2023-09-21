@@ -2065,7 +2065,7 @@ li.row dd.long, li.header dd.long {
 input.gsc-search-button {
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: #000;
-	background: #FAFAFA url("/web/web/community/styles/prosilver/theme/images/bg_button.gif") repeat-x top;
+	background: #FAFAFA url("/community/styles/prosilver/theme/images/bg_button.gif") repeat-x top;
 	border: 1px solid #666666;
 	margin-left: 6px;
 }
