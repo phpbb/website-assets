@@ -2541,15 +2541,17 @@ h1.hostname a:hover {
 	color: #0054a6;
 }
 
+ul.host-featurelist {
+	margin-bottom: 1em;
+}
+
 ul.host-featurelist li {
-	font-size: 12px;
 	list-style-image: url("/assets/images/images/hosting/tick-small.png");
 	line-height: normal !important;
 }
 
 p.host-description {
 	clear: both;
-	font-size: 12px !important;
 }
 
 p.last {
