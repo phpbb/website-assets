@@ -128,6 +128,43 @@ body.hosting li.but-hosting > a {
 	padding-top: 5px;
 }
 
+.phpbb-navbar #searchbox form {
+	position: relative;
+}
+
+/* Suggestions offered while you type in the search box */
+.phpbb-navbar #search-suggestions {
+	position: absolute;
+	z-index: 50;
+	left: 0;
+	right: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background: #FFF;
+	border: 1px solid #B9BFC6;
+	border-top: none;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
+.phpbb-navbar #search-suggestions li {
+	margin: 0;
+	padding: 0;
+}
+
+.phpbb-navbar #search-suggestions a {
+	display: block;
+	padding: 4px 8px;
+	color: #105289;
+	text-decoration: none;
+	font-size: 1.1em;
+}
+
+.phpbb-navbar #search-suggestions a:hover,
+.phpbb-navbar #search-suggestions li.active a {
+	background: #EFF1F3;
+}
+
 .phpbb-navbar #searchbox input {
 	width: 120px;
 	height: 16px !important;
