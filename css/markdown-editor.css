@@ -61,30 +61,30 @@
  * Anything not listed keeps its title attribute and simply shows nothing, so a
  * future EasyMDE version adding a button degrades quietly rather than breaking.
  */
-.editor-toolbar button i.fa {
+.EasyMDEContainer .editor-toolbar button i.fa {
 	font-style: normal;
 	font-weight: normal;
 }
 
-.editor-toolbar button i.fa-bold::before { content: "B"; font-weight: bold; }
-.editor-toolbar button i.fa-italic::before { content: "I"; font-style: italic; }
-.editor-toolbar button i.fa-strikethrough::before { content: "S"; text-decoration: line-through; }
-.editor-toolbar button i.fa-header::before { content: "H"; font-weight: bold; }
-.editor-toolbar button i.fa-quote-left::before { content: "\201C"; }
-.editor-toolbar button i.fa-list-ul::before { content: "\2022"; }
-.editor-toolbar button i.fa-list-ol::before { content: "1."; }
-.editor-toolbar button i.fa-link::before { content: "\26AD"; }
-.editor-toolbar button i.fa-image::before { content: "\25A3"; }
-.editor-toolbar button i.fa-table::before { content: "\25A6"; }
-.editor-toolbar button i.fa-code::before { content: "</>"; }
-.editor-toolbar button i.fa-minus::before { content: "\2015"; }
-.editor-toolbar button i.fa-eye::before { content: "\25D0"; }
-.editor-toolbar button i.fa-columns::before { content: "\25EB"; }
-.editor-toolbar button i.fa-arrows-alt::before { content: "\26F6"; }
-.editor-toolbar button i.fa-question-circle::before { content: "?"; }
-.editor-toolbar button i.fa-undo::before { content: "\21B6"; }
-.editor-toolbar button i.fa-repeat::before { content: "\21B7"; }
-.editor-toolbar button i.fa-eraser::before { content: "\232B"; }
+.EasyMDEContainer .editor-toolbar button i.fa-bold::before { content: "B"; font-weight: bold; }
+.EasyMDEContainer .editor-toolbar button i.fa-italic::before { content: "I"; font-style: italic; }
+.EasyMDEContainer .editor-toolbar button i.fa-strikethrough::before { content: "S"; text-decoration: line-through; }
+.EasyMDEContainer .editor-toolbar button i.fa-header::before { content: "H"; font-weight: bold; }
+.EasyMDEContainer .editor-toolbar button i.fa-quote-left::before { content: "\201C"; }
+.EasyMDEContainer .editor-toolbar button i.fa-list-ul::before { content: "\2022"; }
+.EasyMDEContainer .editor-toolbar button i.fa-list-ol::before { content: "1."; }
+.EasyMDEContainer .editor-toolbar button i.fa-link::before { content: "\26AD"; }
+.EasyMDEContainer .editor-toolbar button i.fa-image::before { content: "\25A3"; }
+.EasyMDEContainer .editor-toolbar button i.fa-table::before { content: "\25A6"; }
+.EasyMDEContainer .editor-toolbar button i.fa-code::before { content: "</>"; }
+.EasyMDEContainer .editor-toolbar button i.fa-minus::before { content: "\2015"; }
+.EasyMDEContainer .editor-toolbar button i.fa-eye::before { content: "\25D0"; }
+.EasyMDEContainer .editor-toolbar button i.fa-columns::before { content: "\25EB"; }
+.EasyMDEContainer .editor-toolbar button i.fa-arrows-alt::before { content: "\26F6"; }
+.EasyMDEContainer .editor-toolbar button i.fa-question-circle::before { content: "?"; }
+.EasyMDEContainer .editor-toolbar button i.fa-undo::before { content: "\21B6"; }
+.EasyMDEContainer .editor-toolbar button i.fa-repeat::before { content: "\21B7"; }
+.EasyMDEContainer .editor-toolbar button i.fa-eraser::before { content: "\232B"; }
 
 /* ---- Rendered Markdown ---- */
 
