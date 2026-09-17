@@ -189,7 +189,7 @@ body.support_docs .intro-body{
 }
 
 
-body.support_docs .forumbg, body.team_new .forumbg {
+body.support_docs .forumbg {
 	margin-bottom: 0;
 	background-image: none;
 }
@@ -202,7 +202,7 @@ body.support_docs .forumbg li.header {
 	padding-top: 5px;
 }
 
-body.support_docs .forumbg .main-content, body.team_new .forumbg .main-content  {
+body.support_docs .forumbg .main-content {
 	background-color: #F0F4F7;
 	border-top: 1px solid #FFFFFF;
 	margin-top: 3px;
