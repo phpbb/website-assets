@@ -60,7 +60,8 @@ body.support li.but-support > a,
 body.community  li.but-community > a,
 body.shop li.but-shop > a,
 body.blog li.but-blog > a,
-body.hosting li.but-hosting > a {
+body.hosting li.but-hosting > a,
+body.team li.but-team > a {
 	background: #e0e0e0 url("/assets/images/images/bg_navbar_active.png") 0 -1px repeat-x;
 	color: #de0a46;
 	text-shadow: 0 1px 1px #F1F1F1;
