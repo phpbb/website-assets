@@ -2120,6 +2120,222 @@ body.support-template .gen-info dt label {
 	font-weight: normal;
 }
 
+/* The rebuilt generator (phpbb-website-private #28/#29). The .hover and
+   .feature-extra rules above belong to the old page and can go with it. */
+body.support-template .srt-question textarea {
+	width: 94%;
+}
+
+/* prosilver clears a dl's floats with overflow: hidden, which would cut off
+   the help text; clear them without clipping. */
+body.support-template .gen-info dl {
+	overflow: visible;
+}
+
+body.support-template .gen-info dl::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+body.support-template .srt-question-label {
+	margin: 0.5em 0 0.3em;
+}
+
+body.support-template .srt-note,
+body.support-template .gen-info .error {
+	margin-top: 0.3em;
+}
+
+/* Help: an icon that shows the text on hover, or on a tap on touch screens.
+   The inputs point at the text with aria-describedby, so screen readers read
+   it with the field and the icon needs no place in the tab order. */
+.srt-help {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 4px;
+	color: #105289;
+	cursor: help;
+	outline: none;
+}
+
+.srt-help .srt-help-icon {
+	display: block;
+	width: 1.25em;
+	height: 1.25em;
+}
+
+.srt-help:hover,
+.srt-help:focus {
+	color: #D31141;
+}
+
+.srt-help-text {
+	display: none;
+	position: absolute;
+	z-index: 50;
+	left: -8px;
+	top: calc(100% + 6px);
+	width: 24em;
+	max-width: 70vw;
+	padding: 6px 10px;
+	border: 1px solid #B4BAC0;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	color: #333333;
+	font-weight: normal;
+	line-height: 1.5;
+	text-align: left;
+	cursor: auto;
+}
+
+.srt-help:hover .srt-help-text,
+.srt-help:focus .srt-help-text {
+	display: block;
+}
+
+.srt-help-text p {
+	margin: 0 0 0.5em;
+}
+
+.srt-help-text p:last-child,
+.srt-help-text ul:last-child {
+	margin-bottom: 0;
+}
+
+/* Previous and next together, starting over set apart. */
+.srt-buttons {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 6px;
+}
+
+.srt-buttons .srt-start-over {
+	margin-left: auto;
+}
+
+/* The form's default button, so Enter moves forward; never shown. */
+.srt-default-submit {
+	position: absolute;
+	left: -10000px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* The generator's pages in the team tools. */
+.srt-admin table.table1 td {
+	vertical-align: middle;
+}
+
+.srt-admin .srt-muted {
+	color: #777777;
+}
+
+.srt-admin dl dt {
+	width: 30%;
+}
+
+.srt-admin dl dd {
+	margin-left: 31%;
+}
+
+.srt-admin .error {
+	color: #BC2A4D;
+	font-weight: bold;
+}
+
+.srt-admin .markdown-field {
+	margin: 0.6em 0;
+}
+
+.srt-admin .markdown-field .CodeMirror,
+.srt-admin .markdown-field .CodeMirror-scroll {
+	min-height: 100px;
+	height: 140px;
+}
+
+.srt-admin table.srt-options input.inputbox {
+	width: 95%;
+}
+
+.srt-admin table.srt-options td.srt-order input.inputbox {
+	width: 4em;
+}
+
+.srt-admin td.srt-order {
+	white-space: nowrap;
+	width: 1%;
+}
+
+/* The same column widths in every step, so the tables line up. */
+.srt-admin table.srt-questions {
+	table-layout: fixed;
+}
+
+.srt-admin table.srt-questions .srt-order {
+	width: 7em;
+}
+
+.srt-admin table.srt-questions th:nth-child(3),
+.srt-admin table.srt-questions td:nth-child(3) {
+	width: 9em;
+}
+
+.srt-admin table.srt-questions th:nth-child(4),
+.srt-admin table.srt-questions td:nth-child(4) {
+	width: 11em;
+}
+
+.srt-admin form.srt-move {
+	display: inline;
+}
+
+.srt-admin form.srt-move .button2 {
+	padding: 0 4px;
+	font-size: 0.9em;
+}
+
+.srt-admin .srt-branches label {
+	margin-right: 1em;
+	white-space: nowrap;
+}
+
+.srt-admin .submit-buttons .srt-cancel {
+	margin-left: 0.5em;
+}
+
+/* Drag and drop, which js/support/srt-admin.js switches on. */
+.srt-admin .srt-drag-handle {
+	display: none;
+	padding: 0 6px 0 2px;
+	color: #999999;
+	cursor: grab;
+	user-select: none;
+}
+
+.srt-admin.srt-sortable-on .srt-drag-handle {
+	display: inline;
+}
+
+.srt-admin tr.srt-dragging {
+	opacity: 0.4;
+}
+
+.srt-admin tbody.srt-drop-target {
+	outline: 2px dashed #5A9BD4;
+	outline-offset: -2px;
+}
+
+.srt-admin tr.srt-placeholder td {
+	padding: 1em;
+	color: #777777;
+	text-align: center;
+}
+
 body.modx-creator .panel {
 	margin-bottom: 10px !important;
 }
