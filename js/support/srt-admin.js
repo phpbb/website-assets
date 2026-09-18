@@ -32,6 +32,33 @@ jQuery(function ($) {
 		return labels.hasOwnProperty(field($row, 'value').val());
 	}
 
+	// The empty rows offered for new answers wait behind the Add button. When
+	// none are left, another comes from the template.
+	var $prototype = $('#srt-option-prototype');
+	var nextIndex = $table.find('tbody tr').length;
+
+	function newRow() {
+		var $row = $table.find('tbody tr.srt-blank-row[hidden]').first();
+
+		if (!$row.length && $prototype.length) {
+			$row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
+			$row.prop('hidden', true).appendTo($table.find('tbody'));
+		}
+
+		return $row;
+	}
+
+	// A yes or no question only shows its Yes and No rows.
+	function stripe() {
+		var boolean = $table.hasClass('srt-boolean');
+
+		$table.find('tbody tr').not('[hidden]').filter(function () {
+			return !boolean || !$(this).hasClass('srt-row-extra');
+		}).each(function (index) {
+			$(this).toggleClass('bg1', index % 2 === 0).toggleClass('bg2', index % 2 === 1);
+		});
+	}
+
 	// Switching a question to yes or no fills blank rows with the two answers
 	// it now has, if they are not there yet.
 	function addYesAndNo() {
@@ -45,9 +72,18 @@ jQuery(function ($) {
 				return;
 			}
 
+			// An empty row, but not one sent back with an error for what else
+			// it had filled in.
 			var $blank = $rows.filter(function () {
-				return field($(this), 'value').val() === '' && field($(this), 'label').val() === '';
+				var $row = $(this);
+
+				return field($row, 'value').val() === '' && field($row, 'label').val() === ''
+					&& !field($row, 'warn').is(':checked') && !$row.find('select[name$="[outcome]"]').val();
 			}).first();
+
+			if (!$blank.length) {
+				$blank = newRow();
+			}
 
 			field($blank, 'value').val(value);
 			field($blank, 'label').val(label);
@@ -94,6 +130,7 @@ jQuery(function ($) {
 			$row.toggleClass('srt-row-extra', boolean && !fixed);
 			field($row, 'value').add(field($row, 'label')).prop('readonly', fixed);
 		});
+		stripe();
 
 		// A question can only depend on one asked on an earlier step. While the
 		// step field is being retyped it holds no number; leave the list be.
@@ -128,33 +165,41 @@ jQuery(function ($) {
 		});
 	}
 
-	// The empty rows offered for new answers wait behind the Add button, which
-	// shows one at a time, and adds another from the template when none are
-	// left. The new answer goes last.
-	var $prototype = $('#srt-option-prototype');
-	var nextIndex = $table.find('tbody tr').length;
+	// The answers show in their order, also when the form comes back after a
+	// failed save, so that dragging one keeps the order of the others. The
+	// empty rows go last, out of sight.
+	function position($row) {
+		return parseInt(field($row, 'position').val(), 10) || 0;
+	}
 
+	var $sorted = $table.find('tbody tr').not('.srt-blank-row').get().sort(function (a, b) {
+		return position($(a)) - position($(b));
+	});
+	$table.find('tbody').prepend($sorted);
 	$table.find('tbody tr.srt-blank-row').prop('hidden', true);
 	$form.find('.srt-add-option').removeAttr('hidden');
+	stripe();
 
+	// The Add button shows one empty row at a time, as the last answer.
 	$form.on('click', '[data-srt-add-option]', function () {
-		var $row = $table.find('tbody tr.srt-blank-row[hidden]').first();
+		var $row = newRow();
+		var last = 0;
 
-		if (!$row.length && $prototype.length) {
-			$row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
-			$row.addClass('srt-blank-row');
+		$table.find('tbody tr').not('[hidden]').each(function () {
+			last = Math.max(last, position($(this)));
+		});
+
+		var $hidden = $table.find('tbody tr[hidden]').not($row).first();
+
+		if ($hidden.length) {
+			$row.insertBefore($hidden);
+		} else {
+			$row.appendTo($table.find('tbody'));
 		}
 
-		var last = 0;
-		$table.find('tbody tr').not('.srt-blank-row').each(function () {
-			last = Math.max(last, parseInt(field($(this), 'position').val(), 10) || 0);
-		});
-
-		$row.appendTo($table.find('tbody')).removeClass('srt-blank-row').prop('hidden', false);
+		$row.removeClass('srt-blank-row').prop('hidden', false);
 		field($row, 'position').val(last + 10);
-		$table.find('tbody tr').not('[hidden]').each(function (index) {
-			$(this).toggleClass('bg1', index % 2 === 0).toggleClass('bg2', index % 2 === 1);
-		});
+		stripe();
 		field($row, 'value').trigger('focus');
 	});
 
@@ -186,7 +231,7 @@ jQuery(function ($) {
 	}
 
 	$admin.addClass('srt-sortable-on');
-	$admin.find('.srt-new-step').prop('hidden', false);
+	$admin.find('.srt-new-step, .srt-drag-hint').prop('hidden', false);
 
 	var $dragged = null;
 	var group = null;
@@ -213,7 +258,7 @@ jQuery(function ($) {
 	}
 
 	function tidy($tbody) {
-		var $rows = rows($tbody);
+		var $rows = rows($tbody).not('[hidden]');
 
 		$tbody.children('.srt-placeholder').prop('hidden', $rows.length > 0);
 		$rows.each(function (index) {
