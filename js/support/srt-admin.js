@@ -1,6 +1,125 @@
 /**
- * Drag and drop sorting for the Support Request Template pages in the team
- * tools (phpbb-website-private #29), on the jQuery every page loads.
+ * The Support Request Template pages in the team tools (phpbb-website-private
+ * #29), on the jQuery every page loads.
+ *
+ * Question form: only the parts that apply to the chosen type are shown.
+ * Elements carry the types they apply to in data-srt-types; those marked
+ * data-srt-needs-versions only show once a version list is chosen. A yes or no
+ * question shows one row per answer, Yes and No, for picking what each does.
+ * Without this script the whole form shows.
+ */
+jQuery(function ($) {
+	'use strict';
+
+	var $form = $('#srt-question-form');
+
+	if (!$form.length) {
+		return;
+	}
+
+	var $type = $form.find('[data-srt-type-select]');
+	var $versions = $form.find('[data-srt-version-select]');
+	var $requires = $form.find('[data-srt-requires-select]');
+	var $warnOutdated = $form.find('input[name$="[warnOutdated]"]');
+	var $table = $form.find('table.srt-options');
+	var labels = {yes: 'Yes', no: 'No'};
+
+	function field($row, name) {
+		return $row.find('input[name$="[' + name + ']"]');
+	}
+
+	function isYesOrNo($row) {
+		return labels.hasOwnProperty(field($row, 'value').val());
+	}
+
+	// Switching a question to yes or no fills blank rows with the two answers
+	// it now has, if they are not there yet.
+	function addYesAndNo() {
+		$.each(labels, function (value, label) {
+			var $rows = $table.find('tbody tr');
+			var exists = $rows.filter(function () {
+				return field($(this), 'value').val() === value;
+			}).length > 0;
+
+			if (exists) {
+				return;
+			}
+
+			var $blank = $rows.filter(function () {
+				return field($(this), 'value').val() === '' && field($(this), 'label').val() === '';
+			}).first();
+
+			field($blank, 'value').val(value);
+			field($blank, 'label').val(label);
+			$blank.attr('data-srt-auto', value);
+		});
+	}
+
+	// Switching away from yes or no again empties the rows filled above, as
+	// long as nobody changed them, so they do not become answers unnoticed.
+	function removeYesAndNo() {
+		$table.find('tbody tr[data-srt-auto]').each(function () {
+			var $row = $(this);
+			var value = $row.attr('data-srt-auto');
+
+			if (field($row, 'value').val() === value && field($row, 'label').val() === labels[value]) {
+				field($row, 'value').val('');
+				field($row, 'label').val('');
+			}
+
+			$row.removeAttr('data-srt-auto');
+		});
+	}
+
+	function update() {
+		var type = $type.val();
+		var boolean = type === 'boolean';
+
+		$form.find('[data-srt-types]').each(function () {
+			$(this).prop('hidden', $.inArray(type, $(this).attr('data-srt-types').split(' ')) === -1);
+		});
+
+		$form.find('[data-srt-needs-versions]').prop('hidden', !$versions.val() || (type !== 'dropdown' && type !== 'option'));
+
+		if (boolean) {
+			addYesAndNo();
+		} else {
+			removeYesAndNo();
+		}
+
+		$table.toggleClass('srt-boolean', boolean);
+		$table.find('tbody tr').each(function () {
+			var $row = $(this);
+			var fixed = boolean && isYesOrNo($row);
+
+			$row.toggleClass('srt-row-extra', boolean && !fixed);
+			field($row, 'value').add(field($row, 'label')).prop('readonly', fixed);
+		});
+
+		// The answer a condition waits for, once there is a condition.
+		$form.find('[data-srt-needs-requires]').prop('hidden', !$requires.val());
+
+		// The warning, once an answer shown in the table, or an outdated
+		// release, warns.
+		var warns = $table.find('tbody tr:not(.srt-row-extra) input[name$="[warn]"]:checked').length > 0
+			|| ($warnOutdated.is(':checked') && !$form.find('[data-srt-needs-versions]').prop('hidden'));
+		$form.find('[data-srt-needs-warning]').prop('hidden', !warns);
+
+		// An editor set up while hidden has no size until it is refreshed.
+		$form.find('.CodeMirror').each(function () {
+			if (this.CodeMirror && $(this).is(':visible')) {
+				this.CodeMirror.refresh();
+			}
+		});
+	}
+
+	$type.add($versions).add($requires).on('change', update);
+	$form.on('change', 'input[name$="[warn]"], input[name$="[warnOutdated]"]', update);
+	update();
+});
+
+/**
+ * Drag and drop sorting of the questions and of a question's answers.
  *
  * Rows are dragged by their handle. On the overview, questions can be dropped
  * in any step, or in the "new step" table, and the new order is submitted at
