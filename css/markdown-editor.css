@@ -85,6 +85,27 @@
 .EasyMDEContainer .editor-toolbar button i.fa-undo::before { content: "\21B6"; }
 .EasyMDEContainer .editor-toolbar button i.fa-repeat::before { content: "\21B7"; }
 .EasyMDEContainer .editor-toolbar button i.fa-eraser::before { content: "\232B"; }
+.EasyMDEContainer .editor-toolbar button i.fa-underline::before { content: "U"; text-decoration: underline; }
+.EasyMDEContainer .editor-toolbar button i.fa-font::before { content: "A"; font-weight: bold; }
+
+/*
+ * The colour menu: one row per colour, its "A" in that colour (set by
+ * markdown-editor.js from the website's palette) next to its name.
+ */
+.EasyMDEContainer .editor-toolbar .easymde-dropdown-content {
+	background-color: #fff;
+	border: 1px solid #c7c3bf;
+	padding: 2px 0;
+	z-index: 10;
+}
+
+.EasyMDEContainer .editor-toolbar .easymde-dropdown-content button {
+	display: block;
+	width: 100%;
+	text-align: left;
+	white-space: nowrap;
+	color: #333;
+}
 
 /* ---- Rendered Markdown ---- */
 
