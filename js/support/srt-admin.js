@@ -51,7 +51,7 @@ jQuery(function ($) {
 
 			field($blank, 'value').val(value);
 			field($blank, 'label').val(label);
-			$blank.attr('data-srt-auto', value);
+			$blank.attr('data-srt-auto', value).removeClass('srt-blank-row').prop('hidden', false);
 		});
 	}
 
@@ -65,6 +65,7 @@ jQuery(function ($) {
 			if (field($row, 'value').val() === value && field($row, 'label').val() === labels[value]) {
 				field($row, 'value').val('');
 				field($row, 'label').val('');
+				$row.addClass('srt-blank-row').prop('hidden', true);
 			}
 
 			$row.removeAttr('data-srt-auto');
@@ -126,6 +127,36 @@ jQuery(function ($) {
 			}
 		});
 	}
+
+	// The empty rows offered for new answers wait behind the Add button, which
+	// shows one at a time, and adds another from the template when none are
+	// left. The new answer goes last.
+	var $prototype = $('#srt-option-prototype');
+	var nextIndex = $table.find('tbody tr').length;
+
+	$table.find('tbody tr.srt-blank-row').prop('hidden', true);
+	$form.find('.srt-add-option').removeAttr('hidden');
+
+	$form.on('click', '[data-srt-add-option]', function () {
+		var $row = $table.find('tbody tr.srt-blank-row[hidden]').first();
+
+		if (!$row.length && $prototype.length) {
+			$row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
+			$row.addClass('srt-blank-row');
+		}
+
+		var last = 0;
+		$table.find('tbody tr').not('.srt-blank-row').each(function () {
+			last = Math.max(last, parseInt(field($(this), 'position').val(), 10) || 0);
+		});
+
+		$row.appendTo($table.find('tbody')).removeClass('srt-blank-row').prop('hidden', false);
+		field($row, 'position').val(last + 10);
+		$table.find('tbody tr').not('[hidden]').each(function (index) {
+			$(this).toggleClass('bg1', index % 2 === 0).toggleClass('bg2', index % 2 === 1);
+		});
+		field($row, 'value').trigger('focus');
+	});
 
 	$type.add($requires).on('change', update);
 	$step.on('input change', update);
