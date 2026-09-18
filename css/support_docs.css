@@ -1095,10 +1095,23 @@ ul#tutorials li {
 	text-align: center;
 }
 
+/* Read by screen readers only, such as the word after a chip's count. */
+.kb-visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
 /* A category with no articles for this version. */
 .kb-categories .empty a {
 	border-style: dashed;
-	color: #747A7F;
+	color: #626D76;
 }
 
 .kb-categories .active a,
@@ -1110,7 +1123,7 @@ ul#tutorials li {
 }
 
 .kb-categories .active .kb-count {
-	background: rgba(255, 255, 255, 0.2);
+	background: #3F4950;
 	color: #FFFFFF;
 }
 
@@ -1154,7 +1167,7 @@ ul#tutorials li {
 	border-radius: 999px;
 	background: #E9EEF2;
 	color: #505C65;
-	font-size: 1em;
+	font-size: 1.1em;
 	vertical-align: 2px;
 }
 
