@@ -2909,40 +2909,62 @@ div.launch {
 }
 
 
-/* Cookies table */
-table.cookie {
-	width: 100%;
-	border: 1px solid #CCCFD3;
-	background-color: #FFFFFF;
-	padding: 2px;
+/* Cookie debugger (/support/cookies/, team only) */
+
+/* A cookie setting and how it works for the board */
+.cookie-debugger .verdict {
+	font-weight: bold;
 }
 
-th.cookie {
-	padding: 3px 4px;
-	border-width: 0 1px 1px 0;
-	color: #FFFFFF;
-	background: #70AED3 url("gradient2b.gif") bottom left repeat-x;
-	border-top: 1px solid #6DACD2;
-	border-bottom: 1px solid #327AA5;
-	text-align: left;
-	font-size: 0.75em;
-	text-transform: uppercase;
+.cookie-debugger .verdict-good {
+	color: #1B7F1F;
 }
 
-td.cookie {
-	text-align: left;
-	font-size: 0.85em;
-	padding: 4px;
-	line-height: 1.20em;
-	border-width: 0 1px 1px 0;
+.cookie-debugger .verdict-bad {
+	color: #C00000;
 }
 
-td.cookie:last-child {
-	border-right: 0;
+.cookie-debugger .verdict-neutral {
+	color: #333333;
 }
 
-tr:last-child td.cookie {
-	border-bottom: 0;
+/* Domain, path and secure flag, with the reason for each */
+.cookie-debugger dl.cookie-summary {
+	font-size: 1.2em;
+}
+
+.cookie-debugger dl.cookie-summary dt {
+	float: left;
+	clear: left;
+	width: 9em;
+	font-weight: bold;
+}
+
+.cookie-debugger dl.cookie-summary dd {
+	margin-left: 9em;
+	margin-bottom: 0.5em;
+}
+
+/* The marker and cookie tables hold long unbroken strings */
+.cookie-debugger td.long {
+	word-break: break-all;
+}
+
+.cookie-debugger td.marker {
+	font-family: monospace;
+	word-break: break-all;
+}
+
+.cookie-debugger td.nowrap {
+	white-space: nowrap;
+}
+
+/* prosilver resets display, which hides the disclosure triangle */
+.cookie-debugger details summary {
+	font-size: 1.2em;
+	display: list-item;
+	cursor: pointer;
+	margin-bottom: 0.5em;
 }
 
 /* Right to left BBCode */
