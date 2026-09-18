@@ -259,6 +259,19 @@ body.support-template .gen-info .error {
 	display: inline;
 }
 
+/* Dragging sets the order of the answers, so their order numbers, which
+   stand in for it without the script, are not shown. */
+.srt-admin.srt-sortable-on table.srt-options .srt-col-order input,
+.srt-admin.srt-sortable-on .srt-order-hint {
+	display: none;
+}
+
+/* That column then only holds the drag handles. */
+.srt-admin.srt-sortable-on table.srt-options th.srt-col-order {
+	width: 1.5em;
+	font-size: 0;
+}
+
 .srt-admin tr.srt-dragging {
 	opacity: 0.4;
 }

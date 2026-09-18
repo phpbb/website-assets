@@ -42,6 +42,9 @@ jQuery(function ($) {
 
 		if (!$row.length && $prototype.length) {
 			$row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
+			// Like the empty rows the page offers: its order field is hidden
+			// while dragging is on, so it must never be left empty.
+			field($row, 'position').val('0');
 			$row.prop('hidden', true).appendTo($table.find('tbody'));
 		}
 
