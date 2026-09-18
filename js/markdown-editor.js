@@ -12,19 +12,20 @@
  * Colour and underline: Markdown has neither, so the website keeps them as
  * <span class="text-…"> with a class from a fixed list, and renders only those
  * spans, and only when a span opens and closes inside one block without
- * crossing other formatting. The textarea's data-markdown-styles attribute
- * carries the list (App\Form\Type\MarkdownEditorType), so the buttons offer
- * exactly what the site renders and this script keeps no copy of it. Without
- * the attribute there are no such buttons.
+ * crossing other formatting; one that does not is left off the page. The
+ * textarea's data-markdown-styles attribute carries the list
+ * (App\Form\Type\MarkdownEditorType), so the buttons offer exactly what the
+ * site renders and this script keeps no copy of it. Without the attribute
+ * there are no such buttons.
  *
- * A span the site cannot render shows on the page as HTML text, so no edit is
- * made on trust. The buttons work line by line, leave code, tables and other
- * block syntax alone, and try every edit first: the line is rendered with a
- * probe span and without it, and the edit is made only if the probe comes out
- * as an element directly inside its block and taking it out again gives back
- * exactly the rendering the line had without it. When the selected part of a
- * line does not pass, the whole line's text is tried; when that does not pass
- * either, the line is left as it is.
+ * So that a style an author adds also shows, no edit is made on trust. The
+ * buttons work line by line, leave code, tables and other block syntax alone,
+ * and try every edit first: the paragraph around the line is rendered with a
+ * probe span and without it, and the edit is made only if the probe opens and
+ * closes around properly nested content with no block inside, and taking it
+ * out again gives back exactly the rendering the paragraph had without it.
+ * When the selected part of a line does not pass, the whole line's text is
+ * tried; when that does not pass either, the line is left as it is.
  */
 (function () {
 	'use strict';
@@ -33,8 +34,10 @@
 
 	var PROBE = 'markdown-editor-probe';
 
-	/** Elements a span may sit directly inside; the site's rule too. */
-	var BLOCK_PARENTS = ['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TD', 'TH'];
+	/** Tags a style span may not contain; the site's rule too. */
+	var BLOCK_TAGS = ['p', 'li', 'ul', 'ol', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'div', 'hr', 'pre'];
+
+	var VOID_TAGS = ['br', 'img', 'input', 'wbr'];
 
 	/**
 	 * List, heading and quote markers at the start of a line. A span has to
@@ -42,15 +45,21 @@
 	 */
 	var BLOCK_PREFIX = /^(\s*(?:(?:[*+-]|\d+[.)])\s+|#{1,6}\s+|>\s?)*)/;
 
+	/** A code fence, after any quote or list markers. */
+	var FENCE = /^\s*(`{3,}|~{3,})/;
+
+	/** A link reference definition. */
+	var REFERENCE = /^ {0,3}\[[^\]]+\]:/;
+
 	/** Lines whose syntax a span would break, styled or not. */
 	var UNTOUCHABLE_LINE = [
-		/^\s*(`{3,}|~{3,})/,		// code fence
+		FENCE,
 		/^ {0,3}([-*_])( *\1){2,} *$/,	// thematic break
 		/^ {0,3}(=+|-+) *$/,		// setext heading underline
-		/^ {0,3}\[[^\]]+\]:/		// link reference definition
+		REFERENCE
 	];
 
-	var SPAN_TAG = /<span class="([a-z-]+)">|<\/span>/g;
+	var SPAN_TAG = /<span class="([^"<>]*)">|<\/span>/g;
 
 	/** Emphasis and code markers a selection may sit just inside of. */
 	var MARKERS = '*_~`';
@@ -65,32 +74,143 @@
 		return '<span class="' + className + '">';
 	}
 
-	function count(text, pattern) {
-		return (text.match(pattern) || []).length;
-	}
-
 	function comparePositions(a, b) {
 		return a.line === b.line ? a.ch - b.ch : a.line - b.line;
 	}
 
+	function isBlank(text) {
+		return /^\s*$/.test(text);
+	}
+
+	function withoutPrefix(text) {
+		return text.slice(text.match(BLOCK_PREFIX)[1].length);
+	}
+
 	/**
-	 * Markdown rendered by EasyMDE's own renderer, as a detached document:
-	 * DOMParser runs no scripts and loads no images.
+	 * Markdown rendered by EasyMDE's own renderer: the raw HTML marked wrote,
+	 * captured before the browser could repair any bad nesting in it, and the
+	 * result as a detached document, in which nothing runs and nothing loads.
 	 */
 	function render(editor, markdown) {
-		return new DOMParser().parseFromString(editor.markdown(markdown), 'text/html').body;
+		var html = editor.markdown(markdown);
+
+		return {
+			raw: editor.markdownCapture.raw,
+			body: new DOMParser().parseFromString(html, 'text/html').body
+		};
+	}
+
+	/**
+	 * Whether the probe span in marked's raw HTML closes around properly
+	 * nested inline content: every tag opened inside it closes inside it, no
+	 * block starts inside it, and it is not itself closed early.
+	 */
+	function probeNestsCleanly(raw) {
+		var start = raw.indexOf(openTag(PROBE));
+
+		if (start === -1) {
+			return false;
+		}
+
+		var tag = /<(\/?)([a-zA-Z][a-zA-Z0-9]*)\b[^>]*>/g;
+		var stack = [];
+		var match;
+
+		tag.lastIndex = start + openTag(PROBE).length;
+
+		while ((match = tag.exec(raw)) !== null) {
+			var name = match[2].toLowerCase();
+
+			if (BLOCK_TAGS.indexOf(name) !== -1) {
+				return false;
+			}
+
+			if (VOID_TAGS.indexOf(name) !== -1) {
+				continue;
+			}
+
+			if (match[1] === '') {
+				stack.push(name);
+			} else if (stack.length === 0) {
+				return name === 'span';
+			} else if (stack.pop() !== name) {
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Whether every span tag in a text, of any class, has its partner in it.
+	 */
+	function spanTagsBalance(text) {
+		var depth = 0;
+		var match;
+
+		SPAN_TAG.lastIndex = 0;
+
+		while ((match = SPAN_TAG.exec(text)) !== null) {
+			depth += match[1] !== undefined ? 1 : -1;
+
+			if (depth < 0) {
+				return false;
+			}
+		}
+
+		return depth === 0;
+	}
+
+	/**
+	 * The paragraph a line belongs to, from the blank line before it to the
+	 * blank line after, with the line replaced, and every link reference
+	 * definition of the document after it, so links resolve as on the page.
+	 */
+	function paragraph(cm, context, line, text) {
+		var first = line;
+		var last = line;
+
+		while (first > 0 && !isBlank(cm.getLine(first - 1))) {
+			first--;
+		}
+
+		while (last < cm.lineCount() - 1 && !isBlank(cm.getLine(last + 1))) {
+			last++;
+		}
+
+		var lines = [];
+
+		for (var i = first; i <= last; i++) {
+			lines.push(i === line ? text : cm.getLine(i));
+		}
+
+		return lines.join('\n') + context.references;
 	}
 
 	/**
 	 * Whether wrapping body in a span, between before and after on one line,
 	 * renders as intended and changes nothing else.
 	 */
-	function rendersCleanly(editor, before, body, after) {
-		var plain = render(editor, before + body + after);
-		var probed = render(editor, before + openTag(PROBE) + body + CLOSE + after);
-		var span = probed.querySelector('span.' + PROBE);
+	function rendersCleanly(editor, context, line, before, body, after) {
+		var cm = editor.codemirror;
 
-		if (!span || BLOCK_PARENTS.indexOf(span.parentNode.nodeName) === -1) {
+		// The span's own closing tag has to be the one that closes it: a
+		// body with span tags that do not pair up, such as an author's stray
+		// "</span>", would close it early.
+		if (!spanTagsBalance(body)) {
+			return false;
+		}
+
+		var plain = render(editor, paragraph(cm, context, line, before + body + after));
+		var probed = render(editor, paragraph(cm, context, line, before + openTag(PROBE) + body + CLOSE + after));
+
+		if (!probeNestsCleanly(probed.raw)) {
+			return false;
+		}
+
+		var span = probed.body.querySelector('span.' + PROBE);
+
+		if (!span) {
 			return false;
 		}
 
@@ -100,24 +220,26 @@
 
 		span.parentNode.removeChild(span);
 
-		return probed.innerHTML === plain.innerHTML;
+		return probed.body.innerHTML === plain.body.innerHTML;
 	}
 
 	/**
-	 * Whether a whole line is code: a line in a fenced or indented code block.
-	 * EasyMDE's Markdown mode marks code as "comment".
+	 * Whether a line is code: part of a fenced or indented code block, in a
+	 * quote or list item or not. EasyMDE's Markdown mode marks code as
+	 * "comment"; quote and list markers are tokens of their own.
 	 */
 	function isCodeLine(cm, line) {
 		var tokens = cm.getLineTokens(line);
 		var code = false;
 
 		for (var i = 0; i < tokens.length; i++) {
-			// Indentation is a token of its own, without a type.
-			if (/^\s*$/.test(tokens[i].string)) {
+			var type = tokens[i].type || '';
+
+			if (/^\s*$/.test(tokens[i].string) || (/\b(quote|list|formatting-quote|formatting-list)\b/.test(type) && !/\bcomment\b/.test(type))) {
 				continue;
 			}
 
-			if (!/\bcomment\b/.test(tokens[i].type || '')) {
+			if (!/\bcomment\b/.test(type)) {
 				return false;
 			}
 
@@ -127,11 +249,35 @@
 		return code;
 	}
 
-	function isUntouchable(cm, line, text) {
+	/**
+	 * Whether a line lies between the fences of a fenced code block: an odd
+	 * number of fences above it.
+	 */
+	function isInsideFence(cm, line) {
+		var fences = 0;
+
+		for (var i = 0; i < line; i++) {
+			if (FENCE.test(withoutPrefix(cm.getLine(i)))) {
+				fences++;
+			}
+		}
+
+		return fences % 2 === 1;
+	}
+
+	function isUntouchable(cm, line) {
+		var text = cm.getLine(line);
+		var content = withoutPrefix(text);
+
 		for (var i = 0; i < UNTOUCHABLE_LINE.length; i++) {
-			if (UNTOUCHABLE_LINE[i].test(text)) {
+			if (UNTOUCHABLE_LINE[i].test(text) || UNTOUCHABLE_LINE[i].test(content)) {
 				return true;
 			}
+		}
+
+		// The URL or title of a reference definition, on a line of its own.
+		if (line > 0 && REFERENCE.test(cm.getLine(line - 1)) && !isBlank(text)) {
+			return true;
 		}
 
 		// A table row, with or without the leading pipe: an unescaped pipe
@@ -140,7 +286,7 @@
 			return true;
 		}
 
-		return isCodeLine(cm, line);
+		return isCodeLine(cm, line) || isInsideFence(cm, line);
 	}
 
 	/**
@@ -197,12 +343,12 @@
 	}
 
 	/**
-	 * Remove the spans whose class passes the test, with their matching
-	 * closing tags, keeping everything between them.
+	 * The spans in a text whose class passes the test, paired with their
+	 * closing tags, as [[openIndex, openLength], [closeIndex, closeLength]].
 	 */
-	function unwrapSpans(text, isTarget) {
+	function spanPairs(text, isTarget) {
 		var stack = [];
-		var cuts = [];
+		var pairs = [];
 		var match;
 
 		SPAN_TAG.lastIndex = 0;
@@ -214,20 +360,212 @@
 				var opening = stack.pop();
 
 				if (opening.target) {
-					cuts.push([opening.index, opening.length], [match.index, match[0].length]);
+					pairs.push([[opening.index, opening.length], [match.index, match[0].length]]);
 				}
 			}
 		}
+
+		return pairs;
+	}
+
+	/**
+	 * Delete tags from a line, rightmost first, one small deletion each, so
+	 * no selection bookmark ever sits inside a replaced range.
+	 *
+	 * @return {number} How many characters went before position limit.
+	 */
+	function deleteTags(cm, line, cuts, limit) {
+		var removed = 0;
 
 		cuts.sort(function (a, b) {
 			return b[0] - a[0];
 		});
 
 		for (var i = 0; i < cuts.length; i++) {
-			text = text.slice(0, cuts[i][0]) + text.slice(cuts[i][0] + cuts[i][1]);
+			cm.replaceRange('', { line: line, ch: cuts[i][0] }, { line: line, ch: cuts[i][0] + cuts[i][1] });
+
+			if (cuts[i][0] < limit) {
+				removed += cuts[i][1];
+			}
 		}
 
-		return text;
+		return removed;
+	}
+
+	/**
+	 * Try to wrap [start, end) of a line; true when the edit was made.
+	 */
+	function tryWrap(editor, context, line, start, end, className, removeFirst) {
+		var cm = editor.codemirror;
+		var text = cm.getLine(line);
+		var body = text.slice(start, end);
+		var cuts = [];
+
+		if (removeFirst) {
+			spanPairs(body, removeFirst).forEach(function (pair) {
+				cuts.push([start + pair[0][0], pair[0][1]], [start + pair[1][0], pair[1][1]]);
+			});
+
+			cuts.slice().sort(function (a, b) {
+				return b[0] - a[0];
+			}).forEach(function (cut) {
+				body = body.slice(0, cut[0] - start) + body.slice(cut[0] - start + cut[1]);
+			});
+		}
+
+		if (!rendersCleanly(editor, context, line, text.slice(0, start), body, text.slice(end))) {
+			return false;
+		}
+
+		end -= deleteTags(cm, line, cuts, end);
+
+		// Two insertions rather than one replacement.
+		cm.replaceRange(CLOSE, { line: line, ch: end });
+		cm.replaceRange(openTag(className), { line: line, ch: start });
+
+		return true;
+	}
+
+	/**
+	 * Style one line's parts of the selections, rightmost first so the
+	 * positions of the others stay put. A part with nothing selected gets a
+	 * bookmark inside the empty pair when one went in there.
+	 */
+	function wrapLine(editor, context, line, parts, className, removeFirst) {
+		var cm = editor.codemirror;
+
+		if (isUntouchable(cm, line)) {
+			return;
+		}
+
+		for (var i = 0; i < parts.length; i++) {
+			var part = parts[i];
+			var text = cm.getLine(line);
+
+			if (part.empty) {
+				// Nothing selected: an empty pair to type into, if one fits.
+				if (isBlank(text)) {
+					insertParagraph(cm, line, className, part);
+				} else if (rendersCleanly(editor, context, line, text.slice(0, part.start), '', text.slice(part.start))) {
+					cm.replaceRange(openTag(className) + CLOSE, { line: line, ch: part.start });
+					part.inside = cm.setBookmark({ line: line, ch: part.start + openTag(className).length });
+				}
+
+				continue;
+			}
+
+			var piece = trimmed(text, part.start, part.end);
+
+			if (piece === null || tryWrap(editor, context, line, piece.start, piece.end, className, removeFirst)) {
+				continue;
+			}
+
+			// The selected part cuts through other formatting: the line's
+			// whole text, once, instead of any other part of it.
+			var whole = trimmed(text, 0, text.length);
+
+			if (whole !== null) {
+				tryWrap(editor, context, line, whole.start, whole.end, className, removeFirst);
+			}
+
+			return;
+		}
+	}
+
+	/**
+	 * An empty pair on a blank line, as a paragraph of its own: with a blank
+	 * line added on either side that has text, it cannot join the paragraph
+	 * before or after it.
+	 */
+	function insertParagraph(cm, line, className, part) {
+		var before = line > 0 && !isBlank(cm.getLine(line - 1)) ? '\n' : '';
+		var after = line < cm.lineCount() - 1 && !isBlank(cm.getLine(line + 1)) ? '\n' : '';
+
+		cm.replaceRange(before + openTag(className) + CLOSE + after, { line: line, ch: 0 }, { line: line, ch: cm.getLine(line).length });
+		part.inside = cm.setBookmark({ line: line + (before ? 1 : 0), ch: openTag(className).length });
+	}
+
+	/**
+	 * Take spans off one line's parts: every pair with a tag in a part goes,
+	 * both halves, except in code.
+	 */
+	function unwrapLine(editor, line, parts, isTarget) {
+		var cm = editor.codemirror;
+
+		if (isUntouchable(cm, line)) {
+			return;
+		}
+
+		var text = cm.getLine(line);
+		var code = [];
+		var match;
+		var inlineCode = /(`+)[^`]*?\1/g;
+
+		while ((match = inlineCode.exec(text)) !== null) {
+			code.push([match.index, match.index + match[0].length]);
+		}
+
+		var inCode = function (index) {
+			return code.some(function (range) {
+				return index >= range[0] && index < range[1];
+			});
+		};
+
+		var inParts = function (index, length) {
+			return parts.some(function (part) {
+				return index < part.end && index + length > part.start;
+			});
+		};
+
+		var cuts = [];
+
+		spanPairs(text, isTarget).forEach(function (pair) {
+			if (inCode(pair[0][0]) || inCode(pair[1][0])) {
+				return;
+			}
+
+			if (inParts(pair[0][0], pair[0][1]) || inParts(pair[1][0], pair[1][1])) {
+				cuts.push(pair[0], pair[1]);
+			}
+		});
+
+		deleteTags(cm, line, cuts, 0);
+	}
+
+	/**
+	 * The selections as ranges, widened over span tags right around them and
+	 * merged where they overlap or touch.
+	 */
+	function mergedRanges(cm) {
+		var list = cm.listSelections().map(function (selection) {
+			var reversed = comparePositions(selection.anchor, selection.head) > 0;
+			var range = takeInSurroundingTags(cm, {
+				from: reversed ? selection.head : selection.anchor,
+				to: reversed ? selection.anchor : selection.head
+			});
+
+			range.reversed = reversed;
+
+			return range;
+		}).sort(function (a, b) {
+			return comparePositions(a.from, b.from);
+		});
+
+		var merged = [];
+
+		list.forEach(function (range) {
+			var last = merged[merged.length - 1];
+
+			if (last && comparePositions(range.from, last.to) <= 0) {
+				if (comparePositions(range.to, last.to) > 0) {
+					last.to = range.to;
+				}
+			} else {
+				merged.push(range);
+			}
+		});
+
+		return merged;
 	}
 
 	/**
@@ -241,7 +579,7 @@
 		var after = cm.getLine(to.line).slice(to.ch);
 
 		for (;;) {
-			var opening = before.match(/<span class="[a-z-]+">$/);
+			var opening = before.match(/<span class="[^"<>]*">$/);
 			var closing = after.match(/^<\/span>/);
 
 			if (!opening || !closing) {
@@ -258,96 +596,23 @@
 	}
 
 	/**
-	 * Try to wrap [start, end) of a line; true when the edit was made.
+	 * Every link reference definition in the document, to render paragraphs
+	 * with, so reference links resolve as they do on the page.
 	 */
-	function tryWrap(editor, line, start, end, className, removeFirst) {
-		var cm = editor.codemirror;
-		var text = cm.getLine(line);
-		var body = text.slice(start, end);
+	function references(cm) {
+		var found = [];
 
-		if (removeFirst) {
-			body = unwrapSpans(body, removeFirst);
-		}
+		for (var i = 0; i < cm.lineCount(); i++) {
+			if (REFERENCE.test(cm.getLine(i))) {
+				found.push(cm.getLine(i));
 
-		if (!rendersCleanly(editor, text.slice(0, start), body, text.slice(end))) {
-			return false;
-		}
-
-		cm.replaceRange(openTag(className) + body + CLOSE, { line: line, ch: start }, { line: line, ch: end });
-
-		return true;
-	}
-
-	/**
-	 * Style one line's parts of the selections, rightmost first so the
-	 * positions of the others stay put. A part with nothing selected is
-	 * marked inserted when an empty pair went in there.
-	 */
-	function wrapLine(editor, line, parts, className, removeFirst) {
-		var cm = editor.codemirror;
-
-		if (isUntouchable(cm, line, cm.getLine(line))) {
-			return;
-		}
-
-		for (var i = 0; i < parts.length; i++) {
-			var part = parts[i];
-			var text = cm.getLine(line);
-
-			if (part.empty) {
-				// Nothing selected: an empty pair to type into, if one fits.
-				if (rendersCleanly(editor, text.slice(0, part.start), '', text.slice(part.start))) {
-					cm.replaceRange(openTag(className) + CLOSE, { line: line, ch: part.start });
-					part.inserted = true;
+				if (i + 1 < cm.lineCount() && !isBlank(cm.getLine(i + 1)) && !REFERENCE.test(cm.getLine(i + 1))) {
+					found.push(cm.getLine(i + 1));
 				}
-
-				continue;
-			}
-
-			var piece = trimmed(text, part.start, part.end);
-
-			if (piece === null || tryWrap(editor, line, piece.start, piece.end, className, removeFirst)) {
-				continue;
-			}
-
-			// The selected part cuts through other formatting: the line's
-			// whole text, once, instead of any other part of it.
-			var whole = trimmed(text, 0, text.length);
-
-			if (whole !== null) {
-				tryWrap(editor, line, whole.start, whole.end, className, removeFirst);
-			}
-
-			return;
-		}
-	}
-
-	/**
-	 * Take spans off one line's parts. When a part holds half of a pair the
-	 * whole line is cleaned instead: spans never reach across lines, so that
-	 * is where the other half is.
-	 */
-	function unwrapLine(editor, line, parts, isTarget) {
-		var cm = editor.codemirror;
-
-		for (var i = 0; i < parts.length; i++) {
-			var text = cm.getLine(line);
-			var start = parts[i].start;
-			var end = parts[i].end;
-			var slice = text.slice(start, end);
-
-			if (count(slice, /<span class="[a-z-]+">/g) !== count(slice, /<\/span>/g)) {
-				cm.replaceRange(unwrapSpans(text, isTarget), { line: line, ch: 0 }, { line: line, ch: text.length });
-
-				return;
-			}
-
-			var cleaned = unwrapSpans(slice, isTarget);
-
-			if (cleaned !== slice) {
-				cm.replaceRange(cleaned, { line: line, ch: start }, { line: line, ch: end });
 			}
 		}
+
+		return found.length > 0 ? '\n\n' + found.join('\n') : '';
 	}
 
 	/**
@@ -360,63 +625,72 @@
 		var cm = editor.codemirror;
 
 		cm.operation(function () {
-			var selections = cm.listSelections().map(function (selection) {
-				var ordered = comparePositions(selection.anchor, selection.head) <= 0;
-
-				return takeInSurroundingTags(cm, {
-					from: ordered ? selection.anchor : selection.head,
-					to: ordered ? selection.head : selection.anchor
-				});
-			});
-
+			var context = { references: references(cm) };
 			var lines = {};
-			var marks = [];
 
-			selections.forEach(function (range, index) {
+			var marks = mergedRanges(cm).map(function (range) {
 				var empty = comparePositions(range.from, range.to) === 0;
-
-				marks.push({
+				var mark = {
 					from: cm.setBookmark(range.from),
 					to: cm.setBookmark(range.to, { insertLeft: true }),
+					reversed: range.reversed,
 					empty: empty,
 					parts: []
-				});
+				};
 
 				for (var line = range.from.line; line <= range.to.line; line++) {
 					var part = {
 						start: line === range.from.line ? range.from.ch : 0,
 						end: line === range.to.line ? range.to.ch : cm.getLine(line).length,
 						empty: empty,
-						inserted: false
+						inside: null
 					};
 
-					marks[index].parts.push(part);
+					mark.parts.push(part);
 					(lines[line] = lines[line] || []).push(part);
 				}
+
+				return mark;
 			});
 
 			Object.keys(lines).map(Number).sort(function (a, b) {
 				return b - a;
 			}).forEach(function (line) {
-				handler(line, lines[line].sort(function (a, b) {
+				handler(context, line, lines[line].sort(function (a, b) {
 					return b.start - a.start;
 				}));
 			});
 
-			cm.setSelections(marks.map(function (mark) {
+			var selections = [];
+
+			marks.forEach(function (mark) {
 				var from = mark.from.find();
 				var to = mark.to.find();
 
 				mark.from.clear();
 				mark.to.clear();
 
-				// An inserted empty pair: the cursor goes inside it.
-				if (mark.empty && mark.parts[0].inserted) {
-					from = to = { line: to.line, ch: to.ch - CLOSE.length };
+				if (!from || !to) {
+					return;
 				}
 
-				return { anchor: from, head: to };
-			}));
+				// An inserted empty pair: the cursor goes inside it.
+				var inside = mark.empty && mark.parts[0].inside ? mark.parts[0].inside.find() : null;
+
+				if (mark.empty && mark.parts[0].inside) {
+					mark.parts[0].inside.clear();
+				}
+
+				if (inside) {
+					from = to = inside;
+				}
+
+				selections.push(mark.reversed ? { anchor: to, head: from } : { anchor: from, head: to });
+			});
+
+			if (selections.length > 0) {
+				cm.setSelections(selections);
+			}
 		});
 
 		cm.focus();
@@ -446,21 +720,15 @@
 					var cm = editor.codemirror;
 
 					// Pressed on underlined text: take the underline off.
-					var underlined = cm.listSelections().some(function (selection) {
-						var ordered = comparePositions(selection.anchor, selection.head) <= 0;
-						var range = takeInSurroundingTags(cm, {
-							from: ordered ? selection.anchor : selection.head,
-							to: ordered ? selection.head : selection.anchor
-						});
-
+					var underlined = mergedRanges(cm).some(function (range) {
 						return cm.getRange(range.from, range.to).indexOf(openTag(styles.underline)) !== -1;
 					});
 
-					eachLine(editor, function (line, parts) {
+					eachLine(editor, function (context, line, parts) {
 						if (underlined) {
 							unwrapLine(editor, line, parts, isUnderline);
 						} else {
-							wrapLine(editor, line, parts, styles.underline, null);
+							wrapLine(editor, context, line, parts, styles.underline, isUnderline);
 						}
 					});
 				}
@@ -482,9 +750,9 @@
 					title: colour.label,
 					icon: '<i class="fa fa-font" style="color: ' + escapeHtml(colour.colour) + ';"></i> ' + escapeHtml(colour.label),
 					action: function (editor) {
-						eachLine(editor, function (line, parts) {
+						eachLine(editor, function (context, line, parts) {
 							// A new colour replaces the old one rather than nesting.
-							wrapLine(editor, line, parts, colour.class, isColour);
+							wrapLine(editor, context, line, parts, colour.class, isColour);
 						});
 					}
 				};
@@ -495,7 +763,7 @@
 				title: 'Remove colour',
 				icon: '<i class="fa fa-eraser"></i> Remove colour',
 				action: function (editor) {
-					eachLine(editor, function (line, parts) {
+					eachLine(editor, function (context, line, parts) {
 						unwrapLine(editor, line, parts, isColour);
 					});
 				}
@@ -533,7 +801,12 @@
 
 		var styles = readStyles(textarea);
 
-		new EasyMDE({
+		// marked's raw HTML, for the styling buttons' check: EasyMDE hands it
+		// to the sanitizer before the browser can repair it. Nothing is
+		// changed, so the preview is as before.
+		var capture = { raw: '' };
+
+		var editor = new EasyMDE({
 			element: textarea,
 			// The icon font is labelled by our own stylesheet; without this
 			// EasyMDE injects a stylesheet from a third-party CDN.
@@ -561,10 +834,19 @@
 			// Only with the button: bound on its own, the key would do nothing
 			// and still take the place of CodeMirror's own binding.
 			shortcuts: styles && styles.underline ? { underline: 'Cmd-U' } : {},
+			renderingConfig: {
+				sanitizerFunction: function (html) {
+					capture.raw = html;
+
+					return html;
+				}
+			},
 			// EasyMDE's preview is client side and only approximate; the server
 			// renders the article that finally gets published.
 			previewClass: ['editor-preview', 'markdown-body']
 		});
+
+		editor.markdownCapture = capture;
 	}
 
 	function init() {
