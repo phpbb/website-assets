@@ -142,6 +142,66 @@
 	}
 
 	/**
+	 * The inline code spans of a paragraph as [start, end) offsets, by
+	 * CommonMark's rule, which is the site's: a backtick run opens one, and
+	 * the next run of exactly the same length closes it. A run with no such
+	 * partner is plain text. A run after a backslash opens nothing.
+	 */
+	function codeSpans(text) {
+		var runs = [];
+		var spans = [];
+		var match;
+		var run = /`+/g;
+
+		while ((match = run.exec(text)) !== null) {
+			var backslashes = 0;
+
+			for (var b = match.index - 1; b >= 0 && text.charAt(b) === '\\'; b--) {
+				backslashes++;
+			}
+
+			runs.push({ index: match.index, length: match[0].length, escaped: backslashes % 2 === 1 });
+		}
+
+		for (var i = 0; i < runs.length; i++) {
+			if (runs[i].escaped) {
+				continue;
+			}
+
+			for (var j = i + 1; j < runs.length; j++) {
+				if (runs[j].length === runs[i].length) {
+					spans.push([runs[i].index, runs[j].index + runs[j].length]);
+					i = j;
+					break;
+				}
+			}
+		}
+
+		return spans;
+	}
+
+	/**
+	 * How many unescaped "[" are still open at a position in a text.
+	 */
+	function bracketDepth(text, position) {
+		var depth = 0;
+
+		for (var i = 0; i < position; i++) {
+			var character = text.charAt(i);
+
+			if (character === '\\') {
+				i++;
+			} else if (character === '[') {
+				depth++;
+			} else if (character === ']' && depth > 0) {
+				depth--;
+			}
+		}
+
+		return depth;
+	}
+
+	/**
 	 * Whether every span tag in a text, of any class, has its partner in it.
 	 */
 	function spanTagsBalance(text) {
@@ -167,11 +227,35 @@
 	 * definition of the document after it, so links resolve as on the page.
 	 */
 	function paragraph(cm, context, line, text) {
+		return paragraphParts(cm, line, text).text + context.references;
+	}
+
+	/**
+	 * The paragraph around a line, with the line replaced, and where the line
+	 * starts in it.
+	 */
+	function paragraphParts(cm, line, text) {
 		var first = line;
 		var last = line;
 
-		while (first > 0 && !isBlank(cm.getLine(first - 1))) {
-			first--;
+		// An indented paragraph continues the list item above it, across blank
+		// lines; alone it would read as a code block.
+		for (;;) {
+			while (first > 0 && !isBlank(cm.getLine(first - 1))) {
+				first--;
+			}
+
+			if (first === 0 || !/^( {2,}|\t)/.test(cm.getLine(first))) {
+				break;
+			}
+
+			while (first > 0 && isBlank(cm.getLine(first - 1))) {
+				first--;
+			}
+
+			if (first === 0) {
+				break;
+			}
 		}
 
 		while (last < cm.lineCount() - 1 && !isBlank(cm.getLine(last + 1))) {
@@ -179,12 +263,17 @@
 		}
 
 		var lines = [];
+		var offset = 0;
 
 		for (var i = first; i <= last; i++) {
+			if (i < line) {
+				offset += cm.getLine(i).length + 1;
+			}
+
 			lines.push(i === line ? text : cm.getLine(i));
 		}
 
-		return lines.join('\n') + context.references;
+		return { text: lines.join('\n'), offset: offset };
 	}
 
 	/**
@@ -198,6 +287,35 @@
 		// body with span tags that do not pair up, such as an author's stray
 		// "</span>", would close it early.
 		if (!spanTagsBalance(body)) {
+			return false;
+		}
+
+		// Neither edge may fall inside inline code, by the site's rule: the
+		// two renderers can disagree on where odd code spans start and end.
+		var parts = paragraphParts(cm, line, before + body + after);
+		var start = parts.offset + before.length;
+		var end = start + body.length;
+		var spans = codeSpans(parts.text);
+
+		// Nor split a run of backticks, which would change which runs pair up,
+		// nor follow a backslash, which would escape the tag's "<".
+		if ((parts.text.charAt(start - 1) === '`' && parts.text.charAt(start) === '`')
+			|| (parts.text.charAt(end - 1) === '`' && parts.text.charAt(end) === '`')
+			|| parts.text.charAt(start - 1) === '\\'
+			|| parts.text.charAt(end - 1) === '\\'
+		) {
+			return false;
+		}
+
+		for (var s = 0; s < spans.length; s++) {
+			if ((start > spans[s][0] && start < spans[s][1]) || (end > spans[s][0] && end < spans[s][1])) {
+				return false;
+			}
+		}
+
+		// Nor cross into or out of the brackets of a link or image: both edges
+		// at the same bracket depth.
+		if (bracketDepth(parts.text, start) !== bracketDepth(parts.text, end)) {
 			return false;
 		}
 
@@ -239,7 +357,9 @@
 				continue;
 			}
 
-			if (!/\bcomment\b/.test(type)) {
+			// Inline code is "comment" too, but has its backticks marked as
+			// such: a line that is only `code` is still a paragraph.
+			if (!/\bcomment\b/.test(type) || /\bformatting-code\b/.test(type)) {
 				return false;
 			}
 
@@ -250,19 +370,33 @@
 	}
 
 	/**
-	 * Whether a line lies between the fences of a fenced code block: an odd
-	 * number of fences above it.
+	 * Whether a line lies between the fences of a fenced code block.
 	 */
 	function isInsideFence(cm, line) {
-		var fences = 0;
+		var open = null;
 
 		for (var i = 0; i < line; i++) {
-			if (FENCE.test(withoutPrefix(cm.getLine(i)))) {
-				fences++;
+			var content = withoutPrefix(cm.getLine(i));
+			var fence = content.match(/^\s{0,3}(`{3,}|~{3,})(.*)$/);
+
+			if (!fence) {
+				continue;
+			}
+
+			if (open === null) {
+				// A backtick fence's info string may not hold backticks: a line
+				// like ```x``` is inline code, not a fence.
+				if (fence[1].charAt(0) !== '`' || fence[2].indexOf('`') === -1) {
+					open = fence[1];
+				}
+			} else if (fence[1].charAt(0) === open.charAt(0) && fence[1].length >= open.length && /^\s*$/.test(fence[2])) {
+				// Closed only by the same character, at least as many of it,
+				// and nothing after.
+				open = null;
 			}
 		}
 
-		return fences % 2 === 1;
+		return open !== null;
 	}
 
 	function isUntouchable(cm, line) {
@@ -446,7 +580,11 @@
 				// Nothing selected: an empty pair to type into, if one fits.
 				if (isBlank(text)) {
 					insertParagraph(cm, line, className, part);
-				} else if (rendersCleanly(editor, context, line, text.slice(0, part.start), '', text.slice(part.start))) {
+				} else if (text.charAt(part.start - 1) !== '`' && text.charAt(part.start) !== '`'
+					// Next to a backtick the two renderers can disagree on
+					// whether the pair lands inside inline code.
+					&& rendersCleanly(editor, context, line, text.slice(0, part.start), '', text.slice(part.start))
+				) {
 					cm.replaceRange(openTag(className) + CLOSE, { line: line, ch: part.start });
 					part.inside = cm.setBookmark({ line: line, ch: part.start + openTag(className).length });
 				}
@@ -473,11 +611,33 @@
 	}
 
 	/**
+	 * Whether the nearest line with text in a direction (-1 up, 1 down) is
+	 * part of a list or quote: marked, or indented under a list item.
+	 */
+	function continuesBlock(cm, line, direction) {
+		for (var i = line + direction; i >= 0 && i < cm.lineCount(); i += direction) {
+			var text = cm.getLine(i);
+
+			if (!isBlank(text)) {
+				return /^\s*(?:(?:[*+-]|\d+[.)])(?:\s|$)|>)/.test(text) || /^( {2,}|\t)/.test(text);
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * An empty pair on a blank line, as a paragraph of its own: with a blank
 	 * line added on either side that has text, it cannot join the paragraph
 	 * before or after it.
 	 */
 	function insertParagraph(cm, line, className, part) {
+		// Not between the items of a list or the lines of a quote: a paragraph
+		// there would split it in two.
+		if (isBlank(cm.getLine(line)) && (continuesBlock(cm, line, -1) || continuesBlock(cm, line, 1))) {
+			return;
+		}
+
 		var before = line > 0 && !isBlank(cm.getLine(line - 1)) ? '\n' : '';
 		var after = line < cm.lineCount() - 1 && !isBlank(cm.getLine(line + 1)) ? '\n' : '';
 
