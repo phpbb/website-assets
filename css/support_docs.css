@@ -1046,3 +1046,155 @@ ul#tutorials li {
 		margin: 0 0 24px;
 	}
 }
+
+/*------------------------------------------------------*\
+	Knowledge base listing
+/*------------------------------------------------------*/
+
+/* Category chips: they wrap on a wide screen and scroll sideways in one row
+   on a narrow one. The current one is filled like the docs' active tab. */
+.kb-categories ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	list-style: none;
+	margin: 4px 0 14px;
+	padding: 0;
+}
+
+.kb-categories a {
+	display: inline-block;
+	padding: 5px 12px;
+	border: 1px solid #C7D0D8;
+	border-radius: 999px;
+	background: #FFFFFF;
+	color: #105289;
+	font-size: 1.2em;
+	line-height: 1.4;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.kb-categories a:hover,
+.kb-categories a:focus {
+	border-color: #8C949A;
+	background: #E9EEF2;
+	color: #105289;
+	text-decoration: none;
+}
+
+.kb-categories .kb-count {
+	display: inline-block;
+	min-width: 1.4em;
+	margin-left: 4px;
+	padding: 0 6px;
+	border-radius: 999px;
+	background: #E9EEF2;
+	color: #505C65;
+	font-size: 0.85em;
+	text-align: center;
+}
+
+/* A category with no articles for this version. */
+.kb-categories .empty a {
+	border-style: dashed;
+	color: #747A7F;
+}
+
+.kb-categories .active a,
+.kb-categories .active a:hover,
+.kb-categories .active a:focus {
+	border-color: #505C65;
+	background: #505C65;
+	color: #FFFFFF;
+}
+
+.kb-categories .active .kb-count {
+	background: rgba(255, 255, 255, 0.2);
+	color: #FFFFFF;
+}
+
+/* The heading above the list, and the list itself: rows divided by a hairline
+   rather than a table, so title, description and author fit any width. */
+.support_docs .kb-listing-heading {
+	margin: 0 0 4px;
+	padding: 0 2px 8px;
+	border-bottom: 1px solid #C7D0D8;
+	color: #505C65;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-transform: none;
+}
+
+.kb-articles {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.kb-articles li {
+	padding: 10px 2px;
+	border-bottom: 1px solid #DCE3E8;
+}
+
+.kb-articles li:last-child {
+	border-bottom: none;
+}
+
+.kb-articles .kb-title {
+	font-size: 1.4em;
+	font-weight: bold;
+	line-height: 1.3;
+}
+
+.kb-articles .kb-external {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 1px 7px;
+	border-radius: 999px;
+	background: #E9EEF2;
+	color: #505C65;
+	font-size: 1em;
+	vertical-align: 2px;
+}
+
+#main .kb-articles p,
+.kb-articles p {
+	margin: 3px 0 0;
+	text-align: left;
+}
+
+.kb-articles .kb-description {
+	color: #333333;
+	font-size: 1.2em;
+}
+
+.kb-articles .kb-meta {
+	color: #626D76;
+	font-size: 1.1em;
+}
+
+.support_docs .kb-empty {
+	margin: 12px 2px;
+	font-size: 1.2em;
+}
+
+@media only screen and (max-width: 700px), only screen and (max-device-width: 700px)
+{
+	.kb-categories ul {
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding-bottom: 6px;
+		scrollbar-width: thin;
+	}
+
+	.kb-categories li {
+		flex: 0 0 auto;
+	}
+
+	/* Justified text leaves wide gaps in a narrow column. */
+	.support_docs #main p {
+		text-align: left;
+	}
+}
