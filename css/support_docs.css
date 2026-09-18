@@ -1304,7 +1304,7 @@ ul#tutorials li {
 	font-size: 1.1em;
 }
 
-/* Attachments and the link to paste into a support topic. */
+/* The link to paste into a support topic. */
 .kb-article-footer {
 	margin-top: 20px;
 	padding: 12px 14px;
@@ -1320,27 +1320,6 @@ ul#tutorials li {
 	color: #505C65;
 	font-size: 1.2em;
 	text-transform: none;
-}
-
-.kb-article-attachments {
-	margin-bottom: 14px;
-}
-
-.kb-article-attachments ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.kb-article-attachments li {
-	padding: 3px 0;
-	font-size: 1.2em;
-}
-
-.kb-article-filesize {
-	margin-left: 6px;
-	color: #626D76;
-	font-size: 0.9em;
 }
 
 .kb-article-link-field {
