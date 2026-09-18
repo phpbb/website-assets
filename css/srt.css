@@ -188,7 +188,7 @@ body.support-template .gen-info .error {
 }
 
 .srt-admin table.srt-questions .srt-order {
-	width: 7em;
+	width: 8em;
 }
 
 .srt-admin table.srt-questions th:nth-child(3),
@@ -201,13 +201,53 @@ body.support-template .gen-info .error {
 	width: 11em;
 }
 
-.srt-admin form.srt-move {
-	display: inline;
+/* The drag handle and the two arrows, on one line and centred. */
+.srt-admin .srt-order-tools {
+	display: flex;
+	align-items: center;
+	gap: 3px;
 }
 
-.srt-admin form.srt-move .button2 {
-	padding: 0 4px;
-	font-size: 0.9em;
+.srt-admin form.srt-move {
+	margin: 0;
+}
+
+/* prosilver's icon-only button, square, holding a chevron like the
+   pagination's. */
+.srt-admin form.srt-move .button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+}
+
+.srt-admin .srt-chevron {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
+
+/* The buttons under the tables, with room before the next heading. */
+.srt-admin .srt-actions {
+	margin: 0.6em 0 1.8em;
+}
+
+/* The page links are underlined by an id rule, so this needs one too. */
+#srt-admin .srt-actions a.button,
+#srt-admin .srt-actions a.button:hover {
+	text-decoration: none;
+}
+
+.srt-admin table.srt-outcomes td:first-child,
+.srt-admin table.srt-texts td:first-child {
+	width: 12em;
+}
+
+.srt-admin table.srt-outcomes td:last-child {
+	width: 11em;
 }
 
 .srt-admin .srt-branches label {
