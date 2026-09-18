@@ -47,6 +47,18 @@ body.support-template .gen-info .error {
 	margin-top: 0.3em;
 }
 
+/* A warning under its question, in the style of the messages at the top of
+   a step. */
+body.support-template .gen-info .srt-warning {
+	margin: 0 0 0.8em;
+	padding: 5px 10px;
+	text-align: left;
+}
+
+body.support-template .gen-info .srt-warning p {
+	margin: 0;
+}
+
 /* Help: an icon that shows the text on hover, or on a tap on touch screens.
    The inputs point at the text with aria-describedby, so screen readers read
    it with the field and the icon needs no place in the tab order. */
