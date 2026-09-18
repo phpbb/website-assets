@@ -44,6 +44,19 @@
 		var dragged = null;
 		var dragGroup = null;
 		var before = null;
+		var origin = null;
+		var dropped = false;
+		var submitting = false;
+
+		// Drag events can target a text node in some browsers, which has no
+		// closest().
+		function element(target) {
+			if (!target) {
+				return null;
+			}
+
+			return target.nodeType === 1 ? target : target.parentElement;
+		}
 
 		function rows(tbody) {
 			return Array.prototype.filter.call(tbody.children, function (row) {
@@ -82,9 +95,11 @@
 		function submitOrder() {
 			var form = document.getElementById('srt-order-form');
 
-			if (!form) {
+			if (!form || submitting) {
 				return;
 			}
+
+			submitting = true;
 
 			var steps = admin.querySelectorAll('tbody[data-srt-sortable="questions"]');
 
@@ -117,7 +132,8 @@
 			// Only the handle starts a drag, so text in the answers' fields
 			// can still be selected with the mouse.
 			tbody.addEventListener('mousedown', function (event) {
-				var handle = event.target.closest('.srt-drag-handle');
+				var target = element(event.target);
+				var handle = target ? target.closest('.srt-drag-handle') : null;
 
 				if (handle) {
 					handle.closest('tr').draggable = true;
@@ -125,14 +141,17 @@
 			});
 
 			tbody.addEventListener('dragstart', function (event) {
-				var row = event.target.closest('tr');
+				var target = element(event.target);
+				var row = target ? target.closest('tr') : null;
 
-				if (!row || !row.draggable) {
+				if (submitting || !row || !row.draggable) {
 					event.preventDefault();
 					return;
 				}
 
 				dragged = row;
+				origin = {parent: row.parentNode, next: row.nextSibling};
+				dropped = false;
 				dragGroup = tbody.getAttribute('data-srt-sortable');
 				before = snapshot(dragGroup);
 				row.classList.add('srt-dragging');
@@ -151,7 +170,8 @@
 				clearTargets();
 				tbody.classList.add('srt-drop-target');
 
-				var over = event.target.closest('tr');
+				var target = element(event.target);
+				var over = target ? target.closest('tr') : null;
 				var source = dragged.parentNode;
 
 				if (over && over !== dragged && over.parentNode === tbody && !over.classList.contains('srt-placeholder')) {
@@ -170,6 +190,17 @@
 
 			tbody.addEventListener('drop', function (event) {
 				event.preventDefault();
+				dropped = true;
+			});
+		});
+
+		// A click on a handle that never became a drag must not leave the row
+		// draggable, or selecting text in its fields would drag it instead.
+		document.addEventListener('mouseup', function () {
+			Array.prototype.forEach.call(admin.querySelectorAll('tr[draggable="true"]'), function (row) {
+				if (row !== dragged) {
+					row.draggable = false;
+				}
 			});
 		});
 
@@ -180,12 +211,25 @@
 
 			var row = dragged;
 			var group = dragGroup;
+			var moved = row.parentNode;
 			dragged = null;
 			dragGroup = null;
 
 			row.classList.remove('srt-dragging');
 			row.draggable = false;
 			clearTargets();
+
+			// Cancelled with Escape or let go outside the tables: the row moved
+			// while it was dragged over them, so put it back.
+			if (!dropped) {
+				origin.parent.insertBefore(row, origin.next);
+				tidy(origin.parent);
+				if (moved !== origin.parent) {
+					tidy(moved);
+				}
+
+				return;
+			}
 
 			if (snapshot(group) === before) {
 				return;

@@ -2196,6 +2196,17 @@ body.support-template .gen-info .error {
 	display: block;
 }
 
+/* Covers the gap between the icon and the box, so the box stays open while
+   the pointer moves into it. */
+.srt-help-text::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: -8px;
+	height: 8px;
+}
+
 .srt-help-text p {
 	margin: 0 0 0.5em;
 }
