@@ -210,3 +210,20 @@
 .markdown-body {
 	overflow-wrap: break-word;
 }
+
+/*
+ * Text colour. Markdown has none, so migrated content keeps the colours
+ * authors picked on the forum as <span class="text-…">, mapped to this
+ * palette. The website renders only these classes (App\Markdown\TextColours
+ * lists the same colours); keep the two in step.
+ */
+.markdown-body .text-red { color: #bf0000; }
+.markdown-body .text-darkred { color: #800000; }
+.markdown-body .text-orange { color: #dd6900; }
+.markdown-body .text-green { color: #008000; }
+.markdown-body .text-blue { color: #0040bf; }
+.markdown-body .text-navy { color: #000080; }
+.markdown-body .text-purple { color: #800080; }
+
+/* Underline, which Markdown lacks as well (App\Markdown\TextStyles). */
+.markdown-body .text-underline { text-decoration: underline; }
