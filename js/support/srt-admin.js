@@ -3,10 +3,10 @@
  * #29), on the jQuery every page loads.
  *
  * Question form: only the parts that apply to the chosen type are shown.
- * Elements carry the types they apply to in data-srt-types; those marked
- * data-srt-needs-versions only show once a version list is chosen. A yes or no
+ * Elements carry the types they apply to in data-srt-types. A yes or no
  * question shows one row per answer, Yes and No, for picking what each does.
- * Without this script the whole form shows.
+ * "Only ask when" offers only questions on steps before the one in the step
+ * field. Without this script the whole form shows.
  */
 jQuery(function ($) {
 	'use strict';
@@ -18,7 +18,7 @@ jQuery(function ($) {
 	}
 
 	var $type = $form.find('[data-srt-type-select]');
-	var $versions = $form.find('[data-srt-version-select]');
+	var $step = $form.find('[data-srt-step-input]');
 	var $requires = $form.find('[data-srt-requires-select]');
 	var $warnOutdated = $form.find('input[name$="[warnOutdated]"]');
 	var $table = $form.find('table.srt-options');
@@ -79,8 +79,6 @@ jQuery(function ($) {
 			$(this).prop('hidden', $.inArray(type, $(this).attr('data-srt-types').split(' ')) === -1);
 		});
 
-		$form.find('[data-srt-needs-versions]').prop('hidden', !$versions.val() || (type !== 'dropdown' && type !== 'option'));
-
 		if (boolean) {
 			addYesAndNo();
 		} else {
@@ -96,13 +94,29 @@ jQuery(function ($) {
 			field($row, 'value').add(field($row, 'label')).prop('readonly', fixed);
 		});
 
+		// A question can only depend on one asked on an earlier step. While the
+		// step field is being retyped it holds no number; leave the list be.
+		var step = parseInt($step.val(), 10);
+		$requires.find('option[data-srt-step]').each(function () {
+			if (isNaN(step)) {
+				return;
+			}
+
+			var later = parseInt($(this).attr('data-srt-step'), 10) >= step;
+
+			$(this).prop('disabled', later).prop('hidden', later);
+		});
+		if (!isNaN(step) && $requires.find('option:selected').prop('disabled')) {
+			$requires.val('');
+		}
+
 		// The answer a condition waits for, once there is a condition.
 		$form.find('[data-srt-needs-requires]').prop('hidden', !$requires.val());
 
 		// The warning, once an answer shown in the table, or an outdated
 		// release, warns.
 		var warns = $table.find('tbody tr:not(.srt-row-extra) input[name$="[warn]"]:checked').length > 0
-			|| ($warnOutdated.is(':checked') && !$form.find('[data-srt-needs-versions]').prop('hidden'));
+			|| ($warnOutdated.is(':checked') && type === 'phpbb_version');
 		$form.find('[data-srt-needs-warning]').prop('hidden', !warns);
 
 		// An editor set up while hidden has no size until it is refreshed.
@@ -113,7 +127,8 @@ jQuery(function ($) {
 		});
 	}
 
-	$type.add($versions).add($requires).on('change', update);
+	$type.add($requires).on('change', update);
+	$step.on('input change', update);
 	$form.on('change', 'input[name$="[warn]"], input[name$="[warnOutdated]"]', update);
 	update();
 });

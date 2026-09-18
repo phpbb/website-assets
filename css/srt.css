@@ -116,18 +116,6 @@ body.support-template .gen-info .error {
 	margin-bottom: 0;
 }
 
-/* Previous and next together, starting over set apart. */
-.srt-buttons {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 6px;
-}
-
-.srt-buttons .srt-start-over {
-	margin-left: auto;
-}
-
 /* The form's default button, so Enter moves forward; never shown. */
 .srt-default-submit {
 	position: absolute;
@@ -201,44 +189,8 @@ body.support-template .gen-info .error {
 	width: 11em;
 }
 
-/* The drag handle and the two arrows, on one line and centred. */
-.srt-admin .srt-order-tools {
-	display: flex;
-	align-items: center;
-	gap: 3px;
-}
-
 .srt-admin form.srt-move {
 	margin: 0;
-}
-
-/* prosilver's icon-only button, square, holding a chevron like the
-   pagination's. */
-.srt-admin form.srt-move .button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	width: 24px;
-	height: 24px;
-	padding: 0;
-}
-
-.srt-admin .srt-chevron {
-	display: block;
-	width: 14px;
-	height: 14px;
-}
-
-/* The buttons under the tables, with room before the next heading. */
-.srt-admin .srt-actions {
-	margin: 0.6em 0 1.8em;
-}
-
-/* The page links are underlined by an id rule, so this needs one too. */
-#srt-admin .srt-actions a.button,
-#srt-admin .srt-actions a.button:hover {
-	text-decoration: none;
 }
 
 .srt-admin table.srt-outcomes td:first-child,
@@ -292,10 +244,6 @@ body.support-template .gen-info .error {
 	background: transparent;
 	box-shadow: none;
 	font-weight: bold;
-}
-
-.srt-admin .submit-buttons .srt-cancel {
-	margin-left: 0.5em;
 }
 
 /* Drag and drop, which js/support/srt-admin.js switches on. */
