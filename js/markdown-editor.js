@@ -11,20 +11,30 @@
  *
  * Colour and underline: Markdown has neither, so the website keeps them as
  * <span class="text-…"> with a class from a fixed list, and renders only those
- * spans, and only when a span opens and closes within one block without
+ * spans, and only when a span opens and closes inside one block without
  * crossing other formatting. The textarea's data-markdown-styles attribute
  * carries the list (App\Form\Type\MarkdownEditorType), so the buttons offer
  * exactly what the site renders and this script keeps no copy of it. Without
  * the attribute there are no such buttons.
  *
- * The buttons therefore style text line by line, leave code, tables and other
- * block syntax alone, and never put a span halfway into bold, links or code:
- * a span the site could not render would show on the page as HTML text.
+ * A span the site cannot render shows on the page as HTML text, so no edit is
+ * made on trust. The buttons work line by line, leave code, tables and other
+ * block syntax alone, and try every edit first: the line is rendered with a
+ * probe span and without it, and the edit is made only if the probe comes out
+ * as an element directly inside its block and taking it out again gives back
+ * exactly the rendering the line had without it. When the selected part of a
+ * line does not pass, the whole line's text is tried; when that does not pass
+ * either, the line is left as it is.
  */
 (function () {
 	'use strict';
 
 	var CLOSE = '</span>';
+
+	var PROBE = 'markdown-editor-probe';
+
+	/** Elements a span may sit directly inside; the site's rule too. */
+	var BLOCK_PARENTS = ['P', 'LI', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'TD', 'TH'];
 
 	/**
 	 * List, heading and quote markers at the start of a line. A span has to
@@ -34,11 +44,10 @@
 
 	/** Lines whose syntax a span would break, styled or not. */
 	var UNTOUCHABLE_LINE = [
-		/^\s*(`{3,}|~{3,})/,					// code fence
-		/^ {0,3}([-*_])( *\1){2,} *$/,			// thematic break
-		/^ {0,3}(=+|-+) *$/,					// setext heading underline
-		/^\s*\|/,								// table row
-		/^\s*:?-+:?\s*(\|\s*:?-+:?\s*)+\|?\s*$/	// table delimiter row
+		/^\s*(`{3,}|~{3,})/,		// code fence
+		/^ {0,3}([-*_])( *\1){2,} *$/,	// thematic break
+		/^ {0,3}(=+|-+) *$/,		// setext heading underline
+		/^ {0,3}\[[^\]]+\]:/		// link reference definition
 	];
 
 	var SPAN_TAG = /<span class="([a-z-]+)">|<\/span>/g;
@@ -60,25 +69,38 @@
 		return (text.match(pattern) || []).length;
 	}
 
+	function comparePositions(a, b) {
+		return a.line === b.line ? a.ch - b.ch : a.line - b.line;
+	}
+
 	/**
-	 * Whether a piece of a line can be wrapped in a span without cutting
-	 * through inline code, emphasis, a link or another span.
+	 * Markdown rendered by EasyMDE's own renderer, as a detached document:
+	 * DOMParser runs no scripts and loads no images.
 	 */
-	function isBalanced(text) {
-		var t = text.replace(/\\./g, '');
+	function render(editor, markdown) {
+		return new DOMParser().parseFromString(editor.markdown(markdown), 'text/html').body;
+	}
 
-		t = t.replace(/(`+)[\s\S]*?\1/g, '');
+	/**
+	 * Whether wrapping body in a span, between before and after on one line,
+	 * renders as intended and changes nothing else.
+	 */
+	function rendersCleanly(editor, before, body, after) {
+		var plain = render(editor, before + body + after);
+		var probed = render(editor, before + openTag(PROBE) + body + CLOSE + after);
+		var span = probed.querySelector('span.' + PROBE);
 
-		if (t.indexOf('`') !== -1) {
+		if (!span || BLOCK_PARENTS.indexOf(span.parentNode.nodeName) === -1) {
 			return false;
 		}
 
-		return count(t, /\*\*/g) % 2 === 0
-			&& count(t, /__/g) % 2 === 0
-			&& count(t.replace(/\*\*/g, ''), /\*/g) % 2 === 0
-			&& count(t, /\[/g) === count(t, /\]/g)
-			&& count(t, /\(/g) === count(t, /\)/g)
-			&& count(t, /<span class="[a-z-]+">/g) === count(t, /<\/span>/g);
+		while (span.firstChild) {
+			span.parentNode.insertBefore(span.firstChild, span);
+		}
+
+		span.parentNode.removeChild(span);
+
+		return probed.innerHTML === plain.innerHTML;
 	}
 
 	/**
@@ -112,7 +134,66 @@
 			}
 		}
 
+		// A table row, with or without the leading pipe: an unescaped pipe
+		// outside inline code. A table's rows only make sense together.
+		if (/(^|[^\\])\|/.test(text.replace(/(`+)[^`]*?\1/g, ''))) {
+			return true;
+		}
+
 		return isCodeLine(cm, line);
+	}
+
+	/**
+	 * Where the styleable text of a line ends: before trailing whitespace, a
+	 * hard-break backslash, and a heading's closing hashes.
+	 */
+	function contentEnd(text) {
+		var end = text.length;
+
+		if (/^ {0,3}#{1,6}(\s|$)/.test(text)) {
+			var closing = text.match(/\s+#+\s*$/);
+
+			if (closing) {
+				end = closing.index;
+			}
+		}
+
+		while (end > 0 && /[\s\\]/.test(text.charAt(end - 1))) {
+			end--;
+		}
+
+		return end;
+	}
+
+	/**
+	 * Narrow [start, end) to styleable text: after block markers, before the
+	 * content's end, without surrounding whitespace, and including emphasis
+	 * or code markers it sits just inside of. Null when nothing is left.
+	 */
+	function trimmed(text, start, end) {
+		var prefix = text.match(BLOCK_PREFIX)[1].length;
+		var limit = contentEnd(text);
+
+		start = Math.max(start, prefix);
+		end = Math.min(end, limit);
+
+		while (start < end && /\s/.test(text.charAt(start))) {
+			start++;
+		}
+
+		while (end > start && /\s/.test(text.charAt(end - 1))) {
+			end--;
+		}
+
+		while (start > prefix && end < limit
+			&& text.charAt(start - 1) === text.charAt(end)
+			&& MARKERS.indexOf(text.charAt(end)) !== -1
+		) {
+			start--;
+			end++;
+		}
+
+		return start < end ? { start: start, end: end } : null;
 	}
 
 	/**
@@ -149,27 +230,6 @@
 		return text;
 	}
 
-	function comparePositions(a, b) {
-		return a.line === b.line ? a.ch - b.ch : a.line - b.line;
-	}
-
-	/**
-	 * Each selection as {from, to}, last in the document first, so styling
-	 * one never moves the others.
-	 */
-	function ranges(cm) {
-		return cm.listSelections().map(function (selection) {
-			var ordered = comparePositions(selection.anchor, selection.head) <= 0;
-
-			return {
-				from: ordered ? selection.anchor : selection.head,
-				to: ordered ? selection.head : selection.anchor
-			};
-		}).sort(function (a, b) {
-			return comparePositions(b.from, a.from);
-		});
-	}
-
 	/**
 	 * Widen a range over span tags sitting right around it on its lines, so
 	 * selecting just the styled words is enough to change or remove the style.
@@ -198,148 +258,165 @@
 	}
 
 	/**
-	 * The part of one line a style should go on: within the range, after any
-	 * block markers, without surrounding whitespace or a hard-break backslash,
-	 * and including emphasis or code markers it sits just inside of. Null when
-	 * there is nothing on the line to style.
+	 * Try to wrap [start, end) of a line; true when the edit was made.
 	 */
-	function segment(cm, range, line) {
+	function tryWrap(editor, line, start, end, className, removeFirst) {
+		var cm = editor.codemirror;
 		var text = cm.getLine(line);
-		var prefix = text.match(BLOCK_PREFIX)[1].length;
-		var start = Math.max(line === range.from.line ? range.from.ch : 0, prefix);
-		var end = line === range.to.line ? range.to.ch : text.length;
+		var body = text.slice(start, end);
 
-		while (start < end && /\s/.test(text.charAt(start))) {
-			start++;
+		if (removeFirst) {
+			body = unwrapSpans(body, removeFirst);
 		}
 
-		while (end > start && /[\s\\]/.test(text.charAt(end - 1))) {
-			end--;
+		if (!rendersCleanly(editor, text.slice(0, start), body, text.slice(end))) {
+			return false;
 		}
 
-		while (start > prefix && end < text.length
-			&& text.charAt(start - 1) === text.charAt(end)
-			&& MARKERS.indexOf(text.charAt(end)) !== -1
-		) {
-			start--;
-			end++;
-		}
+		cm.replaceRange(openTag(className) + body + CLOSE, { line: line, ch: start }, { line: line, ch: end });
 
-		return start < end ? { line: line, start: start, end: end, text: text, prefix: prefix } : null;
+		return true;
 	}
 
 	/**
-	 * The whole styleable content of a line, for when the selected part of it
-	 * cuts through other formatting.
+	 * Style one line's parts of the selections, rightmost first so the
+	 * positions of the others stay put. A part with nothing selected is
+	 * marked inserted when an empty pair went in there.
 	 */
-	function wholeLine(piece) {
-		var start = piece.prefix;
-		var end = piece.text.length;
+	function wrapLine(editor, line, parts, className, removeFirst) {
+		var cm = editor.codemirror;
 
-		while (end > start && /[\s\\]/.test(piece.text.charAt(end - 1))) {
-			end--;
+		if (isUntouchable(cm, line, cm.getLine(line))) {
+			return;
 		}
 
-		return { line: piece.line, start: start, end: end, text: piece.text, prefix: piece.prefix };
-	}
+		for (var i = 0; i < parts.length; i++) {
+			var part = parts[i];
+			var text = cm.getLine(line);
 
-	/**
-	 * Style a range: wrap each line's part of it in its own span.
-	 *
-	 * @param {function|null} removeFirst Spans to take off first, so a new
-	 *                                    colour replaces the old one.
-	 */
-	function wrapRange(cm, range, className, removeFirst) {
-		range = takeInSurroundingTags(cm, range);
+			if (part.empty) {
+				// Nothing selected: an empty pair to type into, if one fits.
+				if (rendersCleanly(editor, text.slice(0, part.start), '', text.slice(part.start))) {
+					cm.replaceRange(openTag(className) + CLOSE, { line: line, ch: part.start });
+					part.inserted = true;
+				}
 
-		if (comparePositions(range.from, range.to) === 0) {
-			// Nothing selected: an empty pair to type into, unless in code.
-			if (/\bcomment\b/.test(cm.getTokenTypeAt(range.from) || '') || isUntouchable(cm, range.from.line, cm.getLine(range.from.line))) {
-				return;
+				continue;
 			}
 
-			cm.replaceRange(openTag(className) + CLOSE, range.from);
+			var piece = trimmed(text, part.start, part.end);
 
-			// With a single cursor, put it inside the pair to type into.
-			if (cm.listSelections().length === 1) {
-				cm.setCursor({ line: range.from.line, ch: range.from.ch + openTag(className).length });
+			if (piece === null || tryWrap(editor, line, piece.start, piece.end, className, removeFirst)) {
+				continue;
+			}
+
+			// The selected part cuts through other formatting: the line's
+			// whole text, once, instead of any other part of it.
+			var whole = trimmed(text, 0, text.length);
+
+			if (whole !== null) {
+				tryWrap(editor, line, whole.start, whole.end, className, removeFirst);
 			}
 
 			return;
 		}
+	}
 
-		for (var line = range.to.line; line >= range.from.line; line--) {
-			if (isUntouchable(cm, line, cm.getLine(line))) {
-				continue;
+	/**
+	 * Take spans off one line's parts. When a part holds half of a pair the
+	 * whole line is cleaned instead: spans never reach across lines, so that
+	 * is where the other half is.
+	 */
+	function unwrapLine(editor, line, parts, isTarget) {
+		var cm = editor.codemirror;
+
+		for (var i = 0; i < parts.length; i++) {
+			var text = cm.getLine(line);
+			var start = parts[i].start;
+			var end = parts[i].end;
+			var slice = text.slice(start, end);
+
+			if (count(slice, /<span class="[a-z-]+">/g) !== count(slice, /<\/span>/g)) {
+				cm.replaceRange(unwrapSpans(text, isTarget), { line: line, ch: 0 }, { line: line, ch: text.length });
+
+				return;
 			}
 
-			var piece = segment(cm, range, line);
+			var cleaned = unwrapSpans(slice, isTarget);
 
-			if (piece === null) {
-				continue;
+			if (cleaned !== slice) {
+				cm.replaceRange(cleaned, { line: line, ch: start }, { line: line, ch: end });
 			}
-
-			var body = piece.text.slice(piece.start, piece.end);
-
-			if (removeFirst) {
-				body = unwrapSpans(body, removeFirst);
-			}
-
-			if (!isBalanced(body)) {
-				piece = wholeLine(piece);
-				body = piece.text.slice(piece.start, piece.end);
-
-				if (removeFirst) {
-					body = unwrapSpans(body, removeFirst);
-				}
-
-				if (body === '' || !isBalanced(body)) {
-					continue;
-				}
-			}
-
-			cm.replaceRange(
-				openTag(className) + body + CLOSE,
-				{ line: line, ch: piece.start },
-				{ line: line, ch: piece.end }
-			);
 		}
 	}
 
 	/**
-	 * Take spans off a range. When the range holds half of a pair, the whole
-	 * lines are cleaned instead: spans never reach across lines, so that is
-	 * where the other half is.
+	 * Run a line handler over every selection, grouped by line so parts of
+	 * several selections on one line cannot trip over each other, and keep
+	 * the selections around the text afterwards, so a second button acts on
+	 * the same words.
 	 */
-	function unwrapRange(cm, range, isTarget) {
-		range = takeInSurroundingTags(cm, range);
-
-		var text = cm.getRange(range.from, range.to);
-
-		if (count(text, /<span class="[a-z-]+">/g) !== count(text, /<\/span>/g)) {
-			range = {
-				from: { line: range.from.line, ch: 0 },
-				to: { line: range.to.line, ch: cm.getLine(range.to.line).length }
-			};
-			text = cm.getRange(range.from, range.to);
-		}
-
-		var cleaned = unwrapSpans(text, isTarget);
-
-		if (cleaned !== text) {
-			cm.replaceRange(cleaned, range.from, range.to);
-		}
-	}
-
-	function eachRange(editor, handler) {
+	function eachLine(editor, handler) {
 		var cm = editor.codemirror;
 
 		cm.operation(function () {
-			var list = ranges(cm);
+			var selections = cm.listSelections().map(function (selection) {
+				var ordered = comparePositions(selection.anchor, selection.head) <= 0;
 
-			for (var i = 0; i < list.length; i++) {
-				handler(cm, list[i]);
-			}
+				return takeInSurroundingTags(cm, {
+					from: ordered ? selection.anchor : selection.head,
+					to: ordered ? selection.head : selection.anchor
+				});
+			});
+
+			var lines = {};
+			var marks = [];
+
+			selections.forEach(function (range, index) {
+				var empty = comparePositions(range.from, range.to) === 0;
+
+				marks.push({
+					from: cm.setBookmark(range.from),
+					to: cm.setBookmark(range.to, { insertLeft: true }),
+					empty: empty,
+					parts: []
+				});
+
+				for (var line = range.from.line; line <= range.to.line; line++) {
+					var part = {
+						start: line === range.from.line ? range.from.ch : 0,
+						end: line === range.to.line ? range.to.ch : cm.getLine(line).length,
+						empty: empty,
+						inserted: false
+					};
+
+					marks[index].parts.push(part);
+					(lines[line] = lines[line] || []).push(part);
+				}
+			});
+
+			Object.keys(lines).map(Number).sort(function (a, b) {
+				return b - a;
+			}).forEach(function (line) {
+				handler(line, lines[line].sort(function (a, b) {
+					return b.start - a.start;
+				}));
+			});
+
+			cm.setSelections(marks.map(function (mark) {
+				var from = mark.from.find();
+				var to = mark.to.find();
+
+				mark.from.clear();
+				mark.to.clear();
+
+				// An inserted empty pair: the cursor goes inside it.
+				if (mark.empty && mark.parts[0].inserted) {
+					from = to = { line: to.line, ch: to.ch - CLOSE.length };
+				}
+
+				return { anchor: from, head: to };
+			}));
 		});
 
 		cm.focus();
@@ -366,14 +443,24 @@
 				className: 'fa fa-underline',
 				title: 'Underline',
 				action: function (editor) {
-					eachRange(editor, function (cm, range) {
-						var widened = takeInSurroundingTags(cm, range);
+					var cm = editor.codemirror;
 
-						// Pressed on underlined text: take the underline off.
-						if (cm.getRange(widened.from, widened.to).indexOf(openTag(styles.underline)) !== -1) {
-							unwrapRange(cm, range, isUnderline);
+					// Pressed on underlined text: take the underline off.
+					var underlined = cm.listSelections().some(function (selection) {
+						var ordered = comparePositions(selection.anchor, selection.head) <= 0;
+						var range = takeInSurroundingTags(cm, {
+							from: ordered ? selection.anchor : selection.head,
+							to: ordered ? selection.head : selection.anchor
+						});
+
+						return cm.getRange(range.from, range.to).indexOf(openTag(styles.underline)) !== -1;
+					});
+
+					eachLine(editor, function (line, parts) {
+						if (underlined) {
+							unwrapLine(editor, line, parts, isUnderline);
 						} else {
-							wrapRange(cm, range, styles.underline, null);
+							wrapLine(editor, line, parts, styles.underline, null);
 						}
 					});
 				}
@@ -395,9 +482,9 @@
 					title: colour.label,
 					icon: '<i class="fa fa-font" style="color: ' + escapeHtml(colour.colour) + ';"></i> ' + escapeHtml(colour.label),
 					action: function (editor) {
-						eachRange(editor, function (cm, range) {
+						eachLine(editor, function (line, parts) {
 							// A new colour replaces the old one rather than nesting.
-							wrapRange(cm, range, colour.class, isColour);
+							wrapLine(editor, line, parts, colour.class, isColour);
 						});
 					}
 				};
@@ -408,8 +495,8 @@
 				title: 'Remove colour',
 				icon: '<i class="fa fa-eraser"></i> Remove colour',
 				action: function (editor) {
-					eachRange(editor, function (cm, range) {
-						unwrapRange(cm, range, isColour);
+					eachLine(editor, function (line, parts) {
+						unwrapLine(editor, line, parts, isColour);
 					});
 				}
 			});
