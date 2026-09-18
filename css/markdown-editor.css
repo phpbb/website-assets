@@ -224,3 +224,6 @@
 .markdown-body .text-blue { color: #0040bf; }
 .markdown-body .text-navy { color: #000080; }
 .markdown-body .text-purple { color: #800080; }
+
+/* Underline, which Markdown lacks as well (App\Markdown\TextStyles). */
+.markdown-body .text-underline { text-decoration: underline; }
