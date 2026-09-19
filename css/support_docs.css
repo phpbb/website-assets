@@ -1048,6 +1048,44 @@ ul#tutorials li {
 }
 
 /*------------------------------------------------------*\
+	The documentation in #main
+/*------------------------------------------------------*/
+
+/* The User Guide and the Knowledge Base sit in #main, as the rest of the site
+   does (docs_base.html.twig), and take its text styles. Their sidebar and
+   menus are navigation, not running text: #main's bigger lists, underlined
+   links and red headings do not apply to them. */
+.support_docs #main #extras h3 {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.05em;
+	color: #333333;
+}
+
+.support_docs #main #extras ul,
+.support_docs #main .guide-menu {
+	margin-left: 0;
+	line-height: normal;
+}
+
+.support_docs #main #extras ul {
+	font-size: 1em;
+}
+
+.support_docs #main .guide-menu {
+	font-size: 1.1em;
+}
+
+.support_docs #main #extras a,
+.support_docs #main .guide-menu a {
+	text-decoration: none;
+}
+
+/* A paragraph inside a list item is part of the item, not a paragraph apart. */
+.support_docs #main .main-content li p {
+	margin-bottom: 0;
+}
+
+/*------------------------------------------------------*\
 	Knowledge base listing
 /*------------------------------------------------------*/
 
@@ -1185,6 +1223,37 @@ ul#tutorials li {
 .kb-articles .kb-meta {
 	color: #626D76;
 	font-size: 1.1em;
+}
+
+/* The knowledge base sits in #main (docs_base.html.twig). Its chips and its
+   list are not running text: #main's list size, indent and underlined links
+   do not apply to them, nor its red headings to the list's heading. */
+#main .kb-categories ul,
+#main .kb-articles {
+	margin-left: 0;
+	font-size: 1em;
+	line-height: normal;
+}
+
+#main .kb-categories a,
+#main .kb-articles .kb-title,
+#main .kb-article-tags a {
+	text-decoration: none;
+}
+
+#main .kb-articles .kb-title:hover,
+#main .kb-articles .kb-title:focus {
+	text-decoration: underline;
+}
+
+#main .kb-articles .kb-meta {
+	font-size: 1.1em;
+}
+
+.support_docs #main .kb-listing-heading {
+	font-family: inherit;
+	font-size: 1.3em;
+	color: #505C65;
 }
 
 .support_docs .kb-empty {
