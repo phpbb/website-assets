@@ -47,6 +47,18 @@ body.support-template .gen-info .error {
 	margin-top: 0.3em;
 }
 
+/* A warning under its question, in the style of the messages at the top of
+   a step. */
+body.support-template .gen-info .srt-warning {
+	margin: 0 0 0.8em;
+	padding: 5px 10px;
+	text-align: left;
+}
+
+body.support-template .gen-info .srt-warning p {
+	margin: 0;
+}
+
 /* Help: an icon that shows the text on hover, or on a tap on touch screens.
    The inputs point at the text with aria-describedby, so screen readers read
    it with the field and the icon needs no place in the tab order. */
@@ -116,18 +128,6 @@ body.support-template .gen-info .error {
 	margin-bottom: 0;
 }
 
-/* Previous and next together, starting over set apart. */
-.srt-buttons {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 6px;
-}
-
-.srt-buttons .srt-start-over {
-	margin-left: auto;
-}
-
 /* The form's default button, so Enter moves forward; never shown. */
 .srt-default-submit {
 	position: absolute;
@@ -163,32 +163,26 @@ body.support-template .gen-info .error {
 	margin: 0.6em 0;
 }
 
-.srt-admin .markdown-field .CodeMirror,
+/* Smaller editors than EasyMDE's default: they start low, grow with the
+   text, and scroll once it is long. */
+.srt-admin .markdown-field .CodeMirror {
+	height: auto;
+	min-height: 0;
+}
+
+/* EasyMDE sets its 300px minimum as an inline style. */
 .srt-admin .markdown-field .CodeMirror-scroll {
-	min-height: 100px;
-	height: 140px;
+	min-height: 100px !important;
+	max-height: 360px;
 }
 
 .srt-admin table.srt-options input.inputbox {
 	width: 95%;
 }
 
-.srt-admin table.srt-options td.srt-order input.inputbox {
-	width: 4em;
-}
-
-.srt-admin td.srt-order {
-	white-space: nowrap;
-	width: 1%;
-}
-
 /* The same column widths in every step, so the tables line up. */
 .srt-admin table.srt-questions {
 	table-layout: fixed;
-}
-
-.srt-admin table.srt-questions .srt-order {
-	width: 7em;
 }
 
 .srt-admin table.srt-questions th:nth-child(3),
@@ -201,13 +195,13 @@ body.support-template .gen-info .error {
 	width: 11em;
 }
 
-.srt-admin form.srt-move {
-	display: inline;
+.srt-admin table.srt-outcomes td:first-child,
+.srt-admin table.srt-texts td:first-child {
+	width: 12em;
 }
 
-.srt-admin form.srt-move .button2 {
-	padding: 0 4px;
-	font-size: 0.9em;
+.srt-admin table.srt-outcomes td:last-child {
+	width: 11em;
 }
 
 .srt-admin .srt-branches label {
@@ -215,25 +209,103 @@ body.support-template .gen-info .error {
 	white-space: nowrap;
 }
 
-.srt-admin .submit-buttons .srt-cancel {
-	margin-left: 0.5em;
+/* Parts of the question form that do not apply to the chosen type. prosilver
+   gives dl and fieldset a display of their own, which would win over the
+   hidden attribute. */
+.srt-admin [hidden] {
+	display: none !important;
 }
 
-/* Drag and drop, which js/support/srt-admin.js switches on. */
-.srt-admin .srt-drag-handle {
+.srt-admin .panel h3 {
+	margin-top: 0;
+}
+
+.srt-admin .panel h4 {
+	margin: 1.2em 0 0.4em;
+	padding-bottom: 2px;
+	border-bottom: 1px solid #CCCCCC;
+	color: #115098;
+	font-size: 1.05em;
+}
+
+.srt-admin .srt-versions {
+	margin-bottom: 0.8em;
+}
+
+/* A yes or no question: its two answers are fixed, so only what they do is
+   shown. */
+.srt-admin table.srt-boolean .srt-col-order,
+.srt-admin table.srt-boolean .srt-col-value,
+.srt-admin table.srt-boolean .srt-col-remove,
+.srt-admin table.srt-boolean tr.srt-row-extra {
 	display: none;
-	padding: 0 6px 0 2px;
-	color: #999999;
+}
+
+.srt-admin table.srt-options input[readonly] {
+	border-color: transparent;
+	background: transparent;
+	box-shadow: none;
+	font-weight: bold;
+}
+
+/* Read out, not shown. */
+.srt-admin .srt-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+/* Drag and drop, and the arrow keys, through js/support/srt-admin.js. */
+.srt-admin .srt-drag-handle {
+	display: inline-block;
+	padding: 4px 6px;
+	border-radius: 4px;
+	color: #536482;
 	cursor: grab;
 	user-select: none;
+	vertical-align: middle;
 }
 
-.srt-admin.srt-sortable-on .srt-drag-handle {
-	display: inline;
+.srt-admin .srt-drag-handle svg {
+	display: block;
+	width: 10px;
+	height: 16px;
+	fill: currentColor;
+}
+
+.srt-admin .srt-drag-handle:hover,
+.srt-admin .srt-drag-handle:focus-visible {
+	color: #105289;
+	background-color: #C7D9E9;
+}
+
+/* The order column only holds the handles. */
+.srt-admin table.srt-options .srt-col-order,
+.srt-admin table.srt-questions .srt-order {
+	width: 36px;
 }
 
 .srt-admin tr.srt-dragging {
 	opacity: 0.4;
+}
+
+/* While a new order is being saved. */
+.srt-admin #srt-steps.srt-saving,
+.srt-admin #srt-steps.srt-saving .srt-drag-handle {
+	cursor: progress;
+}
+
+.srt-admin tr.srt-row-saving {
+	opacity: 0.5;
+}
+
+/* A button waiting for the server. */
+#main .srt-admin .srt-busy {
+	cursor: progress;
+	opacity: 0.7;
 }
 
 .srt-admin tbody.srt-drop-target {
