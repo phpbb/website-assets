@@ -1051,10 +1051,19 @@ ul#tutorials li {
 	The documentation in #main
 /*------------------------------------------------------*/
 
+/* Keep the intro, which wraps around the sidebar, off its edge. Below 800px
+   the sidebar is the slide-out panel, with a margin of its own. */
+@media only screen and (min-width: 801px) {
+	.support_docs #main #extras {
+		margin-left: 12px;
+	}
+}
+
 /* The User Guide and the Knowledge Base sit in #main, as the rest of the site
    does (docs_base.html.twig), and take its text styles. Their sidebar and
    menus are navigation, not running text: #main's bigger lists, underlined
    links and red headings do not apply to them. */
+
 .support_docs #main #extras h3 {
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-size: 1.05em;
