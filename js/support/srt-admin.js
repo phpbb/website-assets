@@ -362,6 +362,83 @@ jQuery(function ($) {
 		}
 	});
 
+	// The arrow keys on a handle move its row one place up or down; a question
+	// at the edge of its step moves on into the step before or after.
+	$bodies.on('keydown', '.srt-drag-handle', function (event) {
+		var up = event.which === 38;
+
+		if (submitting || $dragged || (!up && event.which !== 40)
+			|| event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+			return;
+		}
+
+		event.preventDefault();
+
+		var $row = $(this).closest('tr');
+		var $tbody = $row.parent();
+		var name = groupOf($tbody);
+		var $visible = rows($tbody).not('[hidden]');
+		var $sibling = $visible.eq($visible.index($row) + (up ? -1 : 1));
+
+		if (up && $visible.index($row) === 0) {
+			$sibling = $();
+		}
+
+		if ($sibling.length) {
+			if (up) {
+				$row.insertBefore($sibling);
+			} else {
+				$row.insertAfter($sibling);
+			}
+		} else if (name === 'questions') {
+			var $steps = $bodies.filter('[data-srt-sortable="questions"]');
+			var target = $steps.index($tbody) + (up ? -1 : 1);
+
+			// The only question of the last step would start a new step that
+			// is the same one.
+			if (target < 0 || target >= $steps.length || (target === $steps.length - 1 && $visible.length === 1)) {
+				return;
+			}
+
+			if (up) {
+				$row.appendTo($steps.eq(target));
+			} else {
+				$row.prependTo($steps.eq(target));
+			}
+
+			tidy($steps.eq(target));
+		} else {
+			return;
+		}
+
+		tidy($tbody);
+
+		if (name === 'questions') {
+			try {
+				window.sessionStorage.setItem('srt-focus', $row.attr('data-srt-id'));
+			} catch (e) {
+				// Focus is not kept over the reload then.
+			}
+
+			submitOrder();
+		} else {
+			renumber($tbody);
+			$(this).trigger('focus');
+		}
+	});
+
+	// Back from moving a question with the keys: its handle gets focus again.
+	try {
+		var focus = window.sessionStorage.getItem('srt-focus');
+
+		window.sessionStorage.removeItem('srt-focus');
+		if (focus) {
+			$bodies.find('tr[data-srt-id="' + focus.replace(/[^0-9]/g, '') + '"] .srt-drag-handle').trigger('focus');
+		}
+	} catch (e) {
+		// Nothing to restore.
+	}
+
 	$bodies.on('drop', function (event) {
 		event.preventDefault();
 		dropped = true;
