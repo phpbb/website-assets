@@ -173,22 +173,9 @@ body.support-template .gen-info .srt-warning p {
 	width: 95%;
 }
 
-.srt-admin table.srt-options td.srt-order input.inputbox {
-	width: 4em;
-}
-
-.srt-admin td.srt-order {
-	white-space: nowrap;
-	width: 1%;
-}
-
 /* The same column widths in every step, so the tables line up. */
 .srt-admin table.srt-questions {
 	table-layout: fixed;
-}
-
-.srt-admin table.srt-questions .srt-order {
-	width: 8em;
 }
 
 .srt-admin table.srt-questions th:nth-child(3),
@@ -199,10 +186,6 @@ body.support-template .gen-info .srt-warning p {
 .srt-admin table.srt-questions th:nth-child(4),
 .srt-admin table.srt-questions td:nth-child(4) {
 	width: 11em;
-}
-
-.srt-admin form.srt-move {
-	margin: 0;
 }
 
 .srt-admin table.srt-outcomes td:first-child,
@@ -258,9 +241,19 @@ body.support-template .gen-info .srt-warning p {
 	font-weight: bold;
 }
 
-/* Drag and drop, which js/support/srt-admin.js switches on. */
+/* Read out, not shown. */
+.srt-admin .srt-sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+}
+
+/* Drag and drop, and the arrow keys, through js/support/srt-admin.js. */
 .srt-admin .srt-drag-handle {
-	display: none;
+	display: inline-block;
 	padding: 4px 6px;
 	border-radius: 4px;
 	color: #536482;
@@ -282,32 +275,10 @@ body.support-template .gen-info .srt-warning p {
 	background-color: #C7D9E9;
 }
 
-.srt-admin.srt-sortable-on .srt-drag-handle {
-	display: inline-block;
-}
-
-/* Dragging, or the arrow keys on a handle, set the order, so the order
-   numbers and arrow buttons that stand in for it without the script are not
-   shown. */
-.srt-admin.srt-sortable-on table.srt-options .srt-col-order input,
-.srt-admin.srt-sortable-on .srt-order-hint {
-	display: none;
-}
-
-/* Stronger than buttons.css's #main .submit-buttons-inline. */
-#main #srt-admin.srt-sortable-on .srt-move-buttons {
-	display: none;
-}
-
-/* That column then only holds the handles. */
-.srt-admin.srt-sortable-on table.srt-options th.srt-col-order,
-.srt-admin.srt-sortable-on table.srt-questions .srt-order {
+/* The order column only holds the handles. */
+.srt-admin table.srt-options .srt-col-order,
+.srt-admin table.srt-questions .srt-order {
 	width: 36px;
-	font-size: 0;
-}
-
-.srt-admin.srt-sortable-on table.srt-questions td.srt-order {
-	font-size: inherit;
 }
 
 .srt-admin tr.srt-dragging {

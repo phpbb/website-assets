@@ -3,9 +3,7 @@
  * jQuery every page loads.
  *
  * An answer that warns shows its warning under its question as soon as it is
- * picked, and hides it again when another answer is. The page then tells the
- * server, through warnings_shown, not to repeat the warnings on the next
- * step. Without this script they are shown there instead.
+ * picked, and hides it again when another answer is.
  */
 jQuery(function ($) {
 	'use strict';
@@ -34,6 +32,4 @@ jQuery(function ($) {
 		$fields.on('change', update);
 		update();
 	});
-
-	$form.find('[data-srt-warnings-shown]').val('1');
 });

@@ -1,12 +1,36 @@
 /**
  * The Support Request Template pages in the team tools (phpbb-website-private
- * #29), on the jQuery every page loads.
- *
- * Question form: only the parts that apply to the chosen type are shown.
+ * #29), on the jQuery every page loads. The pages rely on this script.
+ */
+
+/**
+ * Where the pages report what the server said, in #srt-status.
+ */
+function srtStatus(message, colour) {
+	'use strict';
+
+	jQuery('#srt-status').empty().append(jQuery('<div class="note-box"></div>').addClass(colour).text(message));
+}
+
+/**
+ * The message in a JSON error answer, or a general one.
+ */
+function srtErrorMessage(xhr) {
+	'use strict';
+
+	try {
+		return JSON.parse(xhr.responseText).message || 'Something went wrong. Please reload the page and try again.';
+	} catch (e) {
+		return 'Something went wrong. Please reload the page and try again.';
+	}
+}
+
+/**
+ * The question form: only the parts that apply to the chosen type are shown.
  * Elements carry the types they apply to in data-srt-types. A yes or no
  * question shows one row per answer, Yes and No, for picking what each does.
  * "Only ask when" offers only questions on steps before the one in the step
- * field. Without this script the whole form shows.
+ * field. The Add button adds an answer from the form's prototype row.
  */
 jQuery(function ($) {
 	'use strict';
@@ -22,48 +46,61 @@ jQuery(function ($) {
 	var $requires = $form.find('[data-srt-requires-select]');
 	var $warnOutdated = $form.find('input[name$="[warnOutdated]"]');
 	var $table = $form.find('table.srt-options');
+	var $prototype = $('#srt-option-prototype');
 	var labels = {yes: 'Yes', no: 'No'};
+
+	// Past the highest index in the table: a form sent back after a failed
+	// save can have gaps, where rows were added and taken out again.
+	var nextIndex = 0;
+	$table.find('tbody input[name$="[value]"]').each(function () {
+		var match = /\[options\]\[(\d+)\]/.exec(this.name);
+
+		if (match) {
+			nextIndex = Math.max(nextIndex, parseInt(match[1], 10) + 1);
+		}
+	});
 
 	function field($row, name) {
 		return $row.find('input[name$="[' + name + ']"]');
+	}
+
+	function position($row) {
+		return parseInt(field($row, 'position').val(), 10) || 0;
 	}
 
 	function isYesOrNo($row) {
 		return labels.hasOwnProperty(field($row, 'value').val());
 	}
 
-	// The empty rows offered for new answers wait behind the Add button. When
-	// none are left, another comes from the template.
-	var $prototype = $('#srt-option-prototype');
-	var nextIndex = $table.find('tbody tr').length;
-
-	function newRow() {
-		var $row = $table.find('tbody tr.srt-blank-row[hidden]').first();
-
-		if (!$row.length && $prototype.length) {
-			$row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
-			// Like the empty rows the page offers: its order field is hidden
-			// while dragging is on, so it must never be left empty.
-			field($row, 'position').val('0');
-			$row.prop('hidden', true).appendTo($table.find('tbody'));
-		}
-
-		return $row;
-	}
-
 	// A yes or no question only shows its Yes and No rows.
 	function stripe() {
 		var boolean = $table.hasClass('srt-boolean');
 
-		$table.find('tbody tr').not('[hidden]').filter(function () {
+		$table.find('tbody tr').filter(function () {
 			return !boolean || !$(this).hasClass('srt-row-extra');
 		}).each(function (index) {
 			$(this).toggleClass('bg1', index % 2 === 0).toggleClass('bg2', index % 2 === 1);
 		});
 	}
 
-	// Switching a question to yes or no fills blank rows with the two answers
-	// it now has, if they are not there yet.
+	// A new answer, from the prototype, after the others.
+	function newRow() {
+		var last = 0;
+
+		$table.find('tbody tr').each(function () {
+			last = Math.max(last, position($(this)));
+		});
+
+		var $row = $($.trim($prototype.html().replace(/__name__/g, String(nextIndex++))));
+
+		field($row, 'position').val(last + 10);
+		$row.appendTo($table.find('tbody'));
+
+		return $row;
+	}
+
+	// Switching a question to yes or no fills an empty row, or adds one, for
+	// each of the two answers it now has, if they are not there yet.
 	function addYesAndNo() {
 		$.each(labels, function (value, label) {
 			var $rows = $table.find('tbody tr');
@@ -77,24 +114,24 @@ jQuery(function ($) {
 
 			// An empty row, but not one sent back with an error for what else
 			// it had filled in.
-			var $blank = $rows.filter(function () {
-				var $row = $(this);
+			var $row = $rows.filter(function () {
+				var $candidate = $(this);
 
-				return field($row, 'value').val() === '' && field($row, 'label').val() === ''
-					&& !field($row, 'warn').is(':checked') && !$row.find('select[name$="[outcome]"]').val();
+				return field($candidate, 'value').val() === '' && field($candidate, 'label').val() === ''
+					&& !field($candidate, 'warn').is(':checked') && !$candidate.find('select[name$="[outcome]"]').val();
 			}).first();
 
-			if (!$blank.length) {
-				$blank = newRow();
+			if (!$row.length) {
+				$row = newRow();
 			}
 
-			field($blank, 'value').val(value);
-			field($blank, 'label').val(label);
-			$blank.attr('data-srt-auto', value).removeClass('srt-blank-row').prop('hidden', false);
+			field($row, 'value').val(value);
+			field($row, 'label').val(label);
+			$row.attr('data-srt-auto', value);
 		});
 	}
 
-	// Switching away from yes or no again empties the rows filled above, as
+	// Switching away from yes or no again takes out the rows filled above, as
 	// long as nobody changed them, so they do not become answers unnoticed.
 	function removeYesAndNo() {
 		$table.find('tbody tr[data-srt-auto]').each(function () {
@@ -102,12 +139,10 @@ jQuery(function ($) {
 			var value = $row.attr('data-srt-auto');
 
 			if (field($row, 'value').val() === value && field($row, 'label').val() === labels[value]) {
-				field($row, 'value').val('');
-				field($row, 'label').val('');
-				$row.addClass('srt-blank-row').prop('hidden', true);
+				$row.remove();
+			} else {
+				$row.removeAttr('data-srt-auto');
 			}
-
-			$row.removeAttr('data-srt-auto');
 		});
 	}
 
@@ -169,39 +204,14 @@ jQuery(function ($) {
 	}
 
 	// The answers show in their order, also when the form comes back after a
-	// failed save, so that dragging one keeps the order of the others. The
-	// empty rows go last, out of sight.
-	function position($row) {
-		return parseInt(field($row, 'position').val(), 10) || 0;
-	}
-
-	var $sorted = $table.find('tbody tr').not('.srt-blank-row').get().sort(function (a, b) {
+	// failed save, so that dragging one keeps the order of the others.
+	$table.find('tbody').append($table.find('tbody tr').get().sort(function (a, b) {
 		return position($(a)) - position($(b));
-	});
-	$table.find('tbody').prepend($sorted);
-	$table.find('tbody tr.srt-blank-row').prop('hidden', true);
-	$form.find('.srt-add-option').removeAttr('hidden');
-	stripe();
+	}));
 
-	// The Add button shows one empty row at a time, as the last answer.
 	$form.on('click', '[data-srt-add-option]', function () {
 		var $row = newRow();
-		var last = 0;
 
-		$table.find('tbody tr').not('[hidden]').each(function () {
-			last = Math.max(last, position($(this)));
-		});
-
-		var $hidden = $table.find('tbody tr[hidden]').not($row).first();
-
-		if ($hidden.length) {
-			$row.insertBefore($hidden);
-		} else {
-			$row.appendTo($table.find('tbody'));
-		}
-
-		$row.removeClass('srt-blank-row').prop('hidden', false);
-		field($row, 'position').val(last + 10);
 		stripe();
 		field($row, 'value').trigger('focus');
 	});
@@ -213,35 +223,65 @@ jQuery(function ($) {
 });
 
 /**
- * Drag and drop sorting of the questions and of a question's answers.
+ * Deleting a question or an outcome: a DELETE request with the page's CSRF
+ * token. The server answers with where to go next, or why it did not delete.
+ */
+jQuery(function ($) {
+	'use strict';
+
+	$('#srt-admin').on('click', '[data-srt-delete]', function () {
+		var $button = $(this);
+
+		if (!window.confirm($button.attr('data-srt-confirm'))) {
+			return;
+		}
+
+		$button.prop('disabled', true);
+
+		$.ajax({
+			type: 'DELETE',
+			url: $button.attr('data-srt-delete'),
+			headers: {'X-CSRF-Token': $button.attr('data-srt-token')},
+			dataType: 'json'
+		}).done(function (data) {
+			window.location.href = data.redirect;
+		}).fail(function (xhr) {
+			$button.prop('disabled', false);
+			srtStatus(srtErrorMessage(xhr), 'red');
+			// The button is at the bottom of the form, the message at the top.
+			document.getElementById('srt-status').scrollIntoView();
+		});
+	});
+});
+
+/**
+ * Sorting the questions on the overview and a question's answers.
  *
- * Rows are dragged by their handle. On the overview, questions can be dropped
- * in any step, or in the "new step" table, and the new order is submitted at
- * once through #srt-order-form. In a question's answers, dropping only
- * renumbers the order fields; the answers are saved with the question.
- *
- * Nothing depends on this: without it the arrows on the overview and the order
- * fields of the answers do the same.
+ * Rows are dragged by their handle, or moved with the arrow keys while their
+ * handle has focus. On the overview, a question can go into any step, or into
+ * the "new step" table after the last one, and every move is saved at once:
+ * the steps are then renumbered, an emptied step disappears and a new empty
+ * one follows the last. A move the server refuses is undone. In a question's
+ * answers, a move only renumbers the hidden order fields; the answers are
+ * saved with the question.
  */
 jQuery(function ($) {
 	'use strict';
 
 	var $admin = $('#srt-admin');
-	var $bodies = $admin.find('tbody[data-srt-sortable]');
-
-	if (!$bodies.length || !('draggable' in document.createElement('tr'))) {
-		return;
-	}
-
-	$admin.addClass('srt-sortable-on');
-	$admin.find('.srt-new-step, .srt-drag-hint').prop('hidden', false);
+	var $steps = $('#srt-steps');
+	var $newStep = $steps.find('.srt-new-step').first().clone();
 
 	var $dragged = null;
 	var group = null;
 	var before = null;
 	var origin = null;
 	var dropped = false;
-	var submitting = false;
+	var saving = false;
+
+	function bodies(name) {
+		return $admin.find('tbody[data-srt-sortable="' + name + '"]');
+	}
 
 	function rows($tbody) {
 		return $tbody.children('tr').not('.srt-placeholder');
@@ -251,40 +291,47 @@ jQuery(function ($) {
 		return $tbody.attr('data-srt-sortable');
 	}
 
-	// A string that changes whenever a row of the group moves.
-	function snapshot(name) {
-		return $bodies.filter('[data-srt-sortable="' + name + '"]').map(function () {
-			return rows($(this)).map(function () {
-				return $(this).attr('data-srt-id') || $(this).find('input, select').attr('name');
-			}).get().join(',');
-		}).get().join('|');
+	// Where every row of the group is, to compare with later or to go back to.
+	function layout(name) {
+		return bodies(name).map(function () {
+			return {tbody: $(this), rows: rows($(this)).get()};
+		}).get();
+	}
+
+	function sameLayout(a, b) {
+		if (a.length !== b.length) {
+			return false;
+		}
+
+		for (var i = 0; i < a.length; i++) {
+			if (a[i].rows.length !== b[i].rows.length) {
+				return false;
+			}
+
+			for (var j = 0; j < a[i].rows.length; j++) {
+				if (a[i].rows[j] !== b[i].rows[j]) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	function restore(saved) {
+		$.each(saved, function (index, place) {
+			place.tbody.prepend(place.rows);
+			tidy(place.tbody);
+		});
 	}
 
 	function tidy($tbody) {
-		var $rows = rows($tbody).not('[hidden]');
+		var $rows = rows($tbody);
 
 		$tbody.children('.srt-placeholder').prop('hidden', $rows.length > 0);
 		$rows.each(function (index) {
 			$(this).toggleClass('bg1', index % 2 === 0).toggleClass('bg2', index % 2 === 1);
 		});
-	}
-
-	function submitOrder() {
-		var $form = $('#srt-order-form');
-
-		if (!$form.length || submitting) {
-			return;
-		}
-
-		submitting = true;
-
-		$bodies.filter('[data-srt-sortable="questions"]').each(function (step) {
-			rows($(this)).each(function () {
-				$('<input>', {type: 'hidden', name: 'order[' + step + '][]', value: $(this).attr('data-srt-id')}).appendTo($form);
-			});
-		});
-
-		$form[0].submit();
 	}
 
 	function renumber($tbody) {
@@ -293,13 +340,64 @@ jQuery(function ($) {
 		});
 	}
 
-	$bodies.each(function () {
-		tidy($(this));
-	});
+	// Steps as the server now numbers them: empty ones gone, and one empty
+	// "new step" after the last.
+	function renumberSteps() {
+		var number = 0;
+
+		$steps.find('.srt-step').each(function () {
+			var $step = $(this);
+
+			if (rows($step.find('tbody')).length === 0) {
+				$step.remove();
+				return;
+			}
+
+			number++;
+			$step.removeClass('srt-new-step').find('[data-srt-step-heading]').text('Step ' + number);
+		});
+
+		$steps.append($newStep.clone());
+	}
+
+	// Sends the order of every question; undoes the move if it is refused.
+	function saveOrder(saved) {
+		var order = bodies('questions').map(function () {
+			return [rows($(this)).map(function () {
+				return $(this).attr('data-srt-id');
+			}).get()];
+		}).get();
+
+		saving = true;
+
+		$.ajax({
+			type: 'POST',
+			url: $steps.attr('data-srt-order-url'),
+			headers: {'X-CSRF-Token': $steps.attr('data-srt-token')},
+			data: {order: order},
+			dataType: 'json'
+		}).done(function (data) {
+			renumberSteps();
+			srtStatus(data.message, 'green');
+		}).fail(function (xhr) {
+			restore(saved);
+			srtStatus(srtErrorMessage(xhr), 'red');
+		}).always(function () {
+			saving = false;
+		});
+	}
+
+	function moved(name, $tbody, saved) {
+		if (name === 'questions') {
+			saveOrder(saved);
+		} else {
+			renumber($tbody);
+		}
+	}
 
 	// Only the handle starts a drag, so text in the answers' fields can still
 	// be selected with the mouse.
-	$bodies.on('mousedown', '.srt-drag-handle', function () {
+	$admin.on('mousedown', 'tbody[data-srt-sortable] .srt-drag-handle', function () {
 		$(this).closest('tr').attr('draggable', 'true');
 	});
 
@@ -309,17 +407,17 @@ jQuery(function ($) {
 		$admin.find('tr[draggable="true"]').not($dragged).removeAttr('draggable');
 	});
 
-	$bodies.on('dragstart', 'tr', function (event) {
+	$admin.on('dragstart', 'tbody[data-srt-sortable] > tr', function (event) {
 		var $row = $(this);
 
-		if (submitting || $row.attr('draggable') !== 'true') {
+		if (saving || $row.attr('draggable') !== 'true') {
 			event.preventDefault();
 			return;
 		}
 
 		$dragged = $row;
 		group = groupOf($row.parent());
-		before = snapshot(group);
+		before = layout(group);
 		origin = {parent: $row.parent(), next: $row.next()};
 		dropped = false;
 
@@ -329,7 +427,7 @@ jQuery(function ($) {
 		event.originalEvent.dataTransfer.setData('text/plain', '');
 	});
 
-	$bodies.on('dragover', function (event) {
+	$admin.on('dragover', 'tbody[data-srt-sortable]', function (event) {
 		var $tbody = $(this);
 
 		if (!$dragged || groupOf($tbody) !== group) {
@@ -338,7 +436,7 @@ jQuery(function ($) {
 
 		event.preventDefault();
 		event.originalEvent.dataTransfer.dropEffect = 'move';
-		$bodies.removeClass('srt-drop-target');
+		$admin.find('tbody.srt-drop-target').removeClass('srt-drop-target');
 		$tbody.addClass('srt-drop-target');
 
 		var $source = $dragged.parent();
@@ -353,7 +451,10 @@ jQuery(function ($) {
 				$dragged.insertBefore($over);
 			}
 		} else if (!$source.is($tbody) && (!$over.length || $over.hasClass('srt-placeholder'))) {
-			$dragged.appendTo($tbody);
+			$dragged.insertBefore($tbody.children('.srt-placeholder').first());
+			if (!$dragged.parent().is($tbody)) {
+				$dragged.appendTo($tbody);
+			}
 		}
 
 		tidy($tbody);
@@ -362,84 +463,7 @@ jQuery(function ($) {
 		}
 	});
 
-	// The arrow keys on a handle move its row one place up or down; a question
-	// at the edge of its step moves on into the step before or after.
-	$bodies.on('keydown', '.srt-drag-handle', function (event) {
-		var up = event.which === 38;
-
-		if (submitting || $dragged || (!up && event.which !== 40)
-			|| event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
-			return;
-		}
-
-		event.preventDefault();
-
-		var $row = $(this).closest('tr');
-		var $tbody = $row.parent();
-		var name = groupOf($tbody);
-		var $visible = rows($tbody).not('[hidden]');
-		var $sibling = $visible.eq($visible.index($row) + (up ? -1 : 1));
-
-		if (up && $visible.index($row) === 0) {
-			$sibling = $();
-		}
-
-		if ($sibling.length) {
-			if (up) {
-				$row.insertBefore($sibling);
-			} else {
-				$row.insertAfter($sibling);
-			}
-		} else if (name === 'questions') {
-			var $steps = $bodies.filter('[data-srt-sortable="questions"]');
-			var target = $steps.index($tbody) + (up ? -1 : 1);
-
-			// The only question of the last step would start a new step that
-			// is the same one.
-			if (target < 0 || target >= $steps.length || (target === $steps.length - 1 && $visible.length === 1)) {
-				return;
-			}
-
-			if (up) {
-				$row.appendTo($steps.eq(target));
-			} else {
-				$row.prependTo($steps.eq(target));
-			}
-
-			tidy($steps.eq(target));
-		} else {
-			return;
-		}
-
-		tidy($tbody);
-
-		if (name === 'questions') {
-			try {
-				window.sessionStorage.setItem('srt-focus', $row.attr('data-srt-id'));
-			} catch (e) {
-				// Focus is not kept over the reload then.
-			}
-
-			submitOrder();
-		} else {
-			renumber($tbody);
-			$(this).trigger('focus');
-		}
-	});
-
-	// Back from moving a question with the keys: its handle gets focus again.
-	try {
-		var focus = window.sessionStorage.getItem('srt-focus');
-
-		window.sessionStorage.removeItem('srt-focus');
-		if (focus) {
-			$bodies.find('tr[data-srt-id="' + focus.replace(/[^0-9]/g, '') + '"] .srt-drag-handle').trigger('focus');
-		}
-	} catch (e) {
-		// Nothing to restore.
-	}
-
-	$bodies.on('drop', function (event) {
+	$admin.on('drop', 'tbody[data-srt-sortable]', function (event) {
 		event.preventDefault();
 		dropped = true;
 	});
@@ -450,40 +474,81 @@ jQuery(function ($) {
 		}
 
 		var $row = $dragged;
-		var $moved = $row.parent();
 		var name = group;
 
 		$dragged = null;
 		group = null;
 
 		$row.removeClass('srt-dragging').removeAttr('draggable');
-		$bodies.removeClass('srt-drop-target');
+		$admin.find('tbody.srt-drop-target').removeClass('srt-drop-target');
 
 		// Cancelled with Escape or let go outside the tables: the row moved
 		// while it was dragged over them, so put it back.
 		if (!dropped) {
-			if (origin.next.length) {
-				$row.insertBefore(origin.next);
+			restore(before);
+			return;
+		}
+
+		if (!sameLayout(before, layout(name))) {
+			moved(name, $row.parent(), before);
+		}
+	});
+
+	// The arrow keys on a handle move its row one place up or down; a question
+	// at the edge of its step moves on into the step before or after.
+	$admin.on('keydown', 'tbody[data-srt-sortable] .srt-drag-handle', function (event) {
+		var up = event.which === 38;
+
+		if (saving || $dragged || (!up && event.which !== 40)
+			|| event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) {
+			return;
+		}
+
+		event.preventDefault();
+
+		var $handle = $(this);
+		var $row = $handle.closest('tr');
+		var $tbody = $row.parent();
+		var name = groupOf($tbody);
+		var saved = layout(name);
+		var $rows = rows($tbody);
+		var index = $rows.index($row);
+		var $sibling = up ? (index > 0 ? $rows.eq(index - 1) : $()) : $rows.eq(index + 1);
+
+		if ($sibling.length) {
+			if (up) {
+				$row.insertBefore($sibling);
 			} else {
-				$row.appendTo(origin.parent);
+				$row.insertAfter($sibling);
+			}
+		} else if (name === 'questions') {
+			var $all = bodies('questions');
+			var target = $all.index($tbody) + (up ? -1 : 1);
+
+			// The only question of the last step would start a new step that
+			// is the same one.
+			if (target < 0 || target >= $all.length || (target === $all.length - 1 && $rows.length === 1)) {
+				return;
 			}
 
-			tidy(origin.parent);
-			if (!$moved.is(origin.parent)) {
-				tidy($moved);
+			var $target = $all.eq(target);
+
+			if (up) {
+				$row.insertBefore($target.children('.srt-placeholder').first());
+				if (!$row.parent().is($target)) {
+					$row.appendTo($target);
+				}
+			} else {
+				$row.prependTo($target);
 			}
 
-			return;
-		}
-
-		if (snapshot(name) === before) {
-			return;
-		}
-
-		if (name === 'questions') {
-			submitOrder();
+			tidy($target);
 		} else {
-			renumber($row.parent());
+			return;
 		}
+
+		tidy($tbody);
+		$handle.trigger('focus');
+		moved(name, $tbody, saved);
 	});
 });
