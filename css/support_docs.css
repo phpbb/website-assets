@@ -1048,6 +1048,53 @@ ul#tutorials li {
 }
 
 /*------------------------------------------------------*\
+	The documentation in #main
+/*------------------------------------------------------*/
+
+/* Keep the intro, which wraps around the sidebar, off its edge. Below 800px
+   the sidebar is the slide-out panel, with a margin of its own. */
+@media only screen and (min-width: 801px) {
+	.support_docs #main #extras {
+		margin-left: 12px;
+	}
+}
+
+/* The User Guide and the Knowledge Base sit in #main, as the rest of the site
+   does (docs_base.html.twig), and take its text styles. Their sidebar and
+   menus are navigation, not running text: #main's bigger lists, underlined
+   links and red headings do not apply to them. */
+
+.support_docs #main #extras h3 {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.05em;
+	color: #333333;
+}
+
+.support_docs #main #extras ul,
+.support_docs #main .guide-menu {
+	margin-left: 0;
+	line-height: normal;
+}
+
+.support_docs #main #extras ul {
+	font-size: 1em;
+}
+
+.support_docs #main .guide-menu {
+	font-size: 1.1em;
+}
+
+.support_docs #main #extras a,
+.support_docs #main .guide-menu a {
+	text-decoration: none;
+}
+
+/* A paragraph inside a list item is part of the item, not a paragraph apart. */
+.support_docs #main .main-content li p {
+	margin-bottom: 0;
+}
+
+/*------------------------------------------------------*\
 	Knowledge base listing
 /*------------------------------------------------------*/
 
@@ -1187,6 +1234,49 @@ ul#tutorials li {
 	font-size: 1.1em;
 }
 
+/* The knowledge base sits in #main (docs_base.html.twig). Its chips and its
+   list are not running text: #main's list size, indent and underlined links
+   do not apply to them, nor its red headings to the list's heading. */
+#main .kb-categories ul,
+#main .kb-articles {
+	margin-left: 0;
+	font-size: 1em;
+	line-height: normal;
+}
+
+#main .kb-categories a,
+#main .kb-articles .kb-title,
+#main .kb-article-tags a {
+	text-decoration: none;
+}
+
+#main .kb-articles .kb-title:hover,
+#main .kb-articles .kb-title:focus {
+	text-decoration: underline;
+}
+
+#main .kb-articles .kb-meta {
+	font-size: 1.1em;
+}
+
+.support_docs #main .kb-listing-heading {
+	font-family: inherit;
+	font-size: 1.3em;
+	color: #505C65;
+}
+
+/* Actions for the knowledge base as a whole, such as submitting an article:
+   at the right of the listing's heading. */
+.kb-toolbar {
+	float: right;
+	margin: -3px 2px 0 12px;
+}
+
+.kb-back {
+	margin: 2px 2px 10px;
+	font-size: 1.2em;
+}
+
 .support_docs .kb-empty {
 	margin: 12px 2px;
 	font-size: 1.2em;
@@ -1298,6 +1388,46 @@ ul#tutorials li {
 	color: #5C4400;
 	font-size: 1.2em;
 	text-align: left;
+}
+
+/* The panel above an article: what was just done, whether it is public, its
+   pending revision, and the reader's actions on it, in one place. Amber when
+   the article is not what everyone sees. */
+.kb-article-panel {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin: 0 2px 12px;
+	padding: 8px 12px;
+	border: 1px solid #C7D0D8;
+	border-radius: 5px;
+	background: #F5F8FA;
+}
+
+.kb-article-panel.kb-article-panel-attention {
+	border-color: #E5C07B;
+	background: #FFF7E0;
+}
+
+.kb-article-panel-text {
+	flex: 1 1 320px;
+}
+
+#main .kb-article-panel p {
+	margin: 2px 0;
+	color: #333333;
+	text-align: left;
+}
+
+#main .kb-article-panel p.kb-article-panel-done {
+	color: #2B6E2F;
+	font-weight: bold;
+}
+
+#main .kb-article-panel .submit-buttons {
+	margin: 0;
 }
 
 .kb-article .markdown-body {
