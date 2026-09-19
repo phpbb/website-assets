@@ -223,33 +223,82 @@ jQuery(function ($) {
 });
 
 /**
- * Deleting a question or an outcome: a DELETE request with the page's CSRF
- * token. The server answers with where to go next, or why it did not delete.
+ * A button busy with a request: disabled, with its text saying so.
+ */
+function srtBusy($button, busy) {
+	'use strict';
+
+	var text = $button.is('input') ? 'val' : 'text';
+
+	if (busy && $button.hasClass('srt-busy')) {
+		return;
+	}
+
+	if (busy) {
+		$button.attr('data-srt-label', $button[text]());
+		$button[text]($button.attr('data-srt-busy') || 'Saving…');
+	} else if ($button.attr('data-srt-label')) {
+		$button[text]($button.attr('data-srt-label'));
+	}
+
+	$button.prop('disabled', busy).toggleClass('srt-busy', busy);
+}
+
+/**
+ * Deleting a question or an outcome, with the page's CSRF token. Symfony
+ * routes it as DELETE; on the wire it is a POST with _method=DELETE, because
+ * the site's .htdev refuses DELETE requests. The server answers with where
+ * to go next, or why it did not delete.
+ *
+ * Saving a form shows that it is busy until the next page comes.
  */
 jQuery(function ($) {
 	'use strict';
 
-	$('#srt-admin').on('click', '[data-srt-delete]', function () {
+	var $admin = $('#srt-admin');
+
+	$admin.on('click', '[data-srt-delete]', function () {
 		var $button = $(this);
 
 		if (!window.confirm($button.attr('data-srt-confirm'))) {
 			return;
 		}
 
-		$button.prop('disabled', true);
+		srtBusy($button, true);
+		srtStatus('Deleting…', 'yellow');
 
 		$.ajax({
-			type: 'DELETE',
+			type: 'POST',
 			url: $button.attr('data-srt-delete'),
+			data: {_method: 'DELETE'},
 			headers: {'X-CSRF-Token': $button.attr('data-srt-token')},
 			dataType: 'json'
 		}).done(function (data) {
 			window.location.href = data.redirect;
 		}).fail(function (xhr) {
-			$button.prop('disabled', false);
+			srtBusy($button, false);
 			srtStatus(srtErrorMessage(xhr), 'red');
 			// The button is at the bottom of the form, the message at the top.
 			document.getElementById('srt-status').scrollIntoView();
+		});
+	});
+
+	$admin.on('submit', 'form[method="post"]', function () {
+		// Not Cancel, which belongs to a form of its own.
+		var $buttons = $(this).find('input[type="submit"], button[type="submit"]').not('[form]');
+
+		// Disabled only after the browser has taken the form's fields.
+		window.setTimeout(function () {
+			$buttons.each(function () {
+				srtBusy($(this), true);
+			});
+		}, 0);
+	});
+
+	// Back to a page kept by the browser: its buttons are not busy any more.
+	$(window).on('pageshow', function () {
+		$admin.find('.srt-busy').each(function () {
+			srtBusy($(this), false);
 		});
 	});
 });
@@ -275,6 +324,7 @@ jQuery(function ($) {
 	var $dragged = null;
 	var group = null;
 	var before = null;
+	var beforeSections = null;
 	var origin = null;
 	var dropped = false;
 	var saving = false;
@@ -340,16 +390,28 @@ jQuery(function ($) {
 		});
 	}
 
-	// Steps as the server now numbers them: empty ones gone, and one empty
-	// "new step" after the last.
+	// The steps as they are, to go back to.
+	function stepSections() {
+		return $steps.children('.srt-step').map(function () {
+			return {
+				element: this,
+				heading: $(this).find('[data-srt-step-heading]').text(),
+				isNew: $(this).hasClass('srt-new-step')
+			};
+		}).get();
+	}
+
+	// Steps as the server numbers them: empty ones gone, and one empty "new
+	// step" after the last. Emptied steps are only detached, so a refused
+	// move can bring them back.
 	function renumberSteps() {
 		var number = 0;
 
-		$steps.find('.srt-step').each(function () {
+		$steps.children('.srt-step').each(function () {
 			var $step = $(this);
 
 			if (rows($step.find('tbody')).length === 0) {
-				$step.remove();
+				$step.detach();
 				return;
 			}
 
@@ -360,8 +422,19 @@ jQuery(function ($) {
 		$steps.append($newStep.clone());
 	}
 
-	// Sends the order of every question; undoes the move if it is refused.
-	function saveOrder(saved) {
+	function restoreSteps(sections) {
+		$steps.children('.srt-step').detach();
+
+		$.each(sections, function (index, section) {
+			$(section.element).toggleClass('srt-new-step', section.isNew)
+				.find('[data-srt-step-heading]').text(section.heading);
+			$steps.append(section.element);
+		});
+	}
+
+	// Sends the order of every question. The steps show the new order at
+	// once, and go back to how they were if the server refuses it.
+	function saveOrder(saved, sections, $row) {
 		var order = bodies('questions').map(function () {
 			return [rows($(this)).map(function () {
 				return $(this).attr('data-srt-id');
@@ -369,6 +442,10 @@ jQuery(function ($) {
 		}).get();
 
 		saving = true;
+		renumberSteps();
+		$steps.addClass('srt-saving');
+		$row.addClass('srt-row-saving');
+		srtStatus('Saving the order…', 'yellow');
 
 		$.ajax({
 			type: 'POST',
@@ -377,21 +454,27 @@ jQuery(function ($) {
 			data: {order: order},
 			dataType: 'json'
 		}).done(function (data) {
-			renumberSteps();
 			srtStatus(data.message, 'green');
 		}).fail(function (xhr) {
+			// Putting the steps back takes focus from the handle it was on.
+			var focused = document.activeElement;
+
+			restoreSteps(sections);
 			restore(saved);
+			$(focused).filter('.srt-drag-handle').trigger('focus');
 			srtStatus(srtErrorMessage(xhr), 'red');
 		}).always(function () {
 			saving = false;
+			$steps.removeClass('srt-saving');
+			$row.removeClass('srt-row-saving');
 		});
 	}
 
-	function moved(name, $tbody, saved) {
+	function moved(name, $row, saved, sections) {
 		if (name === 'questions') {
-			saveOrder(saved);
+			saveOrder(saved, sections, $row);
 		} else {
-			renumber($tbody);
+			renumber($row.parent());
 		}
 	}
 
@@ -418,6 +501,7 @@ jQuery(function ($) {
 		$dragged = $row;
 		group = groupOf($row.parent());
 		before = layout(group);
+		beforeSections = stepSections();
 		origin = {parent: $row.parent(), next: $row.next()};
 		dropped = false;
 
@@ -490,7 +574,7 @@ jQuery(function ($) {
 		}
 
 		if (!sameLayout(before, layout(name))) {
-			moved(name, $row.parent(), before);
+			moved(name, $row, before, beforeSections);
 		}
 	});
 
@@ -511,6 +595,7 @@ jQuery(function ($) {
 		var $tbody = $row.parent();
 		var name = groupOf($tbody);
 		var saved = layout(name);
+		var sections = stepSections();
 		var $rows = rows($tbody);
 		var index = $rows.index($row);
 		var $sibling = up ? (index > 0 ? $rows.eq(index - 1) : $()) : $rows.eq(index + 1);
@@ -549,6 +634,6 @@ jQuery(function ($) {
 
 		tidy($tbody);
 		$handle.trigger('focus');
-		moved(name, $tbody, saved);
+		moved(name, $row, saved, sections);
 	});
 });

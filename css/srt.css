@@ -285,6 +285,22 @@ body.support-template .gen-info .srt-warning p {
 	opacity: 0.4;
 }
 
+/* While a new order is being saved. */
+.srt-admin #srt-steps.srt-saving,
+.srt-admin #srt-steps.srt-saving .srt-drag-handle {
+	cursor: progress;
+}
+
+.srt-admin tr.srt-row-saving {
+	opacity: 0.5;
+}
+
+/* A button waiting for the server. */
+#main .srt-admin .srt-busy {
+	cursor: progress;
+	opacity: 0.7;
+}
+
 .srt-admin tbody.srt-drop-target {
 	outline: 2px dashed #5A9BD4;
 	outline-offset: -2px;
