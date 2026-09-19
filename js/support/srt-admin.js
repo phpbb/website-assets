@@ -325,6 +325,7 @@ jQuery(function ($) {
 	var group = null;
 	var before = null;
 	var beforeSections = null;
+	var alone = false;
 	var origin = null;
 	var dropped = false;
 	var saving = false;
@@ -470,12 +471,33 @@ jQuery(function ($) {
 		});
 	}
 
+	// The only question of the last step cannot start a new step: that step
+	// would be the same one, renumbered.
+	var ALONE_IN_LAST_STEP = 'This question is the only one on the last step, so it already is a step of its own.';
+
+	function aloneInLastStep($row) {
+		var $all = bodies('questions');
+		var $tbody = $row.parent();
+
+		return groupOf($tbody) === 'questions' && $all.index($tbody) === $all.length - 2 && rows($tbody).length === 1;
+	}
+
 	function moved(name, $row, saved, sections) {
 		if (name === 'questions') {
 			saveOrder(saved, sections, $row);
 		} else {
 			renumber($row.parent());
 		}
+	}
+
+	// Back on the overview from another page: the order may have changed
+	// since the browser kept this copy of it, so show it as it is now.
+	if ($steps.length) {
+		$(window).on('pageshow', function (event) {
+			if (event.originalEvent && event.originalEvent.persisted) {
+				window.location.reload();
+			}
+		});
 	}
 
 	// Only the handle starts a drag, so text in the answers' fields can still
@@ -502,6 +524,7 @@ jQuery(function ($) {
 		group = groupOf($row.parent());
 		before = layout(group);
 		beforeSections = stepSections();
+		alone = aloneInLastStep($row);
 		origin = {parent: $row.parent(), next: $row.next()};
 		dropped = false;
 
@@ -515,6 +538,17 @@ jQuery(function ($) {
 		var $tbody = $(this);
 
 		if (!$dragged || groupOf($tbody) !== group) {
+			return;
+		}
+
+		// Not a place it can be dropped; the browser shows as much, and the
+		// page says why, once per drag.
+		if (alone && $tbody.closest('.srt-new-step').length) {
+			if (alone !== 'told') {
+				srtStatus(ALONE_IN_LAST_STEP, 'yellow');
+				alone = 'told';
+			}
+
 			return;
 		}
 
@@ -610,9 +644,12 @@ jQuery(function ($) {
 			var $all = bodies('questions');
 			var target = $all.index($tbody) + (up ? -1 : 1);
 
-			// The only question of the last step would start a new step that
-			// is the same one.
-			if (target < 0 || target >= $all.length || (target === $all.length - 1 && $rows.length === 1)) {
+			if (target < 0 || target >= $all.length) {
+				return;
+			}
+
+			if (!up && aloneInLastStep($row)) {
+				srtStatus(ALONE_IN_LAST_STEP, 'yellow');
 				return;
 			}
 

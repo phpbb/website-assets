@@ -163,10 +163,17 @@ body.support-template .gen-info .srt-warning p {
 	margin: 0.6em 0;
 }
 
-.srt-admin .markdown-field .CodeMirror,
+/* Smaller editors than EasyMDE's default: they start low, grow with the
+   text, and scroll once it is long. */
+.srt-admin .markdown-field .CodeMirror {
+	height: auto;
+	min-height: 0;
+}
+
+/* EasyMDE sets its 300px minimum as an inline style. */
 .srt-admin .markdown-field .CodeMirror-scroll {
-	min-height: 100px;
-	height: 140px;
+	min-height: 100px !important;
+	max-height: 360px;
 }
 
 .srt-admin table.srt-options input.inputbox {

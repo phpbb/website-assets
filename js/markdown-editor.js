@@ -1003,10 +1003,51 @@
 			},
 			// EasyMDE's preview is client side and only approximate; the server
 			// renders the article that finally gets published.
-			previewClass: ['editor-preview', 'markdown-body']
+			previewClass: ['editor-preview', 'markdown-body'],
+			// The textarea follows every change, so the browser checks what
+			// was typed when the form is submitted, not what it started with.
+			forceSync: true
 		});
 
 		editor.markdownCapture = capture;
+		reportInvalid(textarea, editor);
+	}
+
+	/**
+	 * The editor hides its textarea, and the browser cannot point at a hidden
+	 * field it finds invalid, such as a required one left empty: the submit
+	 * would just not happen. Say why next to the editor, and put the cursor
+	 * in it.
+	 */
+	function reportInvalid(textarea, editor) {
+		var message = document.createElement('span');
+		message.className = 'error markdown-editor-error';
+		message.hidden = true;
+		message.setAttribute('aria-live', 'polite');
+
+		// After the editor's container: its toolbar, text and status bar.
+		var container = editor.codemirror.getWrapperElement().parentNode;
+		container.parentNode.insertBefore(message, container.nextSibling);
+
+		textarea.addEventListener('invalid', function (event) {
+			event.preventDefault();
+			message.textContent = textarea.validationMessage;
+			message.hidden = false;
+
+			// Every invalid field says why; only the first takes the cursor.
+			var first = textarea.form && textarea.form.querySelector('input:invalid, select:invalid, textarea:invalid');
+
+			if (!first || first === textarea) {
+				editor.codemirror.getWrapperElement().scrollIntoView({ block: 'center' });
+				editor.codemirror.focus();
+			}
+		});
+
+		editor.codemirror.on('change', function () {
+			if (!message.hidden && textarea.validity.valid) {
+				message.hidden = true;
+			}
+		});
 	}
 
 	function init() {
