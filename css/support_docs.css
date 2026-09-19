@@ -1256,6 +1256,18 @@ ul#tutorials li {
 	color: #505C65;
 }
 
+/* Actions for the knowledge base as a whole, such as submitting an article:
+   at the right of the listing's heading. */
+.kb-toolbar {
+	float: right;
+	margin: -3px 2px 0 12px;
+}
+
+.kb-back {
+	margin: 2px 2px 10px;
+	font-size: 1.2em;
+}
+
 .support_docs .kb-empty {
 	margin: 12px 2px;
 	font-size: 1.2em;
@@ -1367,6 +1379,46 @@ ul#tutorials li {
 	color: #5C4400;
 	font-size: 1.2em;
 	text-align: left;
+}
+
+/* The panel above an article: what was just done, whether it is public, its
+   pending revision, and the reader's actions on it, in one place. Amber when
+   the article is not what everyone sees. */
+.kb-article-panel {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin: 0 2px 12px;
+	padding: 8px 12px;
+	border: 1px solid #C7D0D8;
+	border-radius: 5px;
+	background: #F5F8FA;
+}
+
+.kb-article-panel.kb-article-panel-attention {
+	border-color: #E5C07B;
+	background: #FFF7E0;
+}
+
+.kb-article-panel-text {
+	flex: 1 1 320px;
+}
+
+#main .kb-article-panel p {
+	margin: 2px 0;
+	color: #333333;
+	text-align: left;
+}
+
+#main .kb-article-panel p.kb-article-panel-done {
+	color: #2B6E2F;
+	font-weight: bold;
+}
+
+#main .kb-article-panel .submit-buttons {
+	margin: 0;
 }
 
 .kb-article .markdown-body {
