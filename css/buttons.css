@@ -4,18 +4,21 @@
    element with the class submit-buttons: button1 for the main action, button2
    for the others. Inputs, buttons and links look the same.
 
-   Taken from the team tools, which had them on their own pages only.
+   Taken from the team tools, which had them on their own pages only. Not
+   tied to #main: the documentation pages (the knowledge base) put their
+   content in #ajax. Two classes still outweigh prosilver's own
+   input.button1 and a.button2 rules.
    Linked from base.html.twig, not imported through index.css, so the old
    site's copy of the assets does not shadow it.
 */
 
-#main .submit-buttons {
+.submit-buttons {
 	text-align: center;
 	margin: 0.8em 0;
 }
 
-#main .submit-buttons .button1,
-#main .submit-buttons .button2 {
+.submit-buttons .button1,
+.submit-buttons .button2 {
 	display: inline-block;
 	box-sizing: border-box;
 	vertical-align: middle;
@@ -38,34 +41,34 @@
 	cursor: pointer;
 }
 
-#main .submit-buttons .button1 {
+.submit-buttons .button1 {
 	font-weight: bold;
 	border-color: #0F5C95;
 	background: linear-gradient(#2D7FBD, #105289);
 	color: #FFFFFF;
 }
 
-#main .submit-buttons .button2:hover,
-#main .submit-buttons .button2:focus {
+.submit-buttons .button2:hover,
+.submit-buttons .button2:focus {
 	border-color: #0F5C95;
 	color: #105289;
 	text-decoration: none;
 }
 
-#main .submit-buttons .button1:hover,
-#main .submit-buttons .button1:focus {
+.submit-buttons .button1:hover,
+.submit-buttons .button1:focus {
 	background: linear-gradient(#3A8FD0, #17629F);
 	text-decoration: none;
 }
 
-#main .submit-buttons .button1:focus-visible,
-#main .submit-buttons .button2:focus-visible {
+.submit-buttons .button1:focus-visible,
+.submit-buttons .button2:focus-visible {
 	outline: 2px solid #5A9BD4;
 	outline-offset: 1px;
 }
 
 /* A row of buttons next to other content, such as in a table cell. */
-#main .submit-buttons.submit-buttons-inline {
+.submit-buttons.submit-buttons-inline {
 	display: inline-flex;
 	align-items: center;
 	gap: 4px;
@@ -73,13 +76,13 @@
 	text-align: left;
 }
 
-#main .submit-buttons.submit-buttons-inline .button1,
-#main .submit-buttons.submit-buttons-inline .button2 {
+.submit-buttons.submit-buttons-inline .button1,
+.submit-buttons.submit-buttons-inline .button2 {
 	margin: 0;
 }
 
 /* A square button holding only an icon; give it an aria-label. */
-#main .submit-buttons .button-icon {
+.submit-buttons .button-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -87,7 +90,7 @@
 	padding: 0;
 }
 
-#main .submit-buttons .button-icon svg {
+.submit-buttons .button-icon svg {
 	display: block;
 	width: 14px;
 	height: 14px;
