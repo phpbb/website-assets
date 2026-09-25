@@ -1161,17 +1161,21 @@ ul#tutorials li {
 	color: #626D76;
 }
 
+/* The chosen category, in the site's own primary colour, as its buttons are. */
 .kb-categories .active a,
 .kb-categories .active a:hover,
 .kb-categories .active a:focus {
-	border-color: #505C65;
-	background: #505C65;
+	border-color: #0F5C95;
+	background: linear-gradient(#2D7FBD, #105289);
 	color: #FFFFFF;
+	font-weight: bold;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .kb-categories .active .kb-count {
-	background: #3F4950;
+	background: rgba(255, 255, 255, 0.25);
 	color: #FFFFFF;
+	text-shadow: none;
 }
 
 /* The heading above the list, and the list itself: rows divided by a hairline
@@ -1192,13 +1196,25 @@ ul#tutorials li {
 	padding: 0;
 }
 
+/* One card per article: a hairline row made every article look like more of
+   the one above it. */
 .kb-articles li {
-	padding: 10px 2px;
-	border-bottom: 1px solid #DCE3E8;
+	margin: 0 0 8px;
+	padding: 10px 12px;
+	border: 1px solid #DCE3E8;
+	border-left: 3px solid #C7D0D8;
+	border-radius: 4px;
+	background: #FFFFFF;
+}
+
+.kb-articles li:hover {
+	border-color: #B4BAC0;
+	border-left-color: #105289;
+	background: #FBFCFD;
 }
 
 .kb-articles li:last-child {
-	border-bottom: none;
+	margin-bottom: 0;
 }
 
 .kb-articles .kb-title {
@@ -1246,7 +1262,7 @@ ul#tutorials li {
 
 #main .kb-categories a,
 #main .kb-articles .kb-title,
-#main .kb-article-tags a {
+#main .kb-article-categories a {
 	text-decoration: none;
 }
 
@@ -1342,7 +1358,40 @@ ul#tutorials li {
 	text-align: left;
 }
 
-.kb-article-tags {
+/* A preview is the article page itself, framed so nobody takes it for the
+   published one. */
+.kb-preview {
+	margin: 0 0 20px;
+	padding: 0 12px 12px;
+	border: 1px dashed #8C949A;
+	border-radius: 4px;
+	background: #FBFCFD;
+}
+
+#main p.kb-preview-label,
+.kb-preview-label {
+	margin: 0 -12px 12px;
+	padding: 6px 12px;
+	border-bottom: 1px dashed #8C949A;
+	background: #EEF2F5;
+	color: #505C65;
+	font-size: 1.1em;
+	font-weight: bold;
+	text-align: left;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+/* Which phpBB versions an article covers is a fact about it, so it reads as
+   a line of text. Only its categories are chips, because those lead somewhere. */
+.kb-article p.kb-article-applies {
+	margin: 0 0 8px;
+	color: #505C65;
+	font-size: 1.15em;
+	text-align: left;
+}
+
+.kb-article-categories {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 6px;
@@ -1351,31 +1400,23 @@ ul#tutorials li {
 	padding: 0;
 }
 
-.kb-article-tags li {
+.kb-article-categories a {
 	display: inline-block;
 	padding: 2px 10px;
 	border: 1px solid #C7D0D8;
 	border-radius: 999px;
 	background: #FFFFFF;
-	color: #505C65;
+	color: #105289;
 	font-size: 1.1em;
 	line-height: 1.4;
-}
-
-.kb-article-tags .kb-article-version {
-	border-color: #505C65;
-	background: #505C65;
-	color: #FFFFFF;
-}
-
-.kb-article-tags a {
-	color: #105289;
 	text-decoration: none;
 }
 
-.kb-article-tags a:hover,
-.kb-article-tags a:focus {
-	text-decoration: underline;
+.kb-article-categories a:hover,
+.kb-article-categories a:focus {
+	border-color: #8C949A;
+	background: #E9EEF2;
+	text-decoration: none;
 }
 
 /* An article that only the team and its author can see. */
