@@ -289,6 +289,54 @@ body.home #main div.column1 li, body.home #main div.column2 li {
 	padding: 0 3px !important;
 }
 
+/* Brand icons drawn as inline SVG: a white glyph on a tile in the brand's colour.
+   Interim until the website has its own icon font (paul999/phpbb-website-private#40). */
+.social-icons {
+	display: flex;
+	padding: 0 3px;
+}
+.social-icons a + a {
+	margin-left: 6px;
+}
+.social-icons a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	overflow: hidden;
+	color: #FFFFFF;
+	text-decoration: none;
+	transition: box-shadow 0.15s ease-in-out;
+}
+.social-icons a:hover,
+.social-icons a:focus {
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.7);
+}
+.social-icons a:focus-visible {
+	outline: 2px solid #FFFFFF;
+	outline-offset: 1px;
+}
+.social-icons svg {
+	display: block;
+	fill: currentColor;
+}
+.social-icons .social-icon-rss {
+	background-color: #F26522;
+}
+.social-icons .social-icon-facebook {
+	/* The "f" stands on the tile's bottom edge, as in Facebook's own app icon */
+	align-items: flex-end;
+	background-color: #0866FF;
+}
+.social-icons .social-icon-x {
+	background-color: #000000;
+}
+.social-icons .social-icon-discord {
+	background-color: #5865F2;
+}
+
 /* News listing */
 #main ul.news {
 	border-top: 1px solid #FFFFFF;
