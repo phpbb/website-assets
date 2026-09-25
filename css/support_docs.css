@@ -1048,6 +1048,53 @@ ul#tutorials li {
 }
 
 /*------------------------------------------------------*\
+	The documentation in #main
+/*------------------------------------------------------*/
+
+/* Keep the intro, which wraps around the sidebar, off its edge. Below 800px
+   the sidebar is the slide-out panel, with a margin of its own. */
+@media only screen and (min-width: 801px) {
+	.support_docs #main #extras {
+		margin-left: 12px;
+	}
+}
+
+/* The User Guide and the Knowledge Base sit in #main, as the rest of the site
+   does (docs_base.html.twig), and take its text styles. Their sidebar and
+   menus are navigation, not running text: #main's bigger lists, underlined
+   links and red headings do not apply to them. */
+
+.support_docs #main #extras h3 {
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	font-size: 1.05em;
+	color: #333333;
+}
+
+.support_docs #main #extras ul,
+.support_docs #main .guide-menu {
+	margin-left: 0;
+	line-height: normal;
+}
+
+.support_docs #main #extras ul {
+	font-size: 1em;
+}
+
+.support_docs #main .guide-menu {
+	font-size: 1.1em;
+}
+
+.support_docs #main #extras a,
+.support_docs #main .guide-menu a {
+	text-decoration: none;
+}
+
+/* A paragraph inside a list item is part of the item, not a paragraph apart. */
+.support_docs #main .main-content li p {
+	margin-bottom: 0;
+}
+
+/*------------------------------------------------------*\
 	Knowledge base listing
 /*------------------------------------------------------*/
 
@@ -1114,17 +1161,21 @@ ul#tutorials li {
 	color: #626D76;
 }
 
+/* The chosen category, in the site's own primary colour, as its buttons are. */
 .kb-categories .active a,
 .kb-categories .active a:hover,
 .kb-categories .active a:focus {
-	border-color: #505C65;
-	background: #505C65;
+	border-color: #0F5C95;
+	background: linear-gradient(#2D7FBD, #105289);
 	color: #FFFFFF;
+	font-weight: bold;
+	text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
 
 .kb-categories .active .kb-count {
-	background: #3F4950;
+	background: rgba(255, 255, 255, 0.25);
 	color: #FFFFFF;
+	text-shadow: none;
 }
 
 /* The heading above the list, and the list itself: rows divided by a hairline
@@ -1145,13 +1196,25 @@ ul#tutorials li {
 	padding: 0;
 }
 
+/* One card per article: a hairline row made every article look like more of
+   the one above it. */
 .kb-articles li {
-	padding: 10px 2px;
-	border-bottom: 1px solid #DCE3E8;
+	margin: 0 0 8px;
+	padding: 10px 12px;
+	border: 1px solid #DCE3E8;
+	border-left: 3px solid #C7D0D8;
+	border-radius: 4px;
+	background: #FFFFFF;
+}
+
+.kb-articles li:hover {
+	border-color: #B4BAC0;
+	border-left-color: #105289;
+	background: #FBFCFD;
 }
 
 .kb-articles li:last-child {
-	border-bottom: none;
+	margin-bottom: 0;
 }
 
 .kb-articles .kb-title {
@@ -1185,6 +1248,37 @@ ul#tutorials li {
 .kb-articles .kb-meta {
 	color: #626D76;
 	font-size: 1.1em;
+}
+
+/* The knowledge base sits in #main (docs_base.html.twig). Its chips and its
+   list are not running text: #main's list size, indent and underlined links
+   do not apply to them, nor its red headings to the list's heading. */
+#main .kb-categories ul,
+#main .kb-articles {
+	margin-left: 0;
+	font-size: 1em;
+	line-height: normal;
+}
+
+#main .kb-categories a,
+#main .kb-articles .kb-title,
+#main .kb-article-categories a {
+	text-decoration: none;
+}
+
+#main .kb-articles .kb-title:hover,
+#main .kb-articles .kb-title:focus {
+	text-decoration: underline;
+}
+
+#main .kb-articles .kb-meta {
+	font-size: 1.1em;
+}
+
+.support_docs #main .kb-listing-heading {
+	font-family: inherit;
+	font-size: 1.3em;
+	color: #505C65;
 }
 
 .support_docs .kb-empty {
@@ -1252,7 +1346,38 @@ ul#tutorials li {
 	text-align: left;
 }
 
-.kb-article-tags {
+/* A preview is the article page itself, framed so nobody takes it for the
+   published one. */
+.kb-preview {
+	margin: 0 0 20px;
+	padding: 0 12px 12px;
+	border: 1px dashed #8C949A;
+	border-radius: 4px;
+	background: #FBFCFD;
+}
+
+#main p.kb-preview-label,
+.kb-preview-label {
+	margin: 0 -12px 12px;
+	padding: 6px 12px;
+	border-bottom: 1px dashed #8C949A;
+	background: #EEF2F5;
+	color: #505C65;
+	font-size: 1.1em;
+	font-weight: normal;
+	text-align: left;
+}
+
+/* Which phpBB versions an article covers is a fact about it, so it reads as
+   a line of text. Only its categories are chips, because those lead somewhere. */
+.kb-article p.kb-article-applies {
+	margin: 0 0 8px;
+	color: #505C65;
+	font-size: 1.15em;
+	text-align: left;
+}
+
+.kb-article-categories {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 6px;
@@ -1261,31 +1386,23 @@ ul#tutorials li {
 	padding: 0;
 }
 
-.kb-article-tags li {
+.kb-article-categories a {
 	display: inline-block;
 	padding: 2px 10px;
 	border: 1px solid #C7D0D8;
 	border-radius: 999px;
 	background: #FFFFFF;
-	color: #505C65;
+	color: #105289;
 	font-size: 1.1em;
 	line-height: 1.4;
-}
-
-.kb-article-tags .kb-article-version {
-	border-color: #505C65;
-	background: #505C65;
-	color: #FFFFFF;
-}
-
-.kb-article-tags a {
-	color: #105289;
 	text-decoration: none;
 }
 
-.kb-article-tags a:hover,
-.kb-article-tags a:focus {
-	text-decoration: underline;
+.kb-article-categories a:hover,
+.kb-article-categories a:focus {
+	border-color: #8C949A;
+	background: #E9EEF2;
+	text-decoration: none;
 }
 
 /* An article that only the team and its author can see. */
@@ -1298,6 +1415,46 @@ ul#tutorials li {
 	color: #5C4400;
 	font-size: 1.2em;
 	text-align: left;
+}
+
+/* The panel above an article: what was just done, whether it is public, its
+   pending revision, and the reader's actions on it, in one place. Amber when
+   the article is not what everyone sees. */
+.kb-article-panel {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px 16px;
+	margin: 0 2px 12px;
+	padding: 8px 12px;
+	border: 1px solid #C7D0D8;
+	border-radius: 5px;
+	background: #F5F8FA;
+}
+
+.kb-article-panel.kb-article-panel-attention {
+	border-color: #E5C07B;
+	background: #FFF7E0;
+}
+
+.kb-article-panel-text {
+	flex: 1 1 320px;
+}
+
+#main .kb-article-panel p {
+	margin: 2px 0;
+	color: #333333;
+	text-align: left;
+}
+
+#main .kb-article-panel p.kb-article-panel-done {
+	color: #2B6E2F;
+	font-weight: bold;
+}
+
+#main .kb-article-panel .submit-buttons {
+	margin: 0;
 }
 
 .kb-article .markdown-body {
