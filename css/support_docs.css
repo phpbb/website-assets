@@ -1281,18 +1281,6 @@ ul#tutorials li {
 	color: #505C65;
 }
 
-/* Actions for the knowledge base as a whole, such as submitting an article:
-   at the right of the listing's heading. */
-.kb-toolbar {
-	float: right;
-	margin: -3px 2px 0 12px;
-}
-
-.kb-back {
-	margin: 2px 2px 10px;
-	font-size: 1.2em;
-}
-
 .support_docs .kb-empty {
 	margin: 12px 2px;
 	font-size: 1.2em;
@@ -1376,10 +1364,8 @@ ul#tutorials li {
 	background: #EEF2F5;
 	color: #505C65;
 	font-size: 1.1em;
-	font-weight: bold;
+	font-weight: normal;
 	text-align: left;
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
 }
 
 /* Which phpBB versions an article covers is a fact about it, so it reads as
